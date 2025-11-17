@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StadOntwikkeling_DL", "Stad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StadOntwikkeling_BL", "StadOntwikkeling_BL\StadOntwikkeling_BL.csproj", "{B3368D6F-7349-4518-B19B-B2FC172E6BBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StadOntwikkeling_Tests", "StadOntwikkeling_Tests\StadOntwikkeling_Tests.csproj", "{DA7D908B-0F20-41A2-B802-FC92ECA350F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B3368D6F-7349-4518-B19B-B2FC172E6BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3368D6F-7349-4518-B19B-B2FC172E6BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3368D6F-7349-4518-B19B-B2FC172E6BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7D908B-0F20-41A2-B802-FC92ECA350F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7D908B-0F20-41A2-B802-FC92ECA350F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7D908B-0F20-41A2-B802-FC92ECA350F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7D908B-0F20-41A2-B802-FC92ECA350F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
