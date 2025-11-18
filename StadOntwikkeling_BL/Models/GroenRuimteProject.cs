@@ -9,14 +9,16 @@ namespace StadOntwikkeling_BL.Models
 {
 	public class GroenRuimteProject : ProjectOnderdeel
 	{
+		private Project _project;
 		private double _oppervlakte;
 		private double _biodiversiteitscore;
 		private int _aantalWandelpaden;
 		private bool _inWandelroutes;
 		private double _beoordeling;
 
-		public GroenRuimteProject(double oppervlakte, double biodiversiteitscore, int aantalWandelpaden, List<string> faciliteiten, bool inWandelroutes, double beoordeling)
+		public GroenRuimteProject(Project project, double oppervlakte, double biodiversiteitscore, int aantalWandelpaden, List<string> faciliteiten, bool inWandelroutes, double beoordeling)
 		{
+			Project = project;
 			Oppervlakte = oppervlakte;
 			Biodiversiteitscore = biodiversiteitscore;
 			AantalWandelpaden = aantalWandelpaden;
@@ -25,6 +27,16 @@ namespace StadOntwikkeling_BL.Models
 			Beoordeling = beoordeling;
 		}
 
+		public Project Project
+		{
+			get { return _project; }
+			set
+			{
+				if (value is null)
+					throw new GroenRuimteProjectException("Project mag niet null zijn");
+				_project = value;
+			}
+		}
 		public double Oppervlakte
 		{
 			get { return _oppervlakte; }

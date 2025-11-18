@@ -9,11 +9,13 @@ namespace StadOntwikkeling_BL.Models
 {
 	public class InnovatiefWonenProject : ProjectOnderdeel
 	{
+		private Project _project;
 		private int _aantalWooneenheden;
 		private int _innovatiescore;
 
-		public InnovatiefWonenProject(int aantalWooneenheden, List<string> woonvormTypes, bool rondleiding, bool showWoning, int innovatiescore, bool samenwerkingMetErfgoed, bool samenwerkingMetToerismeGent)
+		public InnovatiefWonenProject(Project project, int aantalWooneenheden, List<string> woonvormTypes, bool rondleiding, bool showWoning, int innovatiescore, bool samenwerkingMetErfgoed, bool samenwerkingMetToerismeGent)
 		{
+			Project = project;
 			AantalWooneenheden = aantalWooneenheden;
 			WoonvormTypes = woonvormTypes;
 			Rondleiding = rondleiding;
@@ -23,6 +25,16 @@ namespace StadOntwikkeling_BL.Models
 			SamenwerkingMetToerismeGent = samenwerkingMetToerismeGent;
 		}
 
+		public Project Project
+		{
+			get { return _project; }
+			set
+			{
+				if (value is null)
+					throw new InnovatiefWonenProjectException("Project mag niet null zijn");
+				_project = value;
+			}
+		}
 		public int AantalWooneenheden
 		{
 			get { return _aantalWooneenheden; }
