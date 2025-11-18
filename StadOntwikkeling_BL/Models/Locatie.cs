@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StadOntwikkeling_BL.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,51 +10,77 @@ namespace StadOntwikkeling_BL.Models
 	public class Locatie
 	{
 		private int _id;
+		private string _straat;
+		private string _postcode;
+		private string _gemeente;
 		private string _wijk;
-        private string _straat;
-        private int _postcode;
-        private string _gemeente;
-        private string _huisnummer;
 
-        public Locatie(int id, string wijk, string straat, int postcode, string gemeente, string huisnummer)
-        {
-            Id = id;
-            Wijk = wijk;
-            Straat = straat;
-            Postcode = postcode;
-            Gemeente = gemeente;
-            Huisnummer = huisnummer;
-        }
+		public Locatie(string straat, string postcode, string gemeente, string wijk)
+		{
+			Straat = straat;
+			Postcode = postcode;
+			Gemeente = gemeente;
+			Wijk = wijk;
+		}
 
-        public int Id
+		public Locatie(int id, string straat, string postcode, string gemeente, string wijk)
+		{
+			Id = id;
+			Straat = straat;
+			Postcode = postcode;
+			Gemeente = gemeente;
+			Wijk = wijk;
+		}
+
+		public int Id
 		{
 			get { return _id; }
-			set { _id = value; }
+			set
+			{
+				if (value <= 0)
+					throw new LocatieException("Id mag niet 0 of negatief zijn");
+				_id = value;
+			}
+		}
+		public string Straat
+		{
+			get { return _straat; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new LocatieException("Straat mag niet leeg of null zijn");
+				_straat = value;
+			}
+		}
+		public string Postcode
+		{
+			get { return _postcode; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new LocatieException("Postcode mag niet leeg of null zijn");
+				_postcode = value;
+			}
+		}
+		public string Gemeente
+		{
+			get { return _gemeente; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new LocatieException("Gemeente mag niet leeg of null zijn");
+				_gemeente = value;
+			}
 		}
 		public string Wijk
 		{
 			get { return _wijk; }
-			set { _wijk = value; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new LocatieException("Wijk mag niet leeg of null zijn");
+				_wijk = value;
+			}
 		}
-        public string Straat
-        {
-            get { return _straat; }
-            set { _straat = value; }
-        }
-        public int Postcode
-        {
-            get { return _postcode; }
-            set { _postcode = value; }
-        }
-        public string Gemeente
-        {
-            get { return _gemeente; }
-            set { _gemeente = value; }
-        }
-        public string Huisnummer
-        {
-            get { return _huisnummer; }
-            set { _huisnummer = value; }
-        }
-    }
+	}
 }

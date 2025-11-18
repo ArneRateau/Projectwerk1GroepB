@@ -7,57 +7,25 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Models
 {
-	public class StadsontwikkelingProject
+	public class StadsontwikkelingProject : ProjectOnderdeel
 	{
-		private int _projectId;
-		private Bouwfirma _bouwfirma;
-		private VergunningStatus _vergunningStatus;
-        private bool _architecturaleWaarde;
-		private bool _bezienswaardigheid;
-		private bool _uitlegbord;
-		private bool _infowandeling;
-
-        public StadsontwikkelingProject(int projectId, VergunningStatus vergunningStatus, bool architecturaleWaarde, bool bezienswaardigheid, bool uitlegbord, bool infoWandeling, Bouwfirma bouwfirma)
-        {
-            ProjectId = projectId;
-            VergunningStatus = vergunningStatus;
-            ArchitecturaleWaarde = architecturaleWaarde;
-            Bezienswaardigheid = bezienswaardigheid;
-            Uitlegbord = uitlegbord;
-            InfoWandeling = infoWandeling;
-            Bouwfirma = bouwfirma;
-        }
-
-        public int ProjectId
+		public StadsontwikkelingProject(List<Bouwfirma> bouwfirmas, VergunningStatus vergunningStatus, bool architecturieeleWaarde, Toegankelijkheid toegankelijkheid, bool bezienswaardigheid, bool uitlegbord, bool infoWandeling)
 		{
-			get { return _projectId; }
-			set { _projectId = value; }
+			Bouwfirmas = bouwfirmas;
+			VergunningStatus = vergunningStatus;
+			ArchitecturieeleWaarde = architecturieeleWaarde;
+			Toegankelijkheid = toegankelijkheid;
+			Bezienswaardigheid = bezienswaardigheid;
+			Uitlegbord = uitlegbord;
+			InfoWandeling = infoWandeling;
 		}
+
+		public List<Bouwfirma> Bouwfirmas { get; set; } = new();
 		public VergunningStatus VergunningStatus { get; set; }
-		public bool ArchitecturaleWaarde
-		{
-			get { return _architecturaleWaarde; }
-			set { _architecturaleWaarde = value; }
-		}
-		public bool Bezienswaardigheid
-		{
-			get { return _bezienswaardigheid; }
-			set { _bezienswaardigheid = value; }
-		}
-		public bool Uitlegbord
-		{
-			get { return _uitlegbord; }
-			set { _uitlegbord = value; }
-		}
-		public bool InfoWandeling
-		{
-			get { return _infowandeling; }
-			set { _infowandeling = value; }
-		}
-		public Bouwfirma Bouwfirma
-		{
-			get { return _bouwfirma; }
-			set { _bouwfirma = value; }
-		}
+		public bool ArchitecturieeleWaarde { get; set; }
+		public Toegankelijkheid Toegankelijkheid { get; set; }
+		public bool Bezienswaardigheid { get; set; }
+		public bool Uitlegbord { get; set; }
+		public bool InfoWandeling { get; set; }
 	}
 }

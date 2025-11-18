@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StadOntwikkeling_BL.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,34 +14,65 @@ namespace StadOntwikkeling_BL.Models
 		private Locatie _locatie;
 		private string _email;
 
-        public Partner(int id, string naam, Locatie locatie, string email, List<ProjectPartner> projecten)
-        {
-            Id = id;
-            Naam = naam;
-            Locatie = locatie;
-            Email = email;
-            Projecten = projecten;
-        }
+		public Partner(string naam, Locatie locatie, string email, List<ProjectPartner> projecten)
+		{
+			Naam = naam;
+			Locatie = locatie;
+			Email = email;
+			Projecten = projecten;
+		}
 
-        public int Id
+		public Partner(int id, string naam, Locatie locatie, string email, List<ProjectPartner> projecten)
+		{
+			Id = id;
+			Naam = naam;
+			Locatie = locatie;
+			Email = email;
+			Projecten = projecten;
+		}
+
+		public int Id
 		{
 			get { return _id; }
-			set { _id = value; }
+			set
+			{
+				if (value <= 0)
+					throw new PartnerException("Id mag niet nul of negatief zijn");
+				_id = value;
+			}
 		}
 		public string Naam
 		{
 			get { return _naam; }
-			set { _naam = value; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new PartnerException("Naam mag niet leeg of null zijn");
+				else if (value.Count() < 2)
+					throw new PartnerException("Naam moet minstens 2 letters bevatten");
+				else
+					_naam = value;
+			}
 		}
 		public Locatie Locatie
 		{
 			get { return _locatie; }
-			set { _locatie = value; }
+			set
+			{
+				if (value == null)
+					throw new PartnerException("Locatie mag niet null zijn");
+				_locatie = value;
+			}
 		}
 		public string Email
 		{
 			get { return _email; }
-			set { _email = value; }
+			set
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new PartnerException("Email mag niet leeg of null zijn");
+				_email = value;
+			}
 		}
 		public List<ProjectPartner> Projecten { get; set; } = new();
 	}
