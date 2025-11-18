@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StadOntwikkeling_BL.Interfaces;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace StadOntwikkeling_WPF
 {
@@ -19,9 +9,32 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class GebruikerToevoegen : Window
     {
-        public GebruikerToevoegen()
+        private readonly IGebruikerManager _gebruikerManager;
+
+
+        public GebruikerToevoegen(IGebruikerManager gebruikerManager)
         {
             InitializeComponent();
+            _gebruikerManager = gebruikerManager;
+            SaveButton.Click += SaveButton_Click;
+            CancelButton.Click += CancelButton_Click;
+        }
+
+        private void SaveButton_Click(object? sender, RoutedEventArgs e)
+        {
+            _gebruikerManager.MaakGebruiker(EmailTextBox.Text, IsAdminCheckBox.IsChecked ?? false, IsPartnerCheckBox.IsChecked ?? false);
+        }
+
+        private void CancelButton_Click(object? sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DialogResult = false;
+            }
+            catch
+            {
+            }
+            Close();
         }
     }
 }
