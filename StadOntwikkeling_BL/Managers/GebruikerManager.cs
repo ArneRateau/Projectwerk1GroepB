@@ -9,10 +9,19 @@ namespace StadOntwikkeling_BL.Managers
 {
     public class GebruikerManager : IGebruikerManager
     {
-        public void MaakGebruiker(string email, bool isAdmin, bool isPartner)
+        private readonly IGebruikerRepo _gebruikerRepo;
+
+        public GebruikerManager(IGebruikerRepo gebruikerRepo)
         {
-            // TODO hier komt logica om een gebruiker te maken in de db
-            throw new NotImplementedException();
+            _gebruikerRepo = gebruikerRepo;
+        }
+
+        
+
+        public void MaakGebruiker(string email, bool isAdmin, bool isPartner)
+        { 
+
+            _gebruikerRepo.MaakGebruiker(email, isAdmin, isPartner);
         }
     }
 }

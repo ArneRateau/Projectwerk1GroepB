@@ -9,7 +9,7 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class GebruikerToevoegen : Window
     {
-        private readonly IGebruikerManager _gebruikerManager;
+        private  IGebruikerManager _gebruikerManager;
 
 
         public GebruikerToevoegen(IGebruikerManager gebruikerManager)
