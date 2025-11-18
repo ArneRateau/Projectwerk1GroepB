@@ -20,5 +20,9 @@ namespace StadOntwikkeling_BL.Managers
         {
             return repo.GetPartners();
         }
+        public void MakeNewPartner(Partner partner)
+        {
+            repo.MakeNewPartner();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StadOntwikkeling_BL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace StadOntwikkeling_BL.Interfaces
 {
     public interface IPartnerRepository
     {
+        List<Partner> GetPartners();
+        void MakeNewPartner();
+        
     }
 }

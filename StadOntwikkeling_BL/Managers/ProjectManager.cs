@@ -20,5 +20,10 @@ namespace StadOntwikkeling_BL.Managers
         {
             return repo.GetProjects();
         }
+        // nog niet zeker over parameters
+        public void CombineProjectOnderdeel()
+        {
+
+        }
     }
 }

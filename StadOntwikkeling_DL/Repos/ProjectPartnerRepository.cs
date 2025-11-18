@@ -1,4 +1,5 @@
 ﻿using StadOntwikkeling_BL.Interfaces;
+using StadOntwikkeling_BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,11 @@ namespace StadOntwikkeling_DL.Repos
         {
             this.connectionString = connectionString;
         }
+
+        public ProjectPartner GetPartnerByRol()
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }
