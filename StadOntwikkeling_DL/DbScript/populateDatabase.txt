@@ -1,0 +1,122 @@
+
+-- Script om data in de database te stoppen. Voer eerst het GentProjecten.sql uit in ssms om de database en tabellen aan te maken.
+USE [GentProjecten]; -- zorg hier dat de naam van je database overeen komt met wat in de [] staat
+GO
+
+-- =============================================
+-- 1. Locaties
+-- =============================================
+INSERT INTO dbo.Locatie (Wijk, Straat, Gemeente, Postcode, HuisNummer) VALUES
+('Sint-Amandsberg', 'Oudebareelstraat', 'Gent', 9040, '12'),
+('Centrum', 'Nederpolder', 'Gent', 9000, '45'),
+('Rabat', 'Dampoortstraat', 'Gent', 9000, '78'),
+('Muide', 'Voorhavenlaan', 'Gent', 9000, '23'),
+('Ledeberg', 'Hundelgemsesteenweg', 'Gent', 9050, '180');
+
+-- =============================================
+-- 2. Partners
+-- =============================================
+INSERT INTO dbo.Partner (Naam, Email, LocatieId) VALUES
+('Stad Gent - Dienst Stadsontwikkeling', 'stadsontwikkeling@gent.be', 1),
+('Toerisme Oost-Vlaanderen', 'info@toerismeoostvlaanderen.be', 2),
+('Woonproject CV', 'info@woonproject.be', 3),
+('Natuurpunt Gent', 'gent@natuurpunt.be', 4);
+
+-- =============================================
+-- 3. Bouwfirma's
+-- =============================================
+INSERT INTO dbo.Bouwfirma (Naam, Email, Telefoon) VALUES
+('BAM Interbuild', 'info@baminterbuild.be', '09 123 45 67'),
+('Cordeel', 'gent@cordeel.eu', '09 234 56 78'),
+('Alheembouw', 'info@alheembouw.be', '09 345 67 89'),
+('Democo', 'contact@democo.be', '09 456 78 90');
+
+-- =============================================
+-- 4. Gebruikers (admins & partners)
+-- =============================================
+INSERT INTO dbo.Gebruiker (Email, IsAdmin, IsPartner) VALUES
+('admin@gmail.be', 1, 0),
+('jens@stad.gent', 0, 0),
+('marie@natuurpunt.be', 0, 1),
+('tom@woonproject.be', 0, 1),
+('sofie@cordeel.eu', 0, 1);
+
+-- =============================================
+-- 5. Projecten (basis)
+-- =============================================
+INSERT INTO dbo.Project (Titel, Startdatum, Beschrijving, Status, LocatieId, ProjectType) VALUES
+('Herontwikkeling Oude Dokken', '2024-03-01', 'Grootschalige stadsvernieuwing aan de dokken met woon- en recreatieprojecten', 1, 4, 'Stadsontwikkeling'),
+('Parkbos fase 3', '2023-06-15', 'Uitbreiding van het Parkbos met nieuwe wandelpaden en biodiversiteit', 1, 5, 'GroeneRuimte'),
+('Cohousing De Wasserij', '2024-01-10', N'Innovatief cohousing-project met 42 wooneenheden en gemeenschappelijke ruimtes', 0, 3, N'InnovatiefWonen'),
+('Reconstructie Nederschelde', '2025-02-01', N'Herinrichting kades met publieke ruimte en nieuwe beplanting', 2, 2, N'Stadsontwikkeling'),
+('Tiny Forest Muide', '2025-09-01', N'Klein stadsbos van 200 m² volgens Miyawaki-methode', 2, 4, N'GroeneRuimte');
+
+-- =============================================
+-- 6. Specifieke project-type tabellen
+-- =============================================
+
+-- Stadsontwikkeling
+INSERT INTO dbo.Stadsontwikkeling (ProjectId, VergunningStatus, ArchitecturieleWaarde, Toegankelijkheid, Bezienswaardigheid, Uitlegbord, Infowandeling) VALUES
+(1, 2, 1, 4, 1, 1, 1),   -- Oude Dokken
+(4, 1, 1, 5, 1, 1, 0);   -- Nederschelde
+
+-- GroeneRuimte
+INSERT INTO dbo.GroeneRuimte (ProjectId, Oppervlakte, Biodiversiteit, AantalWandelpaden, InToeristischeWandelroute, Beoordeling) VALUES
+(2, 85000.0, 0.87, 12, 1, 4.6),   -- Parkbos fase 3
+(5, 200.0,   0.95,  3, 0, 4.9);   -- Tiny Forest Muide
+
+-- InnovatiefWonen
+INSERT INTO dbo.InnovatiefWonen (ProjectId, AantalWooneenheden, WoonvormTypes, Rondleiding, Showwoning, ArchitectuurInnovatieScore, SamenwerkingErfgoed, SamenwerkingToerisme) VALUES
+(3, 42, 'Cohousing; Appartementen; Kangoeroewoning', 1, 1, 8.7, 0, 1);
+
+-- =============================================
+-- 7. Project_ProjectType (koppeling naar de juiste subtype-tabel)
+-- =============================================
+INSERT INTO dbo.Project_ProjectType (ProjectId, StadsontwikkelingId, GroeneRuimteId, InnovatiefWonenId) VALUES
+(1, 1, NULL, NULL),
+(2, NULL, 2, NULL),
+(3, NULL, NULL, 3),
+(4, 4, NULL, NULL),
+(5, NULL, 5, NULL);
+
+-- =============================================
+-- 8. Stadsontwikkeling <-> Bouwfirma (veel-op-veel)
+-- =============================================
+INSERT INTO dbo.Stadsontwikkeling_Bouwfirma (ProjectId, BouwfirmaId) VALUES
+(1, 1), (1, 2),   -- Oude Dokken werkt met BAM en Cordeel
+(4, 3);           -- Nederschelde met Alheembouw
+
+-- =============================================
+-- 9. ProjectPartner
+-- =============================================
+INSERT INTO dbo.ProjectPartner (ProjectId, PartnerId, Rol) VALUES
+(1, 1, 'Projectleider'),
+(1, 2, 'Communicatie & toerisme'),
+(2, 4, 'Beheer & aanleg'),
+(3, 3, 'Ontwikkelaar'),
+(5, 4, 'Initiatiefnemer');
+
+-- =============================================
+-- 10. GebruikerProject (wie mag welk project zien/bewerken)
+-- =============================================
+INSERT INTO dbo.GebruikerProject (GebruikerId, ProjectId) VALUES
+(1,1),(1,2),(1,3),(1,4),(1,5), -- admin ziet alles
+(2,1),(2,4),                   -- Jens (admin) vooral stadsontwikkeling
+(3,2),(3,5),                   -- Marie van Natuurpunt: groene projecten
+(4,3),                         -- Tom van woonproject: cohousing
+(5,1);                         -- Sofie van Cordeel: Oude Dokken
+
+-- =============================================
+-- 11. Faciliteiten (alleen voor GroeneRuimte projecten)
+-- =============================================
+INSERT INTO dbo.Faciliteit (ProjectId, Naam) VALUES
+(2, N'Picknickweide'),
+(2, N'Speelbos'),
+(2, N'Vijver'),
+(2, N'Insectenhotel'),
+(5, N'Zitbankjes'),
+(5, N'Informatiebord'),
+(5, N'Bomenlijst');
+
+PRINT 'Database succesvol gevuld met testdata!';
+GO
