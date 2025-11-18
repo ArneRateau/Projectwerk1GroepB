@@ -8,29 +8,34 @@ namespace StadOntwikkeling_BL.Models
 {
 	public class InnovatiefWonenProject
 	{
-		private Project _project;
-		private int _aantalWooneenheden;
-		private int _innovatiescore;
+		private string _woonvormTypes;
+        private int _aantalWooneenheden;
+		private double _innovatiescore;
+		private bool _rondleiding;
+		private bool _showWoning;
+		private bool _samenwerkingMetErfgoed;
+        private bool _samenwerkingMetToerismeGent;
 
-		public Project Project
-		{
-			get { return _project; }
-			set { _project = value; }
-		}
+
+       
 		public int AantalWooneenheden
 		{
 			get { return _aantalWooneenheden; }
 			set { _aantalWooneenheden = value; }
 		}
-		public List<WoonvormTypes> WoonvormTypes { get; set; } = new();
 		public bool Rondleiding { get; set; }
 		public bool ShowWoning { get; set; }
-		public int Innovatiescore
-		{
-			get { return _innovatiescore; }
-			set { _innovatiescore = value; }
-		}
+		
 		public bool SamenwerkingMetErfgoed { get; set; }
 		public bool SamenwerkingMetToerismeGent { get; set; }
-	}
+        public string WoonvormTypes
+        {
+            get { return _woonvormTypes; }
+            set { _woonvormTypes = value; }
+        }
+        public double Innovatiescore {
+            get { return _innovatiescore; }
+            set { _innovatiescore = value; }
+        }
+    }
 }

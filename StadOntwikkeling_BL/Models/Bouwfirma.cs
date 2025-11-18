@@ -10,8 +10,20 @@ namespace StadOntwikkeling_BL.Models
 	{
 		private int _id;
 		private string _naam;
-		
-		public int Id
+		private string _email;
+        public Bouwfirma(int id, string naam, string email)
+        {
+            Id = id;
+            Naam = naam;
+            Email = email;
+        }
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+
+        public int Id
 		{
 			get { return _id; }
 			set { _id = value; }

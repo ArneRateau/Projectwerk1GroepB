@@ -11,4 +11,8 @@
     <Folder Include="Repos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StadOntwikkeling_BL\StadOntwikkeling_BL.csproj" />
+  </ItemGroup>
+
 </Project>

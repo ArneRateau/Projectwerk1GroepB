@@ -11,12 +11,24 @@ namespace StadOntwikkeling_BL.Models
 	{
 		private int _projectId;
 		private Bouwfirma _bouwfirma;
-		private bool _architecturaleWaarde;
+		private VergunningStatus _vergunningStatus;
+        private bool _architecturaleWaarde;
 		private bool _bezienswaardigheid;
 		private bool _uitlegbord;
 		private bool _infowandeling;
 
-		public int ProjectId
+        public StadsontwikkelingProject(int projectId, VergunningStatus vergunningStatus, bool architecturaleWaarde, bool bezienswaardigheid, bool uitlegbord, bool infoWandeling, Bouwfirma bouwfirma)
+        {
+            ProjectId = projectId;
+            VergunningStatus = vergunningStatus;
+            ArchitecturaleWaarde = architecturaleWaarde;
+            Bezienswaardigheid = bezienswaardigheid;
+            Uitlegbord = uitlegbord;
+            InfoWandeling = infoWandeling;
+            Bouwfirma = bouwfirma;
+        }
+
+        public int ProjectId
 		{
 			get { return _projectId; }
 			set { _projectId = value; }

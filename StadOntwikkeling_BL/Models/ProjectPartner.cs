@@ -12,9 +12,19 @@ namespace StadOntwikkeling_BL.Models
 		private int _id;
 		private Partner _partner;
 		private Project _project;
-		//private Rol _rol; ==> kunnen wij enums in de UT's ook testen?
+		private string _rol;
 
-		public int Id
+        public ProjectPartner(int id, Partner partner, Project project, string rol)
+        {
+            Id = id;
+            Partner = partner;
+            Project = project;
+            Rol = rol;
+        }
+
+        //private Rol _rol; ==> kunnen wij enums in de UT's ook testen?
+
+        public int Id
 		{
 			get { return _id; }
 			set { _id = value; }
@@ -29,5 +39,14 @@ namespace StadOntwikkeling_BL.Models
 			get { return _project; }
 			set { _project = value; }
 		}
-	}
+        public string Rol
+        {
+            get { return _rol; }
+            set { _rol = value; }
+        }
+		public void VoegRolToe(string rol)
+		{
+
+		}
+    }
 }

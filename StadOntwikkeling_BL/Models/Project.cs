@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Models
 {
-	public class Project
+	public abstract class Project
 	{
 		private int _id;
 		private string _title;

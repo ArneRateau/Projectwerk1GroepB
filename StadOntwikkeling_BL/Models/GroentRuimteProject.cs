@@ -15,7 +15,17 @@ namespace StadOntwikkeling_BL.Models
 		private bool _inWandelroutes;
 		private int _beoordeling;
 
-		public int ProjectId
+        public GroentRuimteProject(int projectId, double oppervlakte, int biodiversiteitscore, int aantalWandelpaden, bool inWandelroutes, int beoordeling)
+        {
+            ProjectId = projectId;
+            Oppervlakte = oppervlakte;
+            Biodiversiteitscore = biodiversiteitscore;
+            AantalWandelpaden = aantalWandelpaden;
+            InWandelroutes = inWandelroutes;
+            Beoordeling = beoordeling;
+        }
+
+        public int ProjectId
 		{
 			get { return _projectId; }
 			set { _projectId = value; }
@@ -35,7 +45,6 @@ namespace StadOntwikkeling_BL.Models
 			get { return _aantalWandelpaden; }
 			set { _aantalWandelpaden = value; }
 		}
-		public List<Faciliteit> Faciliteiten { get; set; } = new();
 		public bool InWandelroutes
 		{
 			get { return _inWandelroutes; }

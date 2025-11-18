@@ -8,4 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StadOntwikkeling_BL\StadOntwikkeling_BL.csproj" />
+    <ProjectReference Include="..\StadOntwikkeling_DL\StadOntwikkeling_DL.csproj" />
+  </ItemGroup>
+
 </Project>

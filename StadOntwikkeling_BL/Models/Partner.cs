@@ -10,10 +10,19 @@ namespace StadOntwikkeling_BL.Models
 	{
 		private int _id;
 		private string _naam;
-		private Adres _adres;
+		private Locatie _locatie;
 		private string _email;
 
-		public int Id
+        public Partner(int id, string naam, Locatie locatie, string email, List<ProjectPartner> projecten)
+        {
+            Id = id;
+            Naam = naam;
+            Locatie = locatie;
+            Email = email;
+            Projecten = projecten;
+        }
+
+        public int Id
 		{
 			get { return _id; }
 			set { _id = value; }
@@ -23,10 +32,10 @@ namespace StadOntwikkeling_BL.Models
 			get { return _naam; }
 			set { _naam = value; }
 		}
-		public Adres Adres
+		public Locatie Locatie
 		{
-			get { return _adres; }
-			set { _adres = value; }
+			get { return _locatie; }
+			set { _locatie = value; }
 		}
 		public string Email
 		{
