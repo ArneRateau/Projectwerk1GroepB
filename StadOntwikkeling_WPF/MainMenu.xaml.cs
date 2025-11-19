@@ -13,10 +13,11 @@ namespace StadOntwikkeling_WPF
         private readonly IGebruikerManager _gebruikerManager;
         private readonly IProjectManager _projectManager;
 
-        public MainMenu(IGebruikerManager gebruikerManager)
+        public MainMenu(IGebruikerManager gebruikerManager, IProjectManager projectManager)
         {
             InitializeComponent();
             _gebruikerManager = gebruikerManager;
+            _projectManager = projectManager;
 
             addGebruiker.Click += AddGebruiker_Click;
 

@@ -20,6 +20,10 @@ namespace StadOntwikkeling_BL.Managers
         {
             return repo.GetProjects();
         }
+        public List<Project> GetProjectsLite()
+        {
+            return repo.GetProjectsLite();
+        }
         // nog niet zeker over parameters
         public void CombineProjectOnderdeel()
         {

@@ -10,5 +10,6 @@ namespace StadOntwikkeling_BL.Interfaces
     public interface IProjectManager
     {
         List<Project> GetProjects();
+        List<Project> GetProjectsLite();
     }
 }

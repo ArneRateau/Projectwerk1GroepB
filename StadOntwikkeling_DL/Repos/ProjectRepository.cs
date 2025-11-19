@@ -21,7 +21,7 @@ namespace StadOntwikkeling_DL.Repos
         {
             this.connectionString = connectionString;
         }
-
+        
         public List<Project> GetProjects()
         {
             List<Project> projects = new List<Project>();
@@ -75,6 +75,63 @@ namespace StadOntwikkeling_DL.Repos
                 }
                 return projects;
             }
+        }
+
+        public List<Project> GetProjectsLite()
+        {
+            List<Project> projects = new List<Project>();
+
+            string query = @"
+        SELECT 
+            pr.ProjectId,
+            pr.Titel,
+            pr.Startdatum,
+            pr.Status,
+            pr.Beschrijving,
+            l.LocatieId,
+            l.Straat,
+            l.Gemeente,
+            l.Postcode,
+            l.Wijk,
+            l.HuisNummer
+        FROM Project pr
+        JOIN Locatie l ON pr.LocatieId = l.LocatieId";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                con.Open();
+
+                using (SqlDataReader r = cmd.ExecuteReader())
+                {
+                    while (r.Read())
+                    {
+                        Locatie locatie = new Locatie(
+                    (int)r["LocatieId"],
+                    (string)r["Wijk"],
+                    (string)r["Straat"],
+                    (string)r["Gemeente"],
+                    (string)r["Postcode"],
+                    (string)r["HuisNummer"]
+                );
+
+                        Project p = new Project(
+                            (int)r["ProjectId"],
+                            (string)r["Titel"],
+                            (DateTime)r["Startdatum"],
+                            (Status)(int)r["Status"],
+                            (string)r["Beschrijving"],
+                            locatie,
+                            new List<ProjectPartner>(),  // empty
+                            new List<ProjectOnderdeel>() // empty
+                        );
+
+                        projects.Add(p);
+                    }
+                }
+            }
+
+            return projects;
         }
 
         private List<ProjectOnderdeel> LoadProjectOnderdelen(int projectId)

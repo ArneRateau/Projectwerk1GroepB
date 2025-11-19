@@ -12,7 +12,7 @@ namespace StadOntwikkeling_WPF
     public partial class ZoekVenster : Window
     {
         private readonly IProjectManager _projectManager;
-        private List<Project> _alleProjecten;
+        private List<Project> _alleProjecten = new List<Project>();
 
         public ZoekVenster(IProjectManager projectManager)
         {
@@ -25,7 +25,7 @@ namespace StadOntwikkeling_WPF
 
         private void LoadProjecten()
         {
-            _alleProjecten = _projectManager.GetProjects();
+            _alleProjecten = _projectManager.GetProjectsLite();
             DgResultaten.ItemsSource = _alleProjecten;
         }
         private void BtnZoek_Click(object sender, RoutedEventArgs e)

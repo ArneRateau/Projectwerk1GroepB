@@ -46,7 +46,6 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titel" Binding="{Binding Titel}" Width="2*" />
-                <DataGridTextColumn Header="Wijk" Binding="{Binding Locatie.Wijk}" Width="1.2*" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" />
                 <DataGridTextColumn Header="StartDatum" Binding="{Binding StartDatum}" Width="1.2*" />
             </DataGrid.Columns>

@@ -20,6 +20,7 @@ namespace StadOntwikkeling_WPF
     public partial class MainWindow : Window
     {
         private readonly IGebruikerManager _gebruikerManager;
+        private readonly IProjectManager _projectManager;
 
         public MainWindow(IGebruikerManager gebruikerManager)
         {
@@ -39,7 +40,7 @@ namespace StadOntwikkeling_WPF
             }
             else
             {
-                var mw = new MainMenu(_gebruikerManager);
+                var mw = new MainMenu(_gebruikerManager, _projectManager);
                 mw.ShowDialog();
             }
         }
