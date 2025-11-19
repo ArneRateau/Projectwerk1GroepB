@@ -1,4 +1,5 @@
 ﻿using StadOntwikkeling_BL.Interfaces;
+using StadOntwikkeling_BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,22 @@ namespace StadOntwikkeling_BL.Managers
 {
     public class GebruikerManager : IGebruikerManager
     {
-        private readonly IGebruikerRepo _gebruikerRepo;
+        private readonly IGebruikerRepository _gebruikerRepo;
 
-        public GebruikerManager(IGebruikerRepo gebruikerRepo)
+        public GebruikerManager(IGebruikerRepository gebruikerRepo)
         {
             _gebruikerRepo = gebruikerRepo;
         }
-
-        
 
         public void MaakGebruiker(string email, bool isAdmin, bool isPartner)
         { 
 
             _gebruikerRepo.MaakGebruiker(email, isAdmin, isPartner);
         }
-    }
+
+		public Gebruiker? ZoekGebruikerMetEmail(string email)
+		{
+            return _gebruikerRepo.ZoekGebruikerMetEmail(email);
+		}
+	}
 }
