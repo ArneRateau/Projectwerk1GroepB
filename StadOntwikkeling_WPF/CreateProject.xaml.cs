@@ -1,4 +1,7 @@
-﻿using System;
+﻿using StadOntwikkeling_BL.Managers;
+using StadOntwikkeling_BL.Models;
+using StadOntwikkeling_DL.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,25 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class CreataProject : Window
     {
+        
         public CreataProject()
         {
             InitializeComponent();
+        }
+
+        private void CreeerProject_Click(object sender, RoutedEventArgs e)
+        {
+            string titel = Titel.Text;
+            string status = Status.Text;
+            string datum = Datum.Text;
+            string wijk = Wijk.Text;
+            string straat = Straat.Text;
+            string gemeente = Gemeente.Text;
+            string postcode = Postcode.Text;
+            string huisnummer = Huisnummer.Text;
+            string beschrijving = Beschrijving.Text;
+            CreateProjectSpecifiek cps = new CreateProjectSpecifiek();
+            cps.ShowDialog();
         }
     }
 }
