@@ -14,23 +14,26 @@ namespace StadOntwikkeling_BL.Models
 		private string _postcode;
 		private string _gemeente;
 		private string _wijk;
+		private string _huisnummer;
 
-		public Locatie(string straat, string postcode, string gemeente, string wijk)
+		public Locatie(string straat, string postcode, string gemeente, string wijk, string huisnummer)
 		{
 			Straat = straat;
 			Postcode = postcode;
 			Gemeente = gemeente;
 			Wijk = wijk;
+			Huisnummer = huisnummer;
 		}
 
-		public Locatie(int id, string straat, string postcode, string gemeente, string wijk)
+		public Locatie(int id, string straat, string postcode, string gemeente, string wijk, string huisnummer)
 		{
 			Id = id;
 			Straat = straat;
 			Postcode = postcode;
 			Gemeente = gemeente;
 			Wijk = wijk;
-		}
+            Huisnummer = huisnummer;
+        }
 
 		public int Id
 		{
@@ -80,6 +83,16 @@ namespace StadOntwikkeling_BL.Models
 				if (string.IsNullOrEmpty(value))
 					throw new LocatieException("Wijk mag niet leeg of null zijn");
 				_wijk = value;
+			}
+		}
+		public string Huisnummer
+		{
+			get { return _huisnummer; }
+			set 
+			{
+				if (string.IsNullOrEmpty(value))
+					throw new LocatieException("Huisnummer mag niet leeg of null zijn");
+				_huisnummer = value;
 			}
 		}
 	}
