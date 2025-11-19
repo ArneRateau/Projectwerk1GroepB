@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Interfaces
 {
-    public interface IGebruikerManager
-    {
-        public void MaakGebruiker(string email, bool isAdmin, bool isPartner);
-        public Gebruiker? ZoekGebruikerMetEmail(string email);
-
+	public interface IGebruikerRepository
+	{
+		void MaakGebruiker(string email, bool isAdmin, bool isPartner);
+		Gebruiker? ZoekGebruikerMetEmail(string email);
 	}
 }

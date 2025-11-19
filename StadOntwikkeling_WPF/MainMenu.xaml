@@ -10,8 +10,8 @@
     <Grid>
         <TextBlock Foreground="#009DE0" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,150" >Welkom, gebruiker!</TextBlock>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center">Wat wenst u te doen?</TextBlock>
-        <Button x:Name="Bekijk" Content="Bekijk projecten" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,400,450,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" ></Button>
-        <Button x:Name="creeer" Content="Creeer nieuw project" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,400,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" ></Button>
-        <Button x:Name="addGebruiker" Content="maak gebruiker" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="450,400,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" ></Button>
-    </Grid>
+		<Button x:Name="Bekijk" Content="Bekijk projecten" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,400,450,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="BekijkProjecten_Click"/>
+		<Button x:Name="MaakProject" Content="Maak nieuw project" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,400,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="MaakProject_Click"/>
+		<Button x:Name="addLogin" Content="Maak gebruiker" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="450,400,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="MaakGebruiker_Click"/>
+	</Grid>
 </Window>
