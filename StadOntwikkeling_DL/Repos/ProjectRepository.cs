@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using StadOntwikkeling_BL.Enums;
 using StadOntwikkeling_BL.Interfaces;
 using StadOntwikkeling_BL.Models;
+using StadOntwikkeling_BL.Models.DTO_s;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,6 @@ namespace StadOntwikkeling_DL.Repos
                     {
                         while (reader.Read())
                         {
-                            // Fixed: Postcode is INT in database, convert to string for display
                             Locatie locatie = new Locatie(
                                 (int)reader["LocatieId"],
                                 (string)reader["Straat"],
@@ -77,61 +77,114 @@ namespace StadOntwikkeling_DL.Repos
             }
         }
 
-        public List<Project> GetProjectsLite()
+        private List<string> LoadPartnerNames(int projectId)
         {
-            List<Project> projects = new List<Project>();
+            List<string> partners = new List<string>();
+
+            string query = @"
+        SELECT pa.Naam
+        FROM Partner pa
+        JOIN ProjectPartner pp ON pa.PartnerId = pp.PartnerId
+        WHERE pp.ProjectId = @ProjectId";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                con.Open();
+                cmd.Parameters.AddWithValue("@ProjectId", projectId);
+
+                using (SqlDataReader r = cmd.ExecuteReader())
+                {
+                    while (r.Read())
+                        partners.Add((string)r["Naam"]);
+                }
+            }
+
+            return partners;
+        }
+
+        private List<string> LoadProjectTypes(int projectId)
+        {
+            List<string> types = new List<string>();
+
+            string query = @"
+        SELECT StadsontwikkelingId, GroeneRuimteId, InnovatiefWonenId
+        FROM Project_ProjectType
+        WHERE ProjectId = @ProjectId";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                con.Open();
+                cmd.Parameters.AddWithValue("@ProjectId", projectId);
+
+                using (SqlDataReader r = cmd.ExecuteReader())
+                {
+                    if (r.Read())
+                    {
+                        if (r["StadsontwikkelingId"] != DBNull.Value)
+                            types.Add("Stadsontwikkeling");
+
+                        if (r["GroeneRuimteId"] != DBNull.Value)
+                            types.Add("Groene Ruimte");
+
+                        if (r["InnovatiefWonenId"] != DBNull.Value)
+                            types.Add("Innovatief Wonen");
+                    }
+                }
+            }
+
+            return types;
+        }
+
+
+
+
+        public List<ProjectDTO> GetProjectsLite()
+        {
+            List<ProjectDTO> list = new List<ProjectDTO>();
 
             string query = @"
         SELECT 
             pr.ProjectId,
             pr.Titel,
             pr.Startdatum,
-            pr.Status,
             pr.Beschrijving,
-            l.LocatieId,
-            l.Straat,
-            l.Gemeente,
-            l.Postcode,
-            l.Wijk,
-            l.HuisNummer
+            pr.Status,
+            pr.ProjectType,
+            l.Wijk
         FROM Project pr
         JOIN Locatie l ON pr.LocatieId = l.LocatieId";
 
-            using (SqlConnection con = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, con))
+            using SqlConnection con = new SqlConnection(connectionString);
+            using SqlCommand cmd = new SqlCommand(query, con);
+
+            con.Open();
+
+            int Id;
+            string Title;
+            string Status;
+            string Wijk;
+            DateTime StartDatum;
+            string ProjectType;
+            List<string> PartnerNamen;
+            using SqlDataReader r = cmd.ExecuteReader();
+            while (r.Read())
             {
-                con.Open();
+                ProjectDTO ProjectDTO = new ProjectDTO(Id = (int)r["ProjectId"],
+                    Title = (string)r["Titel"],
+                    Status = ((Status)(int)r["Status"]).ToString(),
+                    Wijk = (string)r["Wijk"],
+                    StartDatum = (DateTime)r["Startdatum"]);
 
-                using (SqlDataReader r = cmd.ExecuteReader())
-                {
-                    while (r.Read())
-                    {
-                        Locatie locatie = new Locatie(
-                    (int)r["LocatieId"],
-                    (string)r["Wijk"],
-                    (string)r["Straat"],
-                    (string)r["Gemeente"],
-                    (string)r["Postcode"],
-                    (string)r["HuisNummer"]
-                );
+                ProjectDTO.PartnerNamen = LoadPartnerNames(Id);
+                ProjectDTO.ProjectTypes = LoadProjectTypes(Id);
 
-                        Project p = new Project(
-                            (int)r["ProjectId"],
-                            (string)r["Titel"],
-                            (DateTime)r["Startdatum"],
-                            (Status)(int)r["Status"],
-                            (string)r["Beschrijving"],
-                            locatie,
-                            new List<ProjectPartner>(),  // empty
-                            new List<ProjectOnderdeel>() // empty
-                        );
+                list.Add(ProjectDTO);
 
-                        projects.Add(p);
-                    }
-                }
             }
 
-            return projects;
+            return list;
         }
 
         private List<ProjectOnderdeel> LoadProjectOnderdelen(int projectId)

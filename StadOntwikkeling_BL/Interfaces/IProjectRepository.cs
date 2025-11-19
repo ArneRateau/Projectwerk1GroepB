@@ -1,4 +1,5 @@
 ﻿using StadOntwikkeling_BL.Models;
+using StadOntwikkeling_BL.Models.DTO_s;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace StadOntwikkeling_BL.Interfaces
     {
         List<Project> GetProjects();
 
-        List<Project> GetProjectsLite();
+        List<ProjectDTO> GetProjectsLite();
         void CombineProjectOnderdeel();
     }
 }

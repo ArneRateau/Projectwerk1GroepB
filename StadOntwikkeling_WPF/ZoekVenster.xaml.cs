@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using StadOntwikkeling_BL.Models;
 using System.Windows.Controls;
 using StadOntwikkeling_BL.Interfaces;
+using StadOntwikkeling_BL.Models.DTO_s;
 
 
 
@@ -12,7 +13,7 @@ namespace StadOntwikkeling_WPF
     public partial class ZoekVenster : Window
     {
         private readonly IProjectManager _projectManager;
-        private List<Project> _alleProjecten = new List<Project>();
+        private List<ProjectDTO> _alleProjecten = new List<ProjectDTO>();
 
         public ZoekVenster(IProjectManager projectManager)
         {
@@ -20,6 +21,7 @@ namespace StadOntwikkeling_WPF
             _projectManager = projectManager;
 
             LoadProjecten();
+            LoadFilters();
 
         }
 
@@ -28,50 +30,110 @@ namespace StadOntwikkeling_WPF
             _alleProjecten = _projectManager.GetProjectsLite();
             DgResultaten.ItemsSource = _alleProjecten;
         }
+
+        void LoadFilters()
+        {
+            // Wijken
+            var wijken = _alleProjecten
+                .Select(p => p.Wijk)
+                .Where(w => !string.IsNullOrWhiteSpace(w))
+                .Distinct()
+                .OrderBy(w => w)
+                .ToList();
+
+            foreach (var w in wijken)
+                CmbWijk.Items.Add(new ComboBoxItem { Content = w });
+
+            // Partners
+            var partners = _alleProjecten
+                .SelectMany(p => p.PartnerNamen)
+                .Where(n => !string.IsNullOrWhiteSpace(n))
+                .Distinct()
+                .OrderBy(n => n)
+                .ToList();
+
+            foreach (var p in partners)
+                CmbPartner.Items.Add(new ComboBoxItem { Content = p });
+        }
+
+
+
         private void BtnZoek_Click(object sender, RoutedEventArgs e)
         {
-            string naam = TxtNaam.Text.Trim();
-            string wijk = TxtWijk.Text.Trim();
-
-            string type = (CmbType.SelectedItem as ComboBoxItem)?.Content.ToString();
-            string status = (CmbStatus.SelectedItem as ComboBoxItem)?.Content.ToString();
-
-            DateTime? start = DpStart.SelectedDate;
-            DateTime? einde = DpEinde.SelectedDate;
-
             var query = _alleProjecten.AsEnumerable();
 
-            if (!string.IsNullOrWhiteSpace(naam))
-                query = query.Where(p => p.Titel.Contains(naam, StringComparison.OrdinalIgnoreCase));
-
-
-            if (!string.IsNullOrWhiteSpace(wijk))
-                query = query.Where(p => p.Locatie.Wijk.Contains(wijk, StringComparison.OrdinalIgnoreCase));
-
-
-            if (!string.IsNullOrWhiteSpace(status))
-                query = query.Where(p => p.Status.ToString() == status);
-
-
-            if (start != null)
-                query = query.Where(p => p.StartDatum >= start);
-
-            if (einde != null)
-                query = query.Where(p => p.StartDatum <= einde);
-
-
-            if (!string.IsNullOrWhiteSpace(type))
+            // Filter: Wijk
+            if (CmbWijk.SelectedItem is ComboBoxItem wijkItem)
             {
-                query = query.Where(p =>
-                    p.ProjectOnderdelen.Any(o =>
-                        (type == "Groene Ruimte" && o is GroenRuimteProject) ||
-                        (type == "Stadsontwikkeling" && o is StadsontwikkelingProject) ||
-                        (type == "Innovatief Wonen" && o is InnovatiefWonenProject)
-                    )
-                );
+                string wijk = wijkItem.Content.ToString();
+                if (wijk != "None")
+                {
+                    query = query.Where(p =>
+                        p.Wijk.Equals(wijk, StringComparison.OrdinalIgnoreCase)
+                    );
+                }
+            }
+
+
+            // Filter: Status
+            if (CmbStatus.SelectedItem is ComboBoxItem statusItem)
+            {
+                string status = statusItem.Content.ToString();
+                if (status != "None")
+                {
+                    query = query.Where(p => p.Status == status);
+                }
+            }
+
+            // Filter: Type project
+            if (CmbType.SelectedItem is ComboBoxItem typeItem)
+            {
+                string type = typeItem.Content.ToString();
+                if (type != "None")
+                {
+                    query = query.Where(p =>
+                        p.ProjectTypes.Any(t =>
+                            t.Equals(type, StringComparison.OrdinalIgnoreCase)
+                        )
+                    );
+                }
+            }
+
+
+            // Filter: Naam partner
+            if (CmbPartner.SelectedItem is ComboBoxItem partnerItem)
+            {
+                string partner = partnerItem.Content.ToString();
+                if (partner != "None")
+                {
+                    query = query.Where(p =>
+                        p.PartnerNamen.Any(pa =>
+                            pa.Equals(partner, StringComparison.OrdinalIgnoreCase)
+                        )
+                    );
+                }
+            }
+
+
+            // Filter: Startdatum >=
+            if (DpStart.SelectedDate is DateTime start)
+            {
+                query = query.Where(p => p.StartDatum >= start);
+            }
+
+
+            // Filter: Startdatum <= einde
+            if (DpEind.SelectedDate is DateTime einde)
+            {
+                query = query.Where(p => p.StartDatum <= einde);
             }
 
             DgResultaten.ItemsSource = query.ToList();
+        }
+
+        private void CmbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

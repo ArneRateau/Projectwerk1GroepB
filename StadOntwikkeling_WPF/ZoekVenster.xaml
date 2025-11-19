@@ -13,26 +13,34 @@
        
         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
 
-            <TextBox x:Name="TxtNaam" Width="150" Margin="0,0,10,0"
-                     ToolTip="Projectnaam" />
+            <ComboBox x:Name="CmbPartner" Width="150" Margin="0,0,10,0"
+          ToolTip="Partnernaam">
+                <ComboBoxItem Content="None" IsSelected="True"/>
+            </ComboBox>
 
-            <TextBox x:Name="TxtWijk" Width="150" Margin="0,0,10,0"
-                     ToolTip="Wijk" />
+
+            <ComboBox x:Name="CmbWijk" Width="150" Margin="0,0,10,0"
+          ToolTip="Wijk">
+                <ComboBoxItem Content="None" IsSelected="True"/>
+            </ComboBox>
+
 
             <ComboBox x:Name="CmbType" Width="160" Margin="0,0,10,0">
+                <ComboBoxItem Content="None" IsSelected="True"/>
                 <ComboBoxItem Content="Stadsontwikkeling"/>
                 <ComboBoxItem Content="Groene Ruimte"/>
                 <ComboBoxItem Content="Innovatief Wonen"/>
             </ComboBox>
 
-            <ComboBox x:Name="CmbStatus" Width="150" Margin="0,0,10,0">
+            <ComboBox x:Name="CmbStatus" Width="150" Margin="0,0,10,0" SelectionChanged="CmbStatus_SelectionChanged">
+                <ComboBoxItem Content="None" IsSelected="True"/>
                 <ComboBoxItem Content="Planning"/>
                 <ComboBoxItem Content="Uitvoering"/>
                 <ComboBoxItem Content="Afgerond"/>
             </ComboBox>
 
             <DatePicker x:Name="DpStart" Width="140" Margin="0,0,10,0"/>
-            <DatePicker x:Name="DpEinde" Width="140" Margin="0,0,10,0"/>
+            <DatePicker x:Name="DpEind" Width="140" Margin="0,0,10,0"/>
 
             <Button Content="Zoek" Width="90" Height="35"
                     Background="#007ACC" Foreground="White"
@@ -45,9 +53,13 @@
                   IsReadOnly="True">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Titel" Binding="{Binding Titel}" Width="2*" />
+                <DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="2*" />
+                <DataGridTextColumn Header="Wijk" Binding="{Binding Wijk}" Width="1.5*" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" />
-                <DataGridTextColumn Header="StartDatum" Binding="{Binding StartDatum}" Width="1.2*" />
+                <DataGridTextColumn Header="StartDatum"  Binding="{Binding StartDatum, StringFormat=\{0:dd/MM/yyyy\}}" Width="1.2*" />
+                <DataGridTextColumn Header="Partners" Binding="{Binding PartnerNamenDisplay}" Width="2*" />
+                <DataGridTextColumn Header="Type(s)" Binding="{Binding ProjectTypesDisplay}" Width="1.5*" />
+
             </DataGrid.Columns>
 
         </DataGrid>

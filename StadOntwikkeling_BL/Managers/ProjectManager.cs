@@ -1,5 +1,6 @@
 ﻿using StadOntwikkeling_BL.Interfaces;
 using StadOntwikkeling_BL.Models;
+using StadOntwikkeling_BL.Models.DTO_s;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace StadOntwikkeling_BL.Managers
         {
             return repo.GetProjects();
         }
-        public List<Project> GetProjectsLite()
+        public List<ProjectDTO> GetProjectsLite()
         {
             return repo.GetProjectsLite();
         }
