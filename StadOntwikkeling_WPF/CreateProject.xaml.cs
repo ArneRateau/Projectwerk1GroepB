@@ -39,30 +39,19 @@ namespace StadOntwikkeling_WPF
                 return;
             }
 
-            int status=0;
-            if (string.IsNullOrWhiteSpace(Status.Text))
+            string status = Status.Text;
+            if (string.IsNullOrWhiteSpace(status))
             {
                 MessageBox.Show("Status moet ingevuld zijn.");
                 return;
             }
-            if (Status.Text.Equals("Planning"))
-            {
-                status = 0;
-            }else if (Status.Text.Equals("Uitvoering"))
-            {
-                status = 1;
-            }
-            else if (Status.Text.Equals("Afgerond"))
-            {
-                status = 2;
-            }
-            
-            if (string.IsNullOrWhiteSpace(Datum.Text))
+
+            string datum = Datum.Text;
+            if (string.IsNullOrWhiteSpace(datum))
             {
                 MessageBox.Show("Geschatte datum moet ingegeven zijn.");
                 return;
             }
-            DateTime datum = DateTime.Parse(Datum.Text);
 
             string wijk = Wijk.Text;
             if (string.IsNullOrWhiteSpace(wijk))
@@ -103,8 +92,8 @@ namespace StadOntwikkeling_WPF
                 MessageBox.Show("Beschrijving moet ingevuld zijn, hoe meer hoe liever.");
                 return;
             }
-            var basisProject = (titel, status, datum, wijk, straat, gemeente, postcode, huisnummer, beschrijving);
-            CreateProjectSpecifiek cps = new CreateProjectSpecifiek();
+            string[] doorgever = {titel, status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving};
+            CreateProjectSpecifiek cps = new CreateProjectSpecifiek(doorgever);
             cps.ShowDialog();
         }
     }

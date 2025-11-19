@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace StadOntwikkeling_WPF
 {
     /// <summary>
@@ -19,10 +20,16 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class CreateProjectSpecifiek : Window
     {
-        public CreateProjectSpecifiek()
+        string[] nrmlData = {};
+        public CreateProjectSpecifiek(string[] doorgever)
         {
             InitializeComponent();
+            nrmlData = doorgever;
+        }
 
+        private void CreeerProject_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
