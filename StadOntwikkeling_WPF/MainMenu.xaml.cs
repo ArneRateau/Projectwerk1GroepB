@@ -18,6 +18,7 @@ namespace StadOntwikkeling_WPF
             _gebruikerManager = gebruikerManager;
 
             addGebruiker.Click += AddGebruiker_Click;
+
         }
 
         private void AddGebruiker_Click(object? sender, RoutedEventArgs e)
@@ -33,7 +34,8 @@ namespace StadOntwikkeling_WPF
 
 		private void MaakProject_Click(object sender, RoutedEventArgs e)
 		{
-
+            var window = new CreataProject();
+            window.ShowDialog();
 		}
 
 		private void MaakGebruiker_Click(object sender, RoutedEventArgs e)
