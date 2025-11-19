@@ -3,6 +3,7 @@ using System.Windows;
 using System.Collections.Generic;
 using StadOntwikkeling_BL.Models;
 using System.Windows.Controls;
+using StadOntwikkeling_BL.Interfaces;
 
 
 
@@ -10,15 +11,23 @@ namespace StadOntwikkeling_WPF
 {
     public partial class ZoekVenster : Window
     {
-        private readonly IProject
+        private readonly IProjectManager _projectManager;
         private List<Project> _alleProjecten;
 
-        public ZoekVenster()
+        public ZoekVenster(IProjectManager projectManager)
         {
             InitializeComponent();
+            _projectManager = projectManager;
+
+            LoadProjecten();
 
         }
 
+        private void LoadProjecten()
+        {
+            _alleProjecten = _projectManager.GetProjects();
+            DgResultaten.ItemsSource = _alleProjecten;
+        }
         private void BtnZoek_Click(object sender, RoutedEventArgs e)
         {
             string naam = TxtNaam.Text.Trim();

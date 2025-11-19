@@ -11,6 +11,7 @@ namespace StadOntwikkeling_WPF
     public partial class MainMenu : Window
     {
         private readonly IGebruikerManager _gebruikerManager;
+        private readonly IProjectManager _projectManager;
 
         public MainMenu(IGebruikerManager gebruikerManager)
         {
@@ -29,7 +30,7 @@ namespace StadOntwikkeling_WPF
 
         private void BekijkProjecten_Click(object sender, RoutedEventArgs e)
 		{
-            var window = new ZoekVenster();
+            var window = new ZoekVenster(_projectManager);
             window.ShowDialog();
         }
 

@@ -10,9 +10,9 @@ namespace StadOntwikkeling_BL.Models
 	public class InnovatiefWonenProject : ProjectOnderdeel
 	{
 		private int _aantalWooneenheden;
-		private int _innovatiescore;
+		private float _innovatiescore;
 
-		public InnovatiefWonenProject(int aantalWooneenheden, List<string> woonvormTypes, bool rondleiding, bool showWoning, int innovatiescore, bool samenwerkingMetErfgoed, bool samenwerkingMetToerismeGent)
+		public InnovatiefWonenProject(int aantalWooneenheden, List<string> woonvormTypes, bool rondleiding, bool showWoning, float innovatiescore, bool samenwerkingMetErfgoed, bool samenwerkingMetToerismeGent)
 		{
 			AantalWooneenheden = aantalWooneenheden;
 			WoonvormTypes = woonvormTypes;
@@ -36,15 +36,15 @@ namespace StadOntwikkeling_BL.Models
 		public List<string> WoonvormTypes { get; set; } = new();
 		public bool Rondleiding { get; set; }
 		public bool ShowWoning { get; set; }
-		public int Innovatiescore
+		public float Innovatiescore
 		{
 			get { return _innovatiescore; }
 			set
 			{
 				if (value < 0)
 					throw new InnovatiefWonenProjectException("Innovatiescore kan niet negatief zijn");
-				_innovatiescore = value;
-			}
+				_innovatiescore = value; 
+            }
 		}
 		public bool SamenwerkingMetErfgoed { get; set; }
 		public bool SamenwerkingMetToerismeGent { get; set; }

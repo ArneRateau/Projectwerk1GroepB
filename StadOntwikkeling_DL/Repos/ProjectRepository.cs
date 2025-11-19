@@ -21,11 +21,13 @@ namespace StadOntwikkeling_DL.Repos
         {
             this.connectionString = connectionString;
         }
-        //nog niet klaar
+
         public List<Project> GetProjects()
         {
             List<Project> projects = new List<Project>();
-            string queryProject = "select pr.ProjectId pr.Titel, pr.Startdatum, pr.Status, pr.Beschrijving, l.LocatieId,l.Straat, l.Gemeente, l.Postcode, l.Wijk, l.Huisnummer from Project pr join Locatie l on pr.LocatieId = l.Id";
+            // Fixed: Added missing comma after ProjectId, fixed column reference l.LocatieId
+            string queryProject = "SELECT pr.ProjectId, pr.Titel, pr.Startdatum, pr.Status, pr.Beschrijving, l.LocatieId, l.Straat, l.Gemeente, l.Postcode, l.Wijk, l.HuisNummer FROM Project pr JOIN Locatie l ON pr.LocatieId = l.LocatieId";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -37,11 +39,31 @@ namespace StadOntwikkeling_DL.Repos
                     {
                         while (reader.Read())
                         {
-                            Locatie locatie = new Locatie((int)reader["LocatieId"], (string)reader["Straat"], (string)reader["Postcode"], (string)reader["Gemeente"], (string)reader["Wijk"],(string)reader["Huisnummer"]);
-                            Project project = new Project((int)reader["ProjectId"], (string)reader["Titel"], (DateTime)reader["Startdatum"], (Status)reader["Status"], (string)reader["Beschrijving"], locatie, new List<ProjectPartner>(),new List<ProjectOnderdeel>());
+                            // Fixed: Postcode is INT in database, convert to string for display
+                            Locatie locatie = new Locatie(
+                                (int)reader["LocatieId"],
+                                (string)reader["Straat"],
+                                reader["Postcode"].ToString(),
+                                (string)reader["Gemeente"],
+                                (string)reader["Wijk"],
+                                (string)reader["HuisNummer"]
+                            );
+
+                            Project project = new Project(
+                                (int)reader["ProjectId"],
+                                (string)reader["Titel"],
+                                (DateTime)reader["Startdatum"],
+                                (Status)reader["Status"],
+                                (string)reader["Beschrijving"],
+                                locatie,
+                                new List<ProjectPartner>(),
+                                new List<ProjectOnderdeel>()
+                            );
+
                             projects.Add(project);
                         }
                     }
+
                     foreach (var project in projects)
                     {
                         project.ProjectOnderdelen = LoadProjectOnderdelen(project.Id);
@@ -49,26 +71,29 @@ namespace StadOntwikkeling_DL.Repos
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Geef projects", ex);
+                    throw new Exception("Error getting projects", ex);
                 }
                 return projects;
             }
         }
+
         private List<ProjectOnderdeel> LoadProjectOnderdelen(int projectId)
         {
-            List<ProjectOnderdeel> projectOnderdelen = new List < ProjectOnderdeel>();
-            string query = "select * Project_ProjectType where ProjectId = @ProjectId";
+            List<ProjectOnderdeel> projectOnderdelen = new List<ProjectOnderdeel>();
+            // Fixed: Added missing FROM keyword
+            string query = "SELECT * FROM Project_ProjectType WHERE ProjectId = @ProjectId";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlCommand cmd = connection.CreateCommand()) 
+            using (SqlCommand cmd = connection.CreateCommand())
             {
                 connection.Open();
                 cmd.CommandText = query;
                 cmd.Parameters.AddWithValue("@ProjectId", projectId);
-                using (SqlDataReader reader = cmd.ExecuteReader()) 
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read()) 
+                    while (reader.Read())
                     {
-                        int onderdeelId = (int)reader["ProjectId"];
                         if (reader["StadsontwikkelingId"] != DBNull.Value)
                         {
                             projectOnderdelen.Add(LoadStadsOntwikkelingProject((int)reader["StadsontwikkelingId"]));
@@ -86,19 +111,32 @@ namespace StadOntwikkeling_DL.Repos
             }
             return projectOnderdelen;
         }
+
         private StadsontwikkelingProject LoadStadsOntwikkelingProject(int onderdeelId)
         {
-            string query = "select * from Stadsontwikkeling where projectId = @ProjectOnderdeelId";
-            using(SqlConnection connection = new SqlConnection(connectionString))
+            string query = "SELECT * FROM Stadsontwikkeling WHERE ProjectId = @ProjectOnderdeelId";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand cmd = connection.CreateCommand())
             {
                 connection.Open();
-                cmd.Parameters.AddWithValue("@ProjectOnderdeelId",onderdeelId);
-                using(SqlDataReader reader = cmd.ExecuteReader())
+                cmd.CommandText = query; // Fixed: Added missing CommandText assignment
+                cmd.Parameters.AddWithValue("@ProjectOnderdeelId", onderdeelId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        var onderdeel = new StadsontwikkelingProject(LoadBouwFirmas(onderdeelId), (VergunningStatus)reader["VergunningStatus"], (bool)reader["ArchitecturieeleWaarde"], (Toegankelijkheid)reader["Toegankelijkheid"], (bool)reader["Bezienswaardigheid"], (bool)reader["Uitlegbord"], (bool)reader["InfoWandeling"]);
+                        // Fixed: Column name is "ArchitecturieleWaarde" not "ArchitecturieeleWaarde"
+                        var onderdeel = new StadsontwikkelingProject(
+                            LoadBouwFirmas(onderdeelId),
+                            (VergunningStatus)reader["VergunningStatus"],
+                            (bool)reader["ArchitecturieleWaarde"],
+                            (Toegankelijkheid)reader["Toegankelijkheid"],
+                            (bool)reader["Bezienswaardigheid"],
+                            (bool)reader["Uitlegbord"],
+                            (bool)reader["Infowandeling"]
+                        );
                         onderdeel.ProjectOnderdeelId = onderdeelId;
                         return onderdeel;
                     }
@@ -106,60 +144,62 @@ namespace StadOntwikkeling_DL.Repos
             }
             return null;
         }
-        //geeft bouwfirmas
+
         private List<Bouwfirma> LoadBouwFirmas(int projectId)
         {
             List<Bouwfirma> bouwfirmas = new List<Bouwfirma>();
-            string query = "select b.* from Bouwfirma b join Stadsontwikkeling_Bouwfirma sb on sb.BouwfirmaId = b.BouwfirmaId where sb.ProjectId = @ProjectId";
+            string query = "SELECT b.* FROM Bouwfirma b JOIN Stadsontwikkeling_Bouwfirma sb ON sb.BouwfirmaId = b.BouwfirmaId WHERE sb.ProjectId = @ProjectId";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand cmd = connection.CreateCommand())
             {
                 connection.Open();
                 cmd.CommandText = query;
                 cmd.Parameters.AddWithValue("@ProjectId", projectId);
+
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        bouwfirmas.Add(new Bouwfirma((int)reader["BouwFirmaId"], (string)reader["Naam"], (string)reader["Email"], (string)reader["Telefoon"]));
+                        bouwfirmas.Add(new Bouwfirma(
+                            (int)reader["BouwfirmaId"],
+                            (string)reader["Naam"],
+                            (string)reader["Email"],
+                            (string)reader["Telefoon"]
+                        ));
                     }
                 }
             }
             return bouwfirmas;
         }
-        //nog niet klaar
-        private StadsontwikkelingProject LoadGroenRuimteProject(int onderdeelId)
+
+        // Fixed: Return type should be GroeneRuimteProject, implemented loading logic
+        private GroenRuimteProject LoadGroenRuimteProject(int onderdeelId)
         {
-            string query = "select * from GroeneRuimte where projectId = @ProjectOnderdeelId";
+            string query = "SELECT * FROM GroeneRuimte WHERE ProjectId = @ProjectOnderdeelId";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand cmd = connection.CreateCommand())
             {
                 connection.Open();
+                cmd.CommandText = query; // Fixed: Added missing CommandText assignment
                 cmd.Parameters.AddWithValue("@ProjectOnderdeelId", onderdeelId);
+
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        //
-                    }
-                }
-            }
-            return null;
-        }
-        //nog niet klaar
-        private InnovatiefWonenProject LoadInnovatiefWonenProject(int onderdeelId)
-        {
-            string query = "select * from InnovatiefWonen where projectId = @ProjectOnderdeelId";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlCommand cmd = connection.CreateCommand())
-            {
-                connection.Open();
-                cmd.Parameters.AddWithValue("@ProjectOnderdeelId", onderdeelId);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        var onderdeel = new InnovatiefWonenProject((int)reader["AantalWooneenheden"],/*moet list zijn*/(string)reader["WoonvormTypes"], (bool)reader["Rondleiding"], (bool)reader["Showwoning"], (int)/*(float)*/reader["ArchitectuurInnovatieScore"], (bool)reader["SamenwerkingErGoed"], (bool)reader["SamenwerkingToerisme"]);
+                        var faciliteiten = LoadFaciliteiten(onderdeelId)
+                    .Select(f => f.Naam)
+                    .ToList();
+                        var onderdeel = new GroenRuimteProject(
+                            (double)reader["Oppervlakte"],
+                            (double)reader["Biodiversiteit"],
+                            (int)reader["AantalWandelpaden"],
+                            faciliteiten,
+                            (bool)reader["InToeristischeWandelroute"],
+                            (double)reader["Beoordeling"]
+                        );
                         onderdeel.ProjectOnderdeelId = onderdeelId;
                         return onderdeel;
                     }
@@ -167,10 +207,77 @@ namespace StadOntwikkeling_DL.Repos
             }
             return null;
         }
-        //nog niet klaar
+
+        // Helper method to load facilities for GroeneRuimte
+        private List<Faciliteit> LoadFaciliteiten(int projectId)
+        {
+            List<Faciliteit> faciliteiten = new List<Faciliteit>();
+            string query = "SELECT * FROM Faciliteit WHERE ProjectId = @ProjectId";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                connection.Open();
+                cmd.CommandText = query;
+                cmd.Parameters.AddWithValue("@ProjectId", projectId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        faciliteiten.Add(new Faciliteit(
+                            (int)reader["FaciliteitId"],
+                            (string)reader["Naam"]
+                        ));
+                    }
+                }
+            }
+            return faciliteiten;
+        }
+
+        private InnovatiefWonenProject LoadInnovatiefWonenProject(int onderdeelId)
+        {
+            string query = "SELECT * FROM InnovatiefWonen WHERE ProjectId = @ProjectOnderdeelId";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                connection.Open();
+                cmd.CommandText = query; // Fixed: Added missing CommandText assignment
+                cmd.Parameters.AddWithValue("@ProjectOnderdeelId", onderdeelId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        string rawWoonvormTypes = (string)reader["WoonvormTypes"];
+
+                        var woonvormen = rawWoonvormTypes
+                            .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                            .Select(s => s.Trim())
+                            .ToList();
+
+                        var onderdeel = new InnovatiefWonenProject(
+                            (int)reader["AantalWooneenheden"],
+                            woonvormen,
+                            (bool)reader["Rondleiding"],
+                            (bool)reader["Showwoning"],
+                            (float)reader["ArchitectuurInnovatieScore"],
+                            (bool)reader["SamenwerkingErfgoed"],
+                            (bool)reader["SamenwerkingToerisme"]
+                        );
+                        onderdeel.ProjectOnderdeelId = onderdeelId;
+                        return onderdeel;
+                    }
+                }
+            }
+            return null;
+        }
+
+        // TODO: Implement this method based on your business logic
         public void CombineProjectOnderdeel()
         {
-
+            // Implementation needed based on requirements
         }
     }
 }
