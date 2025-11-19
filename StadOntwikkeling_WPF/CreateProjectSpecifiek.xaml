@@ -12,10 +12,10 @@
 
         <CheckBox x:Name="StadsOntwikkeling" Content="StadsOntwikkelings Project" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#009DE0" FontSize="20" Margin="0,75,600,150"></CheckBox>
         <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,600,150" >Betrokken bouwfirma's</TextBlock>
-        <CheckBox x:Name="a" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,500"></CheckBox>
-        <CheckBox x:Name="b" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,460"></CheckBox>
-        <CheckBox x:Name="c" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,420"></CheckBox>
-        <CheckBox x:Name="d" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,380"></CheckBox>
+        <CheckBox x:Name="BAM" Content="BAM Interbuild" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,500"></CheckBox>
+        <CheckBox x:Name="Cordeel" Content="Cordeel" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,460"></CheckBox>
+        <CheckBox x:Name="Alheembouw" Content="Alheembouw" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,420"></CheckBox>
+        <CheckBox x:Name="Democo" Content="Democo" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,380"></CheckBox>
         <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,215,600,150" >Vergunning</TextBlock>
         <ComboBox Name="VergStatus" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" FontSize="12" Margin="0,235,600,0" Foreground="#009DE0">
             <ComboBoxItem>in aanvraag</ComboBoxItem>

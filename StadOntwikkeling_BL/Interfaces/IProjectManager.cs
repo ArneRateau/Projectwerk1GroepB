@@ -11,6 +11,6 @@ namespace StadOntwikkeling_BL.Interfaces
     {
         List<Project> GetProjects();
         List<Project> GetProjectsLite();
-        void MaakProject(string titel, int status, DateTime datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving);
+        //Needs reworking void MaakProject(string titel, int status, DateTime datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving);
     }
 }
