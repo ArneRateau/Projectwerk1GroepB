@@ -10,6 +10,7 @@ namespace StadOntwikkeling_WPF
 {
     public partial class ZoekVenster : Window
     {
+        private readonly IProject
         private List<Project> _alleProjecten;
 
         public ZoekVenster()

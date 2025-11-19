@@ -28,8 +28,9 @@ namespace StadOntwikkeling_WPF
 
         private void BekijkProjecten_Click(object sender, RoutedEventArgs e)
 		{
-
-		}
+            var window = new ZoekVenster();
+            window.ShowDialog();
+        }
 
 		private void MaakProject_Click(object sender, RoutedEventArgs e)
 		{
