@@ -22,7 +22,6 @@ namespace StadOntwikkeling_DL.Repos
         {
             this.connectionString = connectionString;
         }
-        
         public List<Project> GetProjects()
         {
             List<Project> projects = new List<Project>();

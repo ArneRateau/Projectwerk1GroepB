@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace StadOntwikkeling_WPF
 {
     /// <summary>
@@ -19,10 +20,65 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class CreateProjectSpecifiek : Window
     {
-        public CreateProjectSpecifiek()
+        string[] nrmlData = {};
+        public CreateProjectSpecifiek(string[] doorgever)
         {
             InitializeComponent();
+            nrmlData = doorgever;
+        }
 
+        private void CreeerProject_Click(object sender, RoutedEventArgs e)
+        {
+            if (StadsOntwikkeling.IsChecked ?? true)
+            {
+                //geen controles added YET
+
+                bool bam, cord, alhe, demo, archWaa, bezienWaard, uitlegBord,infoWand = false;
+
+                if(BAM.IsChecked ?? true) {
+                    bam = true;
+                }
+                if(Cordeel.IsChecked ?? true) {
+                    cord = true;
+                }
+                if(Alheembouw.IsChecked ?? true) {
+                    alhe = true;
+                }
+                if(Democo.IsChecked ?? true) {
+                    demo = true;
+                }
+
+                string vergunningsStatus = VergStatus.Text;
+
+                if (archWaarde.IsChecked ?? true)
+                {
+                    archWaa = true;
+                }
+
+                string openbareToegang = OpenToegan.Text;
+
+                if (BezWaard.IsChecked ?? true) {
+                    bezienWaard = true;
+                }
+
+                if (UitBord.IsChecked ?? true) { 
+                    uitlegBord = true;
+                }
+
+                if (InfoWand.IsChecked ?? true)
+                {
+                    infoWand = true;
+                }
+
+            }
+            if (GroeneRuimte.IsChecked ?? true)
+            {
+                //nog verder uit te werken
+            }
+            if (InnovatiefWonen.IsChecked ?? true)
+            {
+                //nog verder uit te werken
+            }
         }
     }
 }

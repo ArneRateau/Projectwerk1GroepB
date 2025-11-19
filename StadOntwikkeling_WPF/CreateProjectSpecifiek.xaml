@@ -9,12 +9,13 @@
         Title="CreateProjectSpecifiek" Height="800" Width="1000">
     <Grid>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,150" >Voer project specifieke gegevens in.</TextBlock>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,75,600,150" >Stadsontwikkelingproject</TextBlock>
+
+        <CheckBox x:Name="StadsOntwikkeling" Content="StadsOntwikkelings Project" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#009DE0" FontSize="20" Margin="0,75,600,150"></CheckBox>
         <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,600,150" >Betrokken bouwfirma's</TextBlock>
-        <CheckBox x:Name="a" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,500"></CheckBox>
-        <CheckBox x:Name="b" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,460"></CheckBox>
-        <CheckBox x:Name="c" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,420"></CheckBox>
-        <CheckBox x:Name="d" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,380"></CheckBox>
+        <CheckBox x:Name="BAM" Content="BAM Interbuild" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,500"></CheckBox>
+        <CheckBox x:Name="Cordeel" Content="Cordeel" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,460"></CheckBox>
+        <CheckBox x:Name="Alheembouw" Content="Alheembouw" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,420"></CheckBox>
+        <CheckBox x:Name="Democo" Content="Democo" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,380"></CheckBox>
         <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,215,600,150" >Vergunning</TextBlock>
         <ComboBox Name="VergStatus" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" FontSize="12" Margin="0,235,600,0" Foreground="#009DE0">
             <ComboBoxItem>in aanvraag</ComboBoxItem>
@@ -31,8 +32,38 @@
         <CheckBox x:Name="BezWaard" Content="Bezienwaardig voor toeristen" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,50"></CheckBox>
         <CheckBox x:Name="UitBord" Content="Uitlegbord" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,0"></CheckBox>
         <CheckBox x:Name="InfoWand" Content="Infowandeling" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,50,0,0"></CheckBox>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,75,0,150" >Groene ruimte project</TextBlock>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="600,75,0,150" >Innovatief wonen project</TextBlock>
+
+        <CheckBox x:Name="GroeneRuimte" Content="Groene Ruimte Project" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#009DE0" FontSize="20" Margin="0,75,0,150"></CheckBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,110,175,0" >Oppervlakte in M²</TextBlock>
+        <TextBox x:Name="Oppervlakte" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="50,110,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,140,175,0" >Biodiversiteitscore</TextBlock>
+        <TextBox x:Name="BioScore" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="50,140,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,170,175,0" >Aantal wandelpaden</TextBlock>
+        <TextBox x:Name="AantWandel" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="50,170,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,200,0,0" >Beschikbare faciliteiten</TextBlock>
+        <CheckBox x:Name="spel" Content="Speeltuin" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="450,0,0,300"></CheckBox>
+        <CheckBox x:Name="pick" Content="Picknickzone" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="450,0,0,265"></CheckBox>
+        <CheckBox x:Name="info" Content="infoborden" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="450,0,0,230"></CheckBox>
+        <TextBox x:Name="Faciliteit" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="10,280,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <CheckBox x:Name="ToerWand" Content="Toerisctische wandeling" VerticalAlignment="Top" Foreground="#009DE0" FontSize="12" Margin="438,314,-12,0"></CheckBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,340,100,0" >Beoordeling door bezoekers</TextBlock>
+        <TextBox x:Name="BezoeScore" VerticalAlignment="Top" HorizontalAlignment="Center" Width="25" Margin="100,340,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+
+        <CheckBox x:Name="InnovatiefWonen" Content="Innovatief Wonen Project" VerticalAlignment="Top" Foreground="#009DE0" HorizontalAlignment="Center" FontSize="20" Margin="600,75,0,150"></CheckBox>
+        <TextBox x:Name="AantWoon" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="700,110,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="450,110,0,0" >Aantal wooneenheden</TextBlock>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="600,140,0,0" >Types woonvormen</TextBlock>
+        <CheckBox x:Name="Modul" Content="Modulaire woningen" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="750,0,0,420"></CheckBox>
+        <CheckBox x:Name="Cohou" Content="Co-Housing" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="750,0,0,385"></CheckBox>
+        <TextBox x:Name="Woonvorm" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="600,205,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <CheckBox x:Name="Rondleid" Content="Rondleiding mogelijk" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="740,0,0,260"></CheckBox>
+        <CheckBox x:Name="ShowWoni" Content="Showwoning beschikbaar" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="740,0,0,210"></CheckBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="679,304,0,0" >Innovatie-score</TextBlock>
+        <TextBox x:Name="InnoSco" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="775,303,0,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <CheckBox x:Name="SamErf" Content="Samenwerking erfgoed" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="740,0,0,110"></CheckBox>
+        <CheckBox x:Name="SamToe" Content="Samenwerking Toerisme gent" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="740,0,0,60"></CheckBox>
+        <Button x:Name="CreeerProjectType" Content="Creeer" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,685,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="CreeerProject_Click"/>
+
         <Rectangle Width="1" Height="1000" Fill="#009DE0" Margin="0,75,300,0"></Rectangle>
         <Rectangle Width="1" Height="1000" Fill="#009DE0" Margin="300,75,0,0"></Rectangle>
     </Grid>

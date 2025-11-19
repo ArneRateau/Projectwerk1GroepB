@@ -24,12 +24,11 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class CreataProject : Window
     {
-  
+        
 
         public CreataProject()
         {
             InitializeComponent();
-
         }
 
         private void CreeerProject_Click(object sender, RoutedEventArgs e)
@@ -93,7 +92,8 @@ namespace StadOntwikkeling_WPF
                 MessageBox.Show("Beschrijving moet ingevuld zijn, hoe meer hoe liever.");
                 return;
             }
-            CreateProjectSpecifiek cps = new CreateProjectSpecifiek();
+            string[] doorgever = {titel, status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving};
+            CreateProjectSpecifiek cps = new CreateProjectSpecifiek(doorgever);
             cps.ShowDialog();
         }
     }
