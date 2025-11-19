@@ -1,5 +1,4 @@
-﻿using StadOntwikkeling_BL.Interfaces;
-using StadOntwikkeling_BL.Managers;
+﻿using StadOntwikkeling_BL.Managers;
 using StadOntwikkeling_DL.Repos;
 using System.Windows;
 
@@ -10,12 +9,16 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class MainMenu : Window
     {
-        private readonly IGebruikerManager _gebruikerManager;
-        public MainMenu()
+        private readonly GebruikerManager _gebruikerManager;
+        private readonly string _connectionstring;
+        public MainMenu(string connectionstring)
         {
             InitializeComponent();
-
-            _gebruikerManager = new GebruikerManager(new GebruikerRepo());
+            _connectionstring = connectionstring;
+            // repo
+            var gebruikerRepo = new GebruikerRepository(connectionstring);
+            // manager
+            _gebruikerManager = new GebruikerManager(gebruikerRepo);
 
             addLogin.Click += AddLogin_Click;
         }
@@ -25,5 +28,20 @@ namespace StadOntwikkeling_WPF
             GebruikerToevoegen gebruikerToevoegenWindow = new GebruikerToevoegen(_gebruikerManager);
             gebruikerToevoegenWindow.ShowDialog();
         }
-    }
+
+		private void BekijkProjecten_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void MaakProject_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void MaakGebruiker_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+	}
 }

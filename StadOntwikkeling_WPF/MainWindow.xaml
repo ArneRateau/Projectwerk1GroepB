@@ -10,7 +10,7 @@
     <Grid>
         <TextBlock Foreground="#009DE0" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,150" >Welkom!</TextBlock>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center">Emailadres</TextBlock>
-        <TextBox x:Name="Email" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" Margin="0,100,0,0" Height="50" FontSize="25" Foreground="#009DE0"></TextBox>
-        <Button x:Name="Login" Content="Login" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,400,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" ></Button>
-    </Grid>
+		<TextBox x:Name="Email_TextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" Margin="0,100,0,0" Height="50" FontSize="25" Foreground="#009DE0"></TextBox>
+		<Button x:Name="Login" Content="Login" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="0,400,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="Login_Click"/>
+	</Grid>
 </Window>

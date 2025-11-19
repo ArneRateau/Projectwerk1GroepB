@@ -12,7 +12,23 @@ namespace StadOntwikkeling_BL.Models
     {
         private string _email;
         private int _id;
-        public int Id
+
+		public Gebruiker(string email, bool isAdmin, bool isPartner)
+		{
+			Email = email;
+			IsAdmin = isAdmin;
+			IsPartner = isPartner;
+		}
+
+		public Gebruiker(int id, string email, bool isAdmin, bool isPartner)
+		{
+			Id = id;
+			Email = email;
+			IsAdmin = isAdmin;
+			IsPartner = isPartner;
+		}
+
+		public int Id
         {
             get { return _id; }
             set
@@ -34,5 +50,6 @@ namespace StadOntwikkeling_BL.Models
         }
 
         public bool IsAdmin { get; set; }
+        public bool IsPartner { get; set; }
     }
 }
