@@ -9,5 +9,31 @@
         Title="CreateProjectSpecifiek" Height="800" Width="1000">
     <Grid>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,150" >Voer project specifieke gegevens in.</TextBlock>
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,75,600,150" >Stadsontwikkelingproject</TextBlock>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,600,150" >Betrokken bouwfirma's</TextBlock>
+        <CheckBox x:Name="a" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,500"></CheckBox>
+        <CheckBox x:Name="b" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,460"></CheckBox>
+        <CheckBox x:Name="c" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,420"></CheckBox>
+        <CheckBox x:Name="d" Content="TODO" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,380"></CheckBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,215,600,150" >Vergunning</TextBlock>
+        <ComboBox Name="VergStatus" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" FontSize="12" Margin="0,235,600,0" Foreground="#009DE0">
+            <ComboBoxItem>in aanvraag</ComboBoxItem>
+            <ComboBoxItem>Goedgekeurd</ComboBoxItem>
+            <ComboBoxItem>Geweigerd</ComboBoxItem>
+        </ComboBox>
+        <CheckBox x:Name="archWaarde" Content="Architecturale waarde" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,210"></CheckBox>
+        <TextBlock Foreground="#009DE0" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,295,600,150" >Openbaar toegankelijkheid</TextBlock>
+        <ComboBox Name="OpenToegan" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" FontSize="12" Margin="0,315,600,0" Foreground="#009DE0">
+            <ComboBoxItem>volledig openbaar</ComboBoxItem>
+            <ComboBoxItem>Gedeelterlijk</ComboBoxItem>
+            <ComboBoxItem>Gesloten</ComboBoxItem>
+        </ComboBox>
+        <CheckBox x:Name="BezWaard" Content="Bezienwaardig voor toeristen" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,50"></CheckBox>
+        <CheckBox x:Name="UitBord" Content="Uitlegbord" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,0,0,0"></CheckBox>
+        <CheckBox x:Name="InfoWand" Content="Infowandeling" VerticalAlignment="Center" Foreground="#009DE0" FontSize="12" Margin="125,50,0,0"></CheckBox>
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,75,0,150" >Groene ruimte project</TextBlock>
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="600,75,0,150" >Innovatief wonen project</TextBlock>
+        <Rectangle Width="1" Height="1000" Fill="#009DE0" Margin="0,75,300,0"></Rectangle>
+        <Rectangle Width="1" Height="1000" Fill="#009DE0" Margin="300,75,0,0"></Rectangle>
     </Grid>
 </Window>

@@ -22,6 +22,7 @@ namespace StadOntwikkeling_WPF
         public CreateProjectSpecifiek()
         {
             InitializeComponent();
+
         }
     }
 }

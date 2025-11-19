@@ -1,5 +1,7 @@
-﻿using StadOntwikkeling_BL.Managers;
+﻿using Microsoft.IdentityModel.Tokens;
+using StadOntwikkeling_BL.Managers;
 using StadOntwikkeling_BL.Models;
+using StadOntwikkeling_BL.Interfaces;
 using StadOntwikkeling_DL.Repos;
 using System;
 using System.Collections.Generic;
@@ -22,23 +24,75 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class CreataProject : Window
     {
-        
+  
+
         public CreataProject()
         {
             InitializeComponent();
+
         }
 
         private void CreeerProject_Click(object sender, RoutedEventArgs e)
         {
             string titel = Titel.Text;
+            if(string.IsNullOrWhiteSpace(titel)){
+                MessageBox.Show("Titel moet ingevuld zijn.");
+                return;
+            }
+
             string status = Status.Text;
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                MessageBox.Show("Status moet ingevuld zijn.");
+                return;
+            }
+
             string datum = Datum.Text;
+            if (string.IsNullOrWhiteSpace(datum))
+            {
+                MessageBox.Show("Geschatte datum moet ingegeven zijn.");
+                return;
+            }
+
             string wijk = Wijk.Text;
+            if (string.IsNullOrWhiteSpace(wijk))
+            {
+                MessageBox.Show("Wijk moet ingevuld zijn.");
+                return;
+            }
+
             string straat = Straat.Text;
+            if (string.IsNullOrWhiteSpace(straat))
+            {
+                MessageBox.Show("Straatnaam moet ingevuld zijn.");
+                return;
+            }
+
             string gemeente = Gemeente.Text;
+            if (string.IsNullOrWhiteSpace(gemeente))
+            {
+                MessageBox.Show("Gemeente moet ingevuld zijn.");
+                return;
+            }
+
             string postcode = Postcode.Text;
+            if (string.IsNullOrWhiteSpace(postcode))
+            {
+                MessageBox.Show("Postcode moet ingevuld zijn.");
+                return;
+            }
             string huisnummer = Huisnummer.Text;
+            if (string.IsNullOrWhiteSpace(huisnummer))
+            {
+                MessageBox.Show("Huisnummer moet ingevuld zijn.");
+                return;
+            }
             string beschrijving = Beschrijving.Text;
+            if (string.IsNullOrWhiteSpace(beschrijving))
+            {
+                MessageBox.Show("Beschrijving moet ingevuld zijn, hoe meer hoe liever.");
+                return;
+            }
             CreateProjectSpecifiek cps = new CreateProjectSpecifiek();
             cps.ShowDialog();
         }
