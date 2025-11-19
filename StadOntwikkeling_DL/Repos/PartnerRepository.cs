@@ -23,7 +23,7 @@ namespace StadOntwikkeling_DL.Repos
         public List<Partner> GetPartners()
         {
             List<Partner> partners = new List<Partner>();
-            string queryPartner = "select p.Id,p.naam, l.straat, l.gemeente, l.postcode,l.wijk,l.huisnummer from Partner join Locatie l on p.LocatieId = l.Id";
+            string queryPartner = "select p.PartnerId, p.Naam, l.Straat, l.Gemeente, l.Postcode, l.Wijk, l.Huisnummer from Partner p join Locatie l on p.LocatieId = l.Id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand cmd = connection.CreateCommand())
             {
@@ -35,22 +35,59 @@ namespace StadOntwikkeling_DL.Repos
                     {
                         while (reader.Read())
                         {
-                            //partners.Add(new Partner((int)reader["Id"], (string)reader["Naam"],new Locatie((string)reader["straat"],(string)reader["postcode"],(string)reader["gemeente"],(string)reader["wijk"]/*,huisnummer*/ ), (string)reader["email"],/**/));
+                            Locatie locatie = new Locatie((int)reader["LocatieId"], (string)reader["Straat"], (string)reader["Postcode"], (string)reader["Gemeente"], (string)reader["Wijk"],(string)reader["Huisnummer"]);
+                            Partner partner = new Partner((int)reader["PartnerId"], (string)reader["Naam"], locatie, (string)reader["Email"],new List<ProjectPartner>());
+                            partners.Add(partner);
                         }
+                        return partners;
                     }
                 }
                 catch (Exception ex)
                 {
                     throw new Exception("Geef partners", ex);
                 }
-                return partners;
             }
         }
         //nog niet klaar
-        public void MakeNewPartner()
+        public int /*void*/ MakeNewPartner(Partner partner/*, Locatie locatie*/)
         {
+            int locatieId;
+            int partnerId;
+            string queryLocatie = "insert into Locatie(Straat,Gemeente,Postcode,Wijk,Huisnummer) output inserted.LocatieId values(@Straat,@Gemeente,@Postcode,@Wijk,@Huisnummer)";
+            string query = "insert into Partner(Naam,locatieId,Email) output inserted.partnerId values(@Naam,@LocatieId,@Email)";
+            using (SqlConnection connection = new SqlConnection(connectionString)) 
+            using(SqlCommand cmdAddLocatie = connection.CreateCommand())
+            using (SqlCommand cmdAddPartner = connection.CreateCommand())
+            {
+                connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                cmdAddLocatie.Transaction = transaction;
+                cmdAddPartner.Transaction = transaction;
+                cmdAddLocatie.CommandText = query;
+                cmdAddPartner.CommandText = query;
+                try
+                {
+                    cmdAddLocatie.Parameters.AddWithValue("@Straat", partner.Locatie.Straat);
+                    cmdAddLocatie.Parameters.AddWithValue("@Gemeente",partner.Locatie.Gemeente);
+                    cmdAddLocatie.Parameters.AddWithValue("@Postcode",partner.Locatie.Postcode);
+                    cmdAddLocatie.Parameters.AddWithValue("@Wijk", partner.Locatie.Wijk);
+                    cmdAddLocatie.Parameters.AddWithValue("@Huisnummer", partner.Locatie.Huisnummer);
+                    locatieId = (int)cmdAddLocatie.ExecuteScalar();
 
+                    cmdAddPartner.Parameters.AddWithValue("@Naam", partner.Naam);
+                    cmdAddPartner.Parameters.AddWithValue("@LocatieId", partner.Locatie.Id);
+                    cmdAddPartner.Parameters.AddWithValue("@Email", partner.Email);
+                    partnerId = (int)cmdAddPartner.ExecuteScalar();
+
+                    transaction.Commit();
+                    return partnerId;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("", ex);
+                }
+            }
         }
-
     }
 }

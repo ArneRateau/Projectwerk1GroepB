@@ -10,7 +10,8 @@ namespace StadOntwikkeling_BL.Interfaces
     public interface IPartnerRepository
     {
         List<Partner> GetPartners();
-        void MakeNewPartner();
-        
+        public int MakeNewPartner(Partner partner);
+
+
     }
 }
