@@ -1,45 +1,51 @@
 ﻿using Microsoft.Data.SqlClient;
-using StadOntwikkeling_BL.Models;
 using StadOntwikkeling_BL.Interfaces;
+using StadOntwikkeling_BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace StadOntwikkeling_DL.Repos
 {
 	public class GebruikerRepository : IGebruikerRepository
 	{
-		private string _connectionString;
+		private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
 
-		public GebruikerRepository(string connectionstring)
+
+
+        public GebruikerRepository(string connectionstring)
 		{
 			_connectionString = connectionstring;
 		}
 
-		public void MaakGebruiker(string email, bool isAdmin, bool isPartner)
+		public int MaakGebruiker(string email, bool isAdmin, bool isPartner)
 		{
-			using (SqlConnection conn = new SqlConnection(_connectionString))
-			{
-				conn.Open();
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = @"
+            INSERT INTO Gebruiker (Email, IsAdmin, IsPartner)
+            VALUES (@Email, @IsAdmin, @IsPartner);
 
-				string sql = @"INSERT INTO Gebruiker (Email, IsAdmin, IsPartner)
-					   VALUES (@Email, @IsAdmin, @IsPartner)";
+            SELECT CAST(SCOPE_IDENTITY() AS int);";
 
-				using (SqlCommand cmd = new SqlCommand(sql, conn))
-				{
-					cmd.Parameters.AddWithValue("@Email", email);
-					cmd.Parameters.AddWithValue("@IsAdmin", isAdmin);
-					cmd.Parameters.AddWithValue("@IsPartner", isPartner);
-					 //todo zorg er voor dat nieuwe id gebruikt wordt 
-					cmd.ExecuteNonQuery();
-				}
-			}
-		}
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@IsAdmin", isAdmin);
+                    cmd.Parameters.AddWithValue("@IsPartner", isPartner);
 
-		public Gebruiker? ZoekGebruikerMetEmail(string email)
+                    int newId = (int)cmd.ExecuteScalar();
+                    return newId;
+                }
+            }
+        }
+
+        public Gebruiker? ZoekGebruikerMetEmail(string email)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{

@@ -9,8 +9,10 @@ namespace StadOntwikkeling_BL.Interfaces
 {
     public interface IGebruikerManager
     {
-        public void MaakGebruiker(string email, bool isAdmin, bool isPartner);
+        public int MaakGebruiker(string email, bool isAdmin, bool isPartner);
         public Gebruiker? ZoekGebruikerMetEmail(string email);
 
-	}
+        public bool IsGeldigEmail(string email); 
+
+    }
 }

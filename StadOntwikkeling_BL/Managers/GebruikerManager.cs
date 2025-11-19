@@ -17,15 +17,25 @@ namespace StadOntwikkeling_BL.Managers
             _gebruikerRepo = gebruikerRepo;
         }
 
-        public void MaakGebruiker(string email, bool isAdmin, bool isPartner)
+        public int MaakGebruiker(string email, bool isAdmin, bool isPartner)
         { 
 
-            _gebruikerRepo.MaakGebruiker(email, isAdmin, isPartner);
+            int newId = _gebruikerRepo.MaakGebruiker(email, isAdmin, isPartner);
+            return newId;
         }
 
 		public Gebruiker? ZoekGebruikerMetEmail(string email)
 		{
             return _gebruikerRepo.ZoekGebruikerMetEmail(email);
 		}
-	}
+
+        public bool IsGeldigEmail(string email)
+        {
+            if (!email.Contains("@"))
+            {
+                return false;
+            }
+            else return true; 
+        }
+    }
 }

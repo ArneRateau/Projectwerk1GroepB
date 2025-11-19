@@ -22,7 +22,30 @@ namespace StadOntwikkeling_WPF
 
         private void SaveButton_Click(object? sender, RoutedEventArgs e)
         {
-            _gebruikerManager.MaakGebruiker(EmailTextBox.Text, IsAdminCheckBox.IsChecked ?? false, IsPartnerCheckBox.IsChecked ?? false);
+            if(string.IsNullOrWhiteSpace(EmailTextBox.Text))
+            {
+                MessageBox.Show("Email mag niet leeg zijn.");
+                return;
+            }
+            if(!_gebruikerManager.IsGeldigEmail(EmailTextBox.Text))
+            {
+                MessageBox.Show("Ongeldig email formaat.");
+                return;
+            }
+            if(_gebruikerManager.ZoekGebruikerMetEmail(EmailTextBox.Text) != null)
+            {
+                MessageBox.Show("Deze email is al in gebruik.");
+                return;
+            }
+            
+           
+                string email = EmailTextBox.Text;
+                bool isAdmin = IsAdminCheckBox.IsChecked ?? false;
+                bool isPartner = IsPartnerCheckBox.IsChecked ?? false;
+                _gebruikerManager.MaakGebruiker(email, isAdmin, isPartner);
+                MessageBox.Show("Gebruiker succesvol toegevoegd.");
+            
+                
         }
 
         private void CancelButton_Click(object? sender, RoutedEventArgs e)

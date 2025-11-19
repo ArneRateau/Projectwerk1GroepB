@@ -9,7 +9,7 @@ namespace StadOntwikkeling_BL.Interfaces
 {
 	public interface IGebruikerRepository
 	{
-		void MaakGebruiker(string email, bool isAdmin, bool isPartner);
+		int MaakGebruiker(string email, bool isAdmin, bool isPartner);
 		Gebruiker? ZoekGebruikerMetEmail(string email);
 	}
 }
