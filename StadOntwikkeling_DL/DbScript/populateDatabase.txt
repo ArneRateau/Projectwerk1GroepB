@@ -44,12 +44,12 @@ INSERT INTO dbo.Gebruiker (Email, IsAdmin, IsPartner) VALUES
 -- =============================================
 -- 5. Projecten (basis)
 -- =============================================
-INSERT INTO dbo.Project (Titel, Startdatum, Beschrijving, Status, LocatieId, ProjectType) VALUES
-('Herontwikkeling Oude Dokken', '2024-03-01', 'Grootschalige stadsvernieuwing aan de dokken met woon- en recreatieprojecten', 1, 4, 'Stadsontwikkeling'),
-('Parkbos fase 3', '2023-06-15', 'Uitbreiding van het Parkbos met nieuwe wandelpaden en biodiversiteit', 1, 5, 'GroeneRuimte'),
-('Cohousing De Wasserij', '2024-01-10', N'Innovatief cohousing-project met 42 wooneenheden en gemeenschappelijke ruimtes', 0, 3, N'InnovatiefWonen'),
-('Reconstructie Nederschelde', '2025-02-01', N'Herinrichting kades met publieke ruimte en nieuwe beplanting', 2, 2, N'Stadsontwikkeling'),
-('Tiny Forest Muide', '2025-09-01', N'Klein stadsbos van 200 m² volgens Miyawaki-methode', 2, 4, N'GroeneRuimte');
+INSERT INTO dbo.Project (Titel, Startdatum, Beschrijving, Status, LocatieId) VALUES
+('Herontwikkeling Oude Dokken', '2024-03-01', 'Grootschalige stadsvernieuwing aan de dokken met woon- en recreatieprojecten', 1, 4),
+('Parkbos fase 3', '2023-06-15', 'Uitbreiding van het Parkbos met nieuwe wandelpaden en biodiversiteit', 1, 5),
+('Cohousing De Wasserij', '2024-01-10', N'Innovatief cohousing-project met 42 wooneenheden en gemeenschappelijke ruimtes', 0, 3),
+('Reconstructie Nederschelde', '2025-02-01', N'Herinrichting kades met publieke ruimte en nieuwe beplanting', 2, 2),
+('Tiny Forest Muide', '2025-09-01', N'Klein stadsbos van 200 m² volgens Miyawaki-methode', 2, 4);
 
 -- =============================================
 -- 6. Specifieke project-type tabellen
@@ -57,8 +57,8 @@ INSERT INTO dbo.Project (Titel, Startdatum, Beschrijving, Status, LocatieId, Pro
 
 -- Stadsontwikkeling
 INSERT INTO dbo.Stadsontwikkeling (ProjectId, VergunningStatus, ArchitecturieleWaarde, Toegankelijkheid, Bezienswaardigheid, Uitlegbord, Infowandeling) VALUES
-(1, 2, 1, 4, 1, 1, 1),   -- Oude Dokken
-(4, 1, 1, 5, 1, 1, 0);   -- Nederschelde
+(1, 2, 1, 2, 1, 1, 1),   -- Oude Dokken
+(4, 1, 1, 0, 1, 1, 0);   -- Nederschelde
 
 -- GroeneRuimte
 INSERT INTO dbo.GroeneRuimte (ProjectId, Oppervlakte, Biodiversiteit, AantalWandelpaden, InToeristischeWandelroute, Beoordeling) VALUES

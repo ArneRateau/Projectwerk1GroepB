@@ -13,12 +13,12 @@ namespace StadOntwikkeling_DL.Repos
 {
 	public class GebruikerRepository : IGebruikerRepository
 	{
-		private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
-		//private string _connectionString = "Data Source=localhost;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
+		//private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
+		private string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
 
 		public GebruikerRepository(string connectionstring)
 		{
-			_connectionString = connectionstring;
+			//_connectionString = connectionstring;
 		}
 
 		public int MaakGebruiker(string email, bool isAdmin, bool isPartner)

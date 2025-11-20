@@ -82,7 +82,7 @@ namespace StadOntwikkeling_WPF
 
 		private void MaakProject_Click(object sender, RoutedEventArgs e)
 		{
-            var window = new CreataProject();
+            var window = new CreataProject(_projectManager);
             window.ShowDialog();
 		}
 
