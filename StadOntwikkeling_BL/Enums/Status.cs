@@ -8,8 +8,8 @@ namespace StadOntwikkeling_BL.Enums
 {
 	public enum Status
 	{
-		Planning,
-		Uitvoering,
-		Afgerond
+		Planning = 1,
+		Uitvoering = 2,
+		Afgerond = 3
 	}
 }

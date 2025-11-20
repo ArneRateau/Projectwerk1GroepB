@@ -36,5 +36,9 @@ namespace StadOntwikkeling_BL.Managers
         {
             throw new NotImplementedException();
         }
-    }
+		public void UpdateProject(Project toUpdate)
+		{
+            repo.UpdateProject(toUpdate);
+		}
+	}
 }
