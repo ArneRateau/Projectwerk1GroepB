@@ -22,5 +22,6 @@ namespace StadOntwikkeling_BL.Interfaces
         public int MaakProject();
 
         Project GetProjectById(int id);
+        List<ProjectPartner> GetProjectPartners(int projectId);
     }
 }

@@ -170,5 +170,11 @@ namespace StadOntwikkeling_WPF
         {
 
         }
+        private void ToonInfoProject_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectDTO res = (ProjectDTO)DgResultaten.SelectedItem;
+            InfoProjectWindow info = new InfoProjectWindow(_projectManager, res.Id);
+            info.ShowDialog();
+        }
     }
 }

@@ -1,0 +1,47 @@
+﻿<Window x:Class="StadOntwikkeling_WPF.InfoProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StadOntwikkeling_WPF"
+        mc:Ignorable="d"
+        Title="InfoProjectWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="ProjectInfo" Foreground="#009DE0"></Label>
+        <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DataGridInfoProjecten" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Titel" Binding="{Binding Titel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Startdatum" Binding="{Binding Startdatum}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Beschrijving}"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Locatie" Binding="{Binding LocatieDisplay}"></DataGridTextColumn>-->
+                <DataGridTextColumn Header="ProjectType" Binding="{Binding ProjectOnderdeelDisplay}"></DataGridTextColumn>
+                <!--nog aanpassen-->
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Grid.Row="2" Content="Partners" Foreground="#009DE0"></Label>
+        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  x:Name="DataGridPartners" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Partner.Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Naam" Binding="{Binding Partner.Naam}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Partner.Email}"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Locatie" Binding="{Binding Locatie}"></DataGridTextColumn>-->
+                <DataGridTextColumn Header="Rol" Binding="{Binding Rol}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="4" Grid.Column="1"  Content="EDIT" Click="ToonProjectWindow_Click" HorizontalAlignment="Center" Width="80" Margin="5,5,1,5" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20"></Button>
+        <Button Grid.Row="4" Grid.Column="1" Content="CSV" Click="ExportToCSV_Click" HorizontalAlignment="Right" Width="80" Margin="5,5,50,5" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20"></Button>
+    </Grid>
+</Window>
