@@ -9,6 +9,7 @@ namespace StadOntwikkeling_BL.Interfaces
 {
     public interface IProjectPartnerRepository
     {
-        ProjectPartner GetPartnerByRol();
+        bool HeeftPartnerRolVoorProject(Project pr, Partner pa, string rol);
+        void KoppelPartnerAanProject(Project pr, Partner pa, string rol);
     }
 }
