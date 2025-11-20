@@ -1,6 +1,8 @@
-﻿using StadOntwikkeling_BL.Interfaces;
+﻿using StadOntwikkeling_BL.Enums;
+using StadOntwikkeling_BL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace StadOntwikkeling_WPF
@@ -23,10 +26,7 @@ namespace StadOntwikkeling_WPF
     {
         private string[] _nrmlData = {};
         private IProjectManager _projectManager;
-
-        public CreateProjectSpecifiek(string[] doorgever)
-        {
-        }
+       
 
         public CreateProjectSpecifiek(string[] doorgever,IProjectManager projectManager)
         {
@@ -165,9 +165,10 @@ namespace StadOntwikkeling_WPF
             {
                 MessageBox.Show("Kies minstens 1 type project");
             }
-
-            _projectManager.MaakProject();
-
+            else { 
+                string titel = _nrmlData[0], status = _nrmlData[1], datum = _nrmlData[2], wijk = _nrmlData[3], straat = _nrmlData[4], gemeente = _nrmlData[5], postcode = _nrmlData[6], huisnummer = _nrmlData[7], beschrijving = _nrmlData[8];
+                _projectManager.MaakProject(titel,status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving);
+            }
 
         }
     }

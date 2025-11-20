@@ -15,6 +15,6 @@ namespace StadOntwikkeling_BL.Interfaces
         List<ProjectDTO> GetProjectsLite();
         void CombineProjectOnderdeel();
 		void UpdateProject(Project toUpdate);
-        public int MaakProject();
+        int MaakProjectAlgemeen(string v1, int v2, DateTime now, string v3, string v4, string v5, int v6, string v7, string v8);
     }
 }

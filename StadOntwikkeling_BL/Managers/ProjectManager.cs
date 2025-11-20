@@ -26,12 +26,27 @@ namespace StadOntwikkeling_BL.Managers
             return _projectRepo.GetProjectsLite();
         }
         // nog niet zeker over parameters
-        public int MaakProject()
+        public int MaakProject(string titel, string status, string datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving)
         {
-            int newID = _projectRepo.MaakProject();
+            int postCode = int.Parse(postcode);
+            DateTime tijd = DateTime.Parse(datum);
+            int Status;
+            if (status == "Planning")
+            {
+                Status = 0;
+            }
+            else if (status == "Uitvoering")
+            {
+                Status = 1;
+            }
+            else {
+                Status = 2;
+            }
+            int newID = _projectRepo.MaakProjectAlgemeen(titel,Status,tijd,wijk,straat,gemeente,postCode,huisnummer,beschrijving);
             return newID;
+           
         }
 
-      
+
     }
 }

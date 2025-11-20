@@ -20,7 +20,7 @@ namespace StadOntwikkeling_DL.Repos
 
 		public ProjectRepository(string connectionString)
 		{
-			_connectionString = connectionString;
+			_connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
 		}
 		public List<Project> GetProjects()
 		{
@@ -406,7 +406,56 @@ namespace StadOntwikkeling_DL.Repos
 			}
 		}
 
-        public int MaakProject()
+        public int MaakProjectAlgemeen(string titel, int status, DateTime startdatum,string wijk, string straat, string gemeente,int postcode, string huisnummer, string Beschrijving)
+        {
+			using (SqlConnection conn = new SqlConnection(_connectionString))
+			{
+				int locId,proId=0;
+				conn.Open();
+				string sqllocatie = @"
+			INSERT INTO Locatie (Wijk, Straat, Gemeente, Postcode, HuisNummer)
+			VALUES (@Wijk, @Straat, @Gemeente, @Postcode, @HuisNummer);
+
+			SELECT CAST(SCOPE_IDENTITY() AS int);";
+				using (SqlCommand cmd = new SqlCommand(sqllocatie, conn))
+				{
+					cmd.Parameters.AddWithValue("@Wijk", wijk);
+                    cmd.Parameters.AddWithValue("@Straat", straat);
+                    cmd.Parameters.AddWithValue("@Gemeente", gemeente);
+                    cmd.Parameters.AddWithValue("@Postcode", postcode);
+                    cmd.Parameters.AddWithValue("@HuisNummer", huisnummer);
+					locId = (int)cmd.ExecuteScalar();
+                }
+
+				string sql = @"
+			INSERT INTO Project (Titel, Startdatum, Beschrijving, Status, LocatieId)
+			VALUES (@Titel, @Startdatum, @Beschrijving, @Status, @LocatieId)
+
+			SELECT CAST(SCOPE_IDENTITY() AS int);";
+				using (SqlCommand cmdo = new SqlCommand(sql, conn))
+				{
+					cmdo.Parameters.AddWithValue("@Titel", titel);
+                    cmdo.Parameters.AddWithValue("@Startdatum", startdatum);
+                    cmdo.Parameters.AddWithValue("@Beschrijving", Beschrijving);
+                    cmdo.Parameters.AddWithValue("@Status", status);
+                    cmdo.Parameters.AddWithValue("@LocatieId", locId);
+                    proId = (int)cmdo.ExecuteScalar();
+                }
+			return proId;
+			}
+        }
+
+        public int MaakProjectStads(int vergunStatus, int archWaard, int Toegang, int bezienswaard, int uitlegb, int infoWand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int MaakProjectGroen(int oppervlak, double biodivers, int aantWandelpad, int toeriWandelr, double beoordeling)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int MaakProjectInno(int aantWoone,string woonvormT, int rondl, int showwon,double archInnoScore, int samErf, int samToer)
         {
             throw new NotImplementedException();
         }
