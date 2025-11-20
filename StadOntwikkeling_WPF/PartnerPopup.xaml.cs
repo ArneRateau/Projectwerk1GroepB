@@ -28,11 +28,7 @@ namespace StadOntwikkeling_WPF
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TxtNaam.Text))
-            {
-                MessageBox.Show("Partnernaam is verplicht.", "Fout", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            
 
             if (string.IsNullOrWhiteSpace(TxtRol.Text))
             {
@@ -40,7 +36,6 @@ namespace StadOntwikkeling_WPF
                 return;
             }
 
-            PartnerNaam = TxtNaam.Text.Trim();
             PartnerRol = TxtRol.Text.Trim();
 
             DialogResult = true;   // belangrijk zodat ShowDialog() == true wordt
