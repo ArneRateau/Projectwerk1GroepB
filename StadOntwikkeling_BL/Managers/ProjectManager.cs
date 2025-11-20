@@ -30,5 +30,9 @@ namespace StadOntwikkeling_BL.Managers
         {
 
         }
-    }
+		public void UpdateProject(Project toUpdate)
+		{
+            repo.UpdateProject(toUpdate);
+		}
+	}
 }
