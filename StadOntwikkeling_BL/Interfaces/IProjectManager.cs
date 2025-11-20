@@ -12,7 +12,7 @@ namespace StadOntwikkeling_BL.Interfaces
     {
         List<Project> GetProjects();
         List<ProjectDTO> GetProjectsLite();
-		void UpdateProject(Project toUpdate);
+		void updateProject(Project toUpdate);
         void MaakProject();
 
         Project GetProjectById(int id);

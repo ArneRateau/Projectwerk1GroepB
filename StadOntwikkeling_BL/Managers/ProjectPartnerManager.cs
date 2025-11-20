@@ -10,19 +10,19 @@ namespace StadOntwikkeling_BL.Managers
 {
     public class ProjectPartnerManager
     {
-        private IProjectPartnerRepository repo;
+        private IProjectPartnerRepository _repo;
 
         public ProjectPartnerManager(IProjectPartnerRepository repo)
         {
-            this.repo = repo;
+            _repo = repo;
         }
         public bool HeeftPartnerRolVoorProject(Project pr, Partner pa, string rol)
         {
-            return repo.HeeftPartnerRolVoorProject(pr, pa, rol);
+            return _repo.HeeftPartnerRolVoorProject(pr, pa, rol);
         }
         public void KoppelPartnerAanProject(Project pr, Partner pa, string rol)
         {
-            repo.KoppelPartnerAanProject(pr, pa, rol);
+            _repo.KoppelPartnerAanProject(pr, pa, rol);
         }
     }
 }

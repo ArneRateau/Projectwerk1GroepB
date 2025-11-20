@@ -47,55 +47,53 @@
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
 
             <!-- ID -->
-            <Label Content="Id:"/>
+                <Label Content="Id:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Id" />
 
             <!-- Titel -->
-            <Label Content="Titel:"/>
+                <Label Content="Titel:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Titel"/>
 
             <!-- StartDatum -->
-            <Label Content="Start Datum:"/>
+                <Label Content="Start Datum:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Datum"/>
 
             <!-- Status -->
-            <Label Content="Status:"/>
+                <Label Content="Status:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Status"/>
 
             <!-- Beschrijving -->
-            <Label Content="Beschrijving:"/>
+                <Label Content="Beschrijving:" FontWeight="Bold"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Height="120">
                 <TextBlock x:Name="TextBlock_Beschrijving"
                            TextWrapping="Wrap"/>
             </ScrollViewer>
 
             <!-- LOCATIE -->
-            <Label Content="Locatie:" FontWeight="Bold" Margin="0,10,0,5"/>
+            <Label Content="Locatie:" FontWeight="ExtraBold" Margin="0,10,0,5"/>
 
-            <Label Content="Straat:"/>
+                <Label Content="Straat:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Locatie_Straat"/>
 
-            <Label Content="Huisnummer:"/>
+                <Label Content="Huisnummer:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Locatie_Huisnummer"/>
 
-            <Label Content="Postcode:"/>
+                <Label Content="Postcode:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Locatie_Postcode"/>
 
-            <Label Content="Gemeente:"/>
+                <Label Content="Gemeente:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Locatie_Gemeente"/>
 
-            <Label Content="Wijk:"/>
+                <Label Content="Wijk:" FontWeight="Bold"/>
             <TextBlock x:Name="TextBlock_Locatie_Wijk"/>
 
         </StackPanel>
 
 
-        <!-- ===========================
-             NIEUWE WAARDES (RIGHT)
-        =========================== -->
+        
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
 
-            <!-- ID (readonly) -->
+          
             <Label Content="Id:"/>
             <TextBox x:Name="TextBox_New_Id" IsReadOnly="True"/>
 
@@ -169,7 +167,7 @@
                        Foreground="#009DE0"
                        FontSize="18"/>
                 <ListBox x:Name="ListBox_Partners_All"
-                         Height="180"/>
+                         Height="180" MouseDoubleClick="ListBox_Partners_All_MouseDoubleClick"/>
             </StackPanel>
 
             <!-- Buttons -->

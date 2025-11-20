@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using StadOntwikkeling_BL.Enums;
+using StadOntwikkeling_BL.Interfaces;
 using StadOntwikkeling_BL.Managers;
 using StadOntwikkeling_BL.Models;
 using StadOntwikkeling_WPF.Model;
@@ -27,14 +28,16 @@ namespace StadOntwikkeling_WPF
     {
         private readonly ProjectManager _projectManager;
         private readonly PartnerManager _partnerManager;
+        private readonly LocatieManager _locatieManager;
         private Project p;
 
-        public ProjectWindow(Project project, ProjectManager projectManager, PartnerManager partnerManager)
+        public ProjectWindow(Project project, ProjectManager projectManager, PartnerManager partnerManager, LocatieManager locatieManager)
         {
             InitializeComponent();
             p = project;
             _projectManager = projectManager;
             _partnerManager = partnerManager;
+            _locatieManager = locatieManager;
 
 
 
@@ -43,9 +46,7 @@ namespace StadOntwikkeling_WPF
             LoadPartners();
         }
 
-        // ============================
-        // 1. HUIDIGE WAARDES
-        // ============================
+        
         private void FillCurrentValues()
         {
             TextBlock_Id.Text = p.Id.ToString();
@@ -61,9 +62,7 @@ namespace StadOntwikkeling_WPF
             TextBlock_Locatie_Wijk.Text = p.Locatie.Wijk;
         }
 
-        // ============================
-        // 2. NIEUWE WAARDES (prefill)
-        // ============================
+       
         private void FillNewValues()
         {
             TextBox_New_Id.Text = p.Id.ToString();
@@ -84,53 +83,43 @@ namespace StadOntwikkeling_WPF
             TextBox_New_Wijk.Text = p.Locatie.Wijk;
         }
 
-        // ============================
-        // 3. PARTNERS LIST
-        // ============================
+
         private void LoadPartners()
         {
             // Clear both lists
             ListBox_Partners_Current.Items.Clear();
             ListBox_Partners_All.Items.Clear();
 
-            // -----------------------------
-            // 1. CURRENT PROJECT PARTNERS
-            // -----------------------------
-            foreach (var pp in p.Projecten)
+            
+            var currentPartners = _partnerManager.GetPartnersByProjectId(p.Id);
+
+            foreach (var partner in currentPartners)
             {
                 ListBox_Partners_Current.Items.Add(
-                    $"Naam: {pp.Partner.Naam}, Rol: {pp.Rol}"
+                    $"{partner.Naam} ({partner.Email})"
                 );
             }
 
-            // -----------------------------
-            // 2. ALL OTHER PARTNERS
-            // -----------------------------
-            // Load all partners from DB
+           
             var allPartners = _partnerManager.GetAllPartners();
 
-            // Get IDs of partners already linked to project
-            var linkedIds = p.Projecten
-                             .Select(pp => pp.Partner.Id)
-                             .ToHashSet();
+            // filter by excluding the ones already in the project
+            var remaining = allPartners
+                            .Where(ap => currentPartners.All(cp => cp.Id != ap.Id))
+                            .OrderBy(ap => ap.Naam)
+                            .ToList();
 
-            // Filter: all partners that are NOT yet linked
-            var remainingPartners = allPartners
-                                    .Where(pa => !linkedIds.Contains(pa.Id))
-                                    .OrderBy(pa => pa.Naam)
-                                    .ToList();
-
-            foreach (var partner in remainingPartners)
+            foreach (var partner in remaining)
             {
-                ListBox_Partners_All.Items.Add(partner.Naam);
+                ListBox_Partners_All.Items.Add(
+                    $"{partner.Naam} ({partner.Email})"
+                );
             }
         }
 
 
 
-        // ============================
-        // 4. OPSLAAN
-        // ============================
+
         private void Button_Opslaan(object sender, RoutedEventArgs e)
         {
             try
@@ -159,7 +148,12 @@ namespace StadOntwikkeling_WPF
                 p.Locatie.Wijk = TextBox_New_Wijk.Text;
 
                 // Save to DB
-                _projectManager.UpdateProject(p);
+                // Save project
+                _projectManager.updateProject(p);
+
+                // Save locatie
+                _locatieManager.updateLocatie(p.Locatie);
+
 
                 MessageBox.Show("Project opgeslagen.");
                 this.Close();
@@ -179,5 +173,31 @@ namespace StadOntwikkeling_WPF
             p = _projectManager.GetProjectById(p.Id);
             LoadPartners();
         }
+
+        private void ListBox_Partners_All_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ListBox_Partners_All.SelectedItem == null)
+                return;
+
+            // The ListBox items look like: "Naam (email)"
+            string selected = ListBox_Partners_All.SelectedItem.ToString();
+
+            // Extract the partner's name (before first '(' )
+            string partnerNaam = selected.Split('(')[0].Trim();
+
+            // manier om juiste partner te vinden zodat role juist kan toegewezen worden
+            //Partner partner = _partnerManager.GetPartnerByName(partnerNaam);
+
+            //if (partner == null)
+            //{
+            //    MessageBox.Show("Partner kon niet geladen worden.");
+            //    return;
+            //}
+
+            // Open the partner window
+            PartnerPopup partnerPopup = new PartnerPopup();//hier kan partner meegegeven worden als parameter
+            partnerPopup.ShowDialog();
+        }
+
     }
 }

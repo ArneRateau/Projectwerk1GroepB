@@ -17,16 +17,18 @@ namespace StadOntwikkeling_WPF
     {
         private readonly IProjectManager _projectManager;
         private readonly IPartnerManager _partnerManager;
+        private readonly ILocatieManager _locatieManager;
         private List<ProjectDTO> _alleProjecten = new List<ProjectDTO>();
 
-        public ZoekVenster(IProjectManager projectManager)
+        public ZoekVenster(IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager)
         {
             InitializeComponent();
             _projectManager = projectManager;
-
+            _partnerManager = partnerManager;
+            _locatieManager = locatieManager;
             LoadProjecten();
             LoadFilters();
-
+            
         }
 
         private void LoadProjecten()
@@ -45,7 +47,13 @@ namespace StadOntwikkeling_WPF
         {
             Project fullProject = _projectManager.GetProjectById(project.Id);
 
-            var win = new ProjectWindow(fullProject, (ProjectManager)_projectManager, (PartnerManager)_partnerManager);
+            
+            
+            var win = new ProjectWindow(fullProject, (ProjectManager)_projectManager, (PartnerManager)_partnerManager, (LocatieManager)_locatieManager);
+
+
+            this.Close();
+
             win.ShowDialog();
 
             LoadProjecten();

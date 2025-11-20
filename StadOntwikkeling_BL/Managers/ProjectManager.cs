@@ -36,9 +36,9 @@ namespace StadOntwikkeling_BL.Managers
         {
             throw new NotImplementedException();
         }
-		public void UpdateProject(Project toUpdate)
+		public void updateProject(Project toUpdate)
 		{
-            _projectRepo.UpdateProject(toUpdate);
+            _projectRepo.updateProject(toUpdate);
 		}
 
         public Project GetProjectById(int id)

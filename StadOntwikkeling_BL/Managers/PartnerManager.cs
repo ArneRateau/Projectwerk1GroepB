@@ -10,24 +10,28 @@ namespace StadOntwikkeling_BL.Managers
 {
     public class PartnerManager : IPartnerManager
     {
-        private IPartnerRepository repo;
+        private IPartnerRepository _repo;
 
         public PartnerManager(IPartnerRepository repo)
         {
-            this.repo = repo;
+            _repo = repo;
         }
         public List<Partner> GetPartners()
         {
-            return repo.GetPartners();
+            return _repo.GetPartners();
         }
         public void MakeNewPartner(Partner partner)
         {
-            repo.MakeNewPartner(partner);
+            _repo.MakeNewPartner(partner);
         }
         public List<Partner> GetAllPartners()
         {
-            //todo getall maken in repo
-            return repo.GetPartners();
+            return _repo.GetAllPartners();
+        }
+
+        public List<Partner> GetPartnersByProjectId(int projectId)
+        {
+            return _repo.GetPartnersByProjectId(projectId);
         }
     }
 }

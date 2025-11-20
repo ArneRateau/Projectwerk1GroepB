@@ -22,12 +22,16 @@ namespace StadOntwikkeling_WPF
     {
         private readonly IGebruikerManager _gebruikerManager;
         private readonly IProjectManager _projectManager;
+        private readonly IPartnerManager _partnerManager;
+        private readonly ILocatieManager _locatieManager;
 
-        public MainWindow(IGebruikerManager gebruikerManager, IProjectManager projectManager)
+        public MainWindow(IGebruikerManager gebruikerManager, IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager)
         {
             InitializeComponent();
             _gebruikerManager = gebruikerManager;
             _projectManager = projectManager;
+            _partnerManager = partnerManager;
+            _locatieManager = locatieManager;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -44,7 +48,7 @@ namespace StadOntwikkeling_WPF
             {
                 AppSession.huidigeGebruiker = g;
 
-                var mw = new MainMenu(_gebruikerManager, _projectManager);
+                var mw = new MainMenu(_gebruikerManager, _projectManager, _partnerManager, _locatieManager);
 
                 mw.ShowDialog();
             }

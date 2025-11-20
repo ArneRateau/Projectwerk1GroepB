@@ -397,23 +397,30 @@ namespace StadOntwikkeling_DL.Repos
 			// Implementation needed based on requirements
 		}
 
-		public void UpdateProject(Project toUpdate)
-		{
-			string query = "UPDATE Project SET Titel=@titel, Startdatum=@startdatum, Beschrijving=@beschrijving, Status=@status WHERE ProjectId=@projectId";
+        public void updateProject(Project toUpdate)
+        {
+            string query = @"UPDATE Project 
+                     SET Titel=@titel, 
+                         Startdatum=@startdatum, 
+                         Beschrijving=@beschrijving, 
+                         Status=@status
+                     WHERE ProjectId=@projectId";
 
-			using (SqlConnection connection = new SqlConnection(_connectionString))
-			using (SqlCommand cmd = connection.CreateCommand())
-			{
-				cmd.Parameters.AddWithValue("@titel", toUpdate.Titel);
-				cmd.Parameters.AddWithValue("@startdatum", toUpdate.StartDatum);
-				cmd.Parameters.AddWithValue("@beschrijving", toUpdate.Beschrijving);
-				cmd.Parameters.AddWithValue("@status", (int)toUpdate.Status);
-				cmd.Parameters.AddWithValue("@projectId", toUpdate.Id);
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                cmd.CommandText = query;
 
-				connection.Open();
-				cmd.ExecuteNonQuery();
-			}
-		}
+                cmd.Parameters.AddWithValue("@titel", toUpdate.Titel);
+                cmd.Parameters.AddWithValue("@startdatum", toUpdate.StartDatum);
+                cmd.Parameters.AddWithValue("@beschrijving", toUpdate.Beschrijving);
+                cmd.Parameters.AddWithValue("@status", (int)toUpdate.Status);
+                cmd.Parameters.AddWithValue("@projectId", toUpdate.Id);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
 
         public int MaakProject()
         {
