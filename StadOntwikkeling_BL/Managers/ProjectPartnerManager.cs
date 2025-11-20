@@ -16,9 +16,13 @@ namespace StadOntwikkeling_BL.Managers
         {
             this.repo = repo;
         }
-        public ProjectPartner GetPartnerByRol()
+        public bool HeeftPartnerRolVoorProject(Project pr, Partner pa, string rol)
         {
-            return repo.GetPartnerByRol();
+            return repo.HeeftPartnerRolVoorProject(pr, pa, rol);
+        }
+        public void KoppelPartnerAanProject(Project pr, Partner pa, string rol)
+        {
+            repo.KoppelPartnerAanProject(pr, pa, rol);
         }
     }
 }
