@@ -441,6 +441,16 @@ namespace StadOntwikkeling_DL.Repos
                     cmdo.Parameters.AddWithValue("@LocatieId", locId);
                     proId = (int)cmdo.ExecuteScalar();
                 }
+				string sqlLinken = @"
+			INSERT INTO Project_ProjectType (ProjectId)
+			VALUES (@ProjectId)
+
+			SELECT CAST(SCOPE_IDENTITY() AS int);";
+				using (SqlCommand cd = new SqlCommand(sqlLinken, conn))
+				{
+					cd.Parameters.AddWithValue("@ProjectId", proId);
+					cd.ExecuteScalar();
+				}
 			return proId;
 			}
         }
@@ -466,7 +476,15 @@ namespace StadOntwikkeling_DL.Repos
                     cmdo.Parameters.AddWithValue("@Infowandeling", infoWand);
 					cmdo.ExecuteScalar();
 				}
-				return 1;
+                string querytje = "UPDATE Project_ProjectType SET StadsontwikkelingId=@StadsontwikkelingId WHERE ProjectId=@projectId";
+
+				using (SqlCommand cod = new SqlCommand(querytje, conn))
+				{
+					cod.Parameters.AddWithValue("@StadsontwikkelingId", projectId);
+					cod.Parameters.AddWithValue("@projectId", projectId);
+					cod.ExecuteScalar();
+				}
+                return 1;
         }
         }
 		void AddBouwFirmaAanStads(int newID, int id)
