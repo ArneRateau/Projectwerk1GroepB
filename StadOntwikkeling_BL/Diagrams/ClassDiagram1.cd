@@ -74,7 +74,7 @@
   <Class Name="StadOntwikkeling_BL.Managers.PartnerManager" Collapsed="true">
     <Position X="12.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAAAEAAAAAAAABAAAAAAAAACAAAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAACAAAAAQAAAAAABAAAAAAAAACAAAAA=</HashCode>
       <FileName>Managers\PartnerManager.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -82,15 +82,14 @@
   <Class Name="StadOntwikkeling_BL.Managers.ProjectManager" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgBAAIAAAABAAAEAAAAAAAAAAAAAAAAQAAIAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Managers\ProjectManager.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="StadOntwikkeling_BL.Managers.ProjectPartnerManager" Collapsed="true">
     <Position X="9" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAIAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Managers\ProjectPartnerManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -146,7 +145,7 @@
   <Class Name="StadOntwikkeling_BL.Models.Partner" Collapsed="true">
     <Position X="9" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAACAAAAAAAABABAAAAkAAAAAAAAAAAAAAAAM=</HashCode>
+      <HashCode>AAACAAAAACAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAM=</HashCode>
       <FileName>Models\Partner.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -202,14 +201,14 @@
   <Interface Name="StadOntwikkeling_BL.Interfaces.IPartnerRepository" Collapsed="true">
     <Position X="12.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAACAAAAAAAAAAAABAAAAAAAAACAAAAA=</HashCode>
       <FileName>Interfaces\IPartnerRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectManager" Collapsed="true">
     <Position X="14.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAIAAAABAAAAAAAAAAAAAAAAAAAAQAAIAAAAAAA=</HashCode>
+      <HashCode>AAgAAAIACAABAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IProjectManager.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -223,7 +222,7 @@
   <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectRepository" Collapsed="true">
     <Position X="9" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAIAAAABAAAAAAAAAgAAAAAAAAAAQAAIAAAAAAA=</HashCode>
+      <HashCode>AAgAAAIACAABAAAAAAAAAgAAAAAAAAAAQAEIAAIAABA=</HashCode>
       <FileName>Interfaces\IProjectRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
