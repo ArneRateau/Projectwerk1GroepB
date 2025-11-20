@@ -11,24 +11,30 @@ namespace StadOntwikkeling_BL.Managers
 {
     public class ProjectManager : IProjectManager
     {
-        private IProjectRepository repo;
+        private IProjectRepository _projectRepo;
 
-        public ProjectManager(IProjectRepository repo)
+        public ProjectManager(IProjectRepository projectRepo)
         {
-            this.repo = repo;
+            _projectRepo = projectRepo;
         }
         public List<Project> GetProjects()
         {
-            return repo.GetProjects();
+            return _projectRepo.GetProjects();
         }
         public List<ProjectDTO> GetProjectsLite()
         {
-            return repo.GetProjectsLite();
+            return _projectRepo.GetProjectsLite();
         }
         // nog niet zeker over parameters
-        public void CombineProjectOnderdeel()
+        public int MaakProject()
         {
+            int newID = _projectRepo.MaakProject();
+            return newID;
+        }
 
+        void IProjectManager.MaakProject()
+        {
+            throw new NotImplementedException();
         }
 		public void UpdateProject(Project toUpdate)
 		{

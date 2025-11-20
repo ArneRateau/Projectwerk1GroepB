@@ -25,8 +25,10 @@ namespace StadOntwikkeling_WPF
             _projectManager = new ProjectManager(ProjectRepo);
 
 
+            var loginWindow = new MainWindow(_gebruikerManager, _projectManager);
+            loginWindow.ShowDialog();
             var mainMenu = new MainMenu(_gebruikerManager, _projectManager);
-            mainMenu.Show();
+
         }
     }
 

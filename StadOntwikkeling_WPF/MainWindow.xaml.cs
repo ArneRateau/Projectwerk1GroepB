@@ -1,4 +1,5 @@
-﻿using StadOntwikkeling_BL.Interfaces;
+﻿using StadOntwikkeling_BL;
+using StadOntwikkeling_BL.Interfaces;
 using StadOntwikkeling_BL.Managers;
 using StadOntwikkeling_DL.Repos;
 using System.Text;
@@ -22,10 +23,11 @@ namespace StadOntwikkeling_WPF
         private readonly IGebruikerManager _gebruikerManager;
         private readonly IProjectManager _projectManager;
 
-        public MainWindow(IGebruikerManager gebruikerManager)
+        public MainWindow(IGebruikerManager gebruikerManager, IProjectManager projectManager)
         {
             InitializeComponent();
             _gebruikerManager = gebruikerManager;
+            _projectManager = projectManager;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -40,7 +42,10 @@ namespace StadOntwikkeling_WPF
             }
             else
             {
+                AppSession.huidigeGebruiker = g;
+
                 var mw = new MainMenu(_gebruikerManager, _projectManager);
+
                 mw.ShowDialog();
             }
         }

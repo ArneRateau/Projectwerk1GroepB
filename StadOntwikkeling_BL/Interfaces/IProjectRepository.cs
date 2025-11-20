@@ -15,5 +15,6 @@ namespace StadOntwikkeling_BL.Interfaces
         List<ProjectDTO> GetProjectsLite();
         void CombineProjectOnderdeel();
 		void UpdateProject(Project toUpdate);
+        public int MaakProject();
     }
 }
