@@ -74,14 +74,15 @@
   <Class Name="StadOntwikkeling_BL.Managers.PartnerManager" Collapsed="true">
     <Position X="12.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAAAAAAEAAAAAAAABAAAAAAAAACAAAAA=</HashCode>
       <FileName>Managers\PartnerManager.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="StadOntwikkeling_BL.Managers.ProjectManager" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgBAAIAAAABAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgBAAIAAAABAAAEAAAAAAAAAAAAAAAAQAAIAAAAAAA=</HashCode>
       <FileName>Managers\ProjectManager.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -166,7 +167,7 @@
   <Class Name="StadOntwikkeling_BL.Models.ProjectPartner" Collapsed="true">
     <Position X="14.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAASAAACAAAAAAAAACBACAAAAAAAAgAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAASAAACAAAAAAAAACBADAAAAAAAAgAAAAAAAAAAAAg=</HashCode>
       <FileName>Models\ProjectPartner.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -208,7 +209,7 @@
   <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectManager" Collapsed="true">
     <Position X="14.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAIAAAABAAAAAAAAAAAAAAAAAAAAQAAIAAAAAAA=</HashCode>
       <FileName>Interfaces\IProjectManager.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -222,7 +223,7 @@
   <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectRepository" Collapsed="true">
     <Position X="9" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAIAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAIAAAABAAAAAAAAAgAAAAAAAAAAQAAIAAAAAAA=</HashCode>
       <FileName>Interfaces\IProjectRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>

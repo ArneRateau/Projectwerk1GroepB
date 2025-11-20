@@ -40,5 +40,12 @@ namespace StadOntwikkeling_BL.Managers
 		{
             _projectRepo.UpdateProject(toUpdate);
 		}
-	}
+
+        public Project GetProjectById(int id)
+        {
+            return _projectRepo.GetProjectById(id);
+        }
+
+        
+    }
 }

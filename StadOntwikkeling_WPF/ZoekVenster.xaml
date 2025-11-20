@@ -50,7 +50,10 @@
         <DataGrid x:Name="DgResultaten"
                   Grid.Row="1"
                   AutoGenerateColumns="False"
-                  IsReadOnly="True">
+                  IsReadOnly="True"
+                  MouseDoubleClick="DgResultaten_MouseDoubleClick">
+
+            
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="2*" />

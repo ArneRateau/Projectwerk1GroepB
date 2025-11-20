@@ -16,5 +16,7 @@ namespace StadOntwikkeling_BL.Interfaces
         void CombineProjectOnderdeel();
 		void UpdateProject(Project toUpdate);
         public int MaakProject();
+
+        Project GetProjectById(int id);
     }
 }

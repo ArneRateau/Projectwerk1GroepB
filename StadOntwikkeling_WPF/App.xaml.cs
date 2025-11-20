@@ -13,6 +13,7 @@ namespace StadOntwikkeling_WPF
     {
         private GebruikerManager _gebruikerManager;
         private ProjectManager _projectManager;
+        private PartnerManager _partnerManager;
         private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
 
         protected override void OnStartup(StartupEventArgs e)
@@ -21,8 +22,11 @@ namespace StadOntwikkeling_WPF
 
             var gebruikerRepo = new GebruikerRepository(_connectionString);
             var ProjectRepo = new ProjectRepository(_connectionString);
+            var PartnerRepo = new PartnerRepository(_connectionString); 
             _gebruikerManager = new GebruikerManager(gebruikerRepo);
             _projectManager = new ProjectManager(ProjectRepo);
+            _partnerManager = new PartnerManager(PartnerRepo);
+
 
 
             var loginWindow = new MainWindow(_gebruikerManager, _projectManager);

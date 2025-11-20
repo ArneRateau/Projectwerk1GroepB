@@ -358,21 +358,30 @@ namespace StadOntwikkeling_DL.Repos
 				{
 					if (reader.Read())
 					{
-						string rawWoonvormTypes = (string)reader["WoonvormTypes"];
-
+						string rawWoonvormTypes = reader["WoonvormTypes"] as string ?? string.Empty;
 						var woonvormen = rawWoonvormTypes
 							.Split(';', StringSplitOptions.RemoveEmptyEntries)
 							.Select(s => s.Trim())
 							.ToList();
 
+						// read score as double then convert
+						float architectuurScore = 0f;
+						if (reader["ArchitectuurInnovatieScore"] != DBNull.Value)
+						{
+							var scoreObj = reader["ArchitectuurInnovatieScore"];
+							if (scoreObj is double d) architectuurScore = Convert.ToSingle(d);
+							else if (scoreObj is float f) architectuurScore = f;
+							else architectuurScore = Convert.ToSingle(scoreObj);
+						}
+
 						var onderdeel = new InnovatiefWonenProject(
 							(int)reader["AantalWooneenheden"],
 							woonvormen,
-							(bool)reader["Rondleiding"],
-							(bool)reader["Showwoning"],
-							(float)reader["ArchitectuurInnovatieScore"],
-							(bool)reader["SamenwerkingErfgoed"],
-							(bool)reader["SamenwerkingToerisme"]
+							reader["Rondleiding"] != DBNull.Value && (bool)reader["Rondleiding"],
+							reader["Showwoning"] != DBNull.Value && (bool)reader["Showwoning"],
+							architectuurScore,
+							reader["SamenwerkingErfgoed"] != DBNull.Value && (bool)reader["SamenwerkingErfgoed"],
+							reader["SamenwerkingToerisme"] != DBNull.Value && (bool)reader["SamenwerkingToerisme"]
 						);
 						onderdeel.ProjectOnderdeelId = onderdeelId;
 						return onderdeel;
@@ -410,5 +419,69 @@ namespace StadOntwikkeling_DL.Repos
         {
             throw new NotImplementedException();
         }
+
+
+        public Project GetProjectById(int id)
+        {
+            Project project = null;
+
+            string query = @"
+        SELECT pr.ProjectId, pr.Titel, pr.Startdatum, pr.Status, pr.Beschrijving,
+               l.LocatieId, l.Straat, l.Gemeente, l.Postcode, l.Wijk, l.HuisNummer
+        FROM Project pr
+        JOIN Locatie l ON pr.LocatieId = l.LocatieId
+        WHERE pr.ProjectId = @ProjectId";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                try
+                {
+                    connection.Open();
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@ProjectId", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Locatie locatie = new Locatie(
+                                (int)reader["LocatieId"],
+                                (string)reader["Straat"],
+                                reader["Postcode"].ToString(),
+                                (string)reader["Gemeente"],
+                                (string)reader["Wijk"],
+                                (string)reader["HuisNummer"]
+                            );
+
+                            project = new Project(
+                                (int)reader["ProjectId"],
+                                (string)reader["Titel"],
+                                (DateTime)reader["Startdatum"],
+                                (Status)reader["Status"],
+                                (string)reader["Beschrijving"],
+                                locatie,
+                                new List<ProjectPartner>(),
+                                new List<ProjectOnderdeel>()
+                            );
+                        }
+                    }
+
+                    if (project == null)
+                        throw new Exception($"Project met Id {id} niet gevonden.");
+
+                    // Load onderdelen (same as in GetProjects)
+                    project.ProjectOnderdelen = LoadProjectOnderdelen(project.Id);
+
+                    return project;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error getting project by id", ex);
+                }
+            }
+        }
+
+
     }
 }   

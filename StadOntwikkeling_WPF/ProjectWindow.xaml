@@ -6,110 +6,194 @@
         xmlns:local="clr-namespace:StadOntwikkeling_WPF"
         mc:Ignorable="d"
         Title="ProjectWindow" Height="800" Width="800">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<TextBlock Margin="0 15 0 30" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Edit Project" HorizontalAlignment="Center" FontSize="30" Foreground="#009DE0" FontWeight="Medium"/>
-		<TextBlock Grid.Row="1" Grid.Column="0" Text="Huidige waardes" HorizontalAlignment="Center" FontSize="15" Foreground="#009DE0"/>
-		<TextBlock Grid.Row="1" Grid.Column="1" Text="Nieuwe waardes" HorizontalAlignment="Center" FontSize="15" Foreground="#009DE0"/>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-		<Grid Grid.Row="2" Margin="5">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-			</Grid.RowDefinitions>
-			<Label Content="Id:" Grid.Row="0" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Id" IsEnabled="False" Grid.Row="0" Grid.Column="1" />
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-			<Label Content="Titel:" Grid.Row="1" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Titel" IsEnabled="False" Grid.Row="1" Grid.Column="1" />
+        <!-- Header -->
+        <TextBlock Margin="0 15 0 30"
+                   Grid.Row="0" Grid.ColumnSpan="2"
+                   Text="Edit Project"
+                   HorizontalAlignment="Center"
+                   FontSize="30"
+                   Foreground="#009DE0"/>
 
-			<Label Content="Start Datum:" Grid.Row="2" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Datum" IsEnabled="False" Grid.Row="2" Grid.Column="1" />
+        <!-- Column Headers -->
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Huidige waardes"
+                   HorizontalAlignment="Center"
+                   FontSize="15" Foreground="#009DE0"/>
 
-			<Label Content="Status:" Grid.Row="3" Grid.Column="0"/>
-			<ComboBox x:Name="ComboBox_Status" IsEnabled="False" Grid.Row="3" Grid.Column="1" >
-				<ComboBoxItem Content="Planning"/>
-				<ComboBoxItem Content="Uitgevoerd"/>
-				<ComboBoxItem Content="Afgerond"/>
-			</ComboBox>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Text="Nieuwe waardes"
+                   HorizontalAlignment="Center"
+                   FontSize="15" Foreground="#009DE0"/>
 
-			<Label Content="Beschrijving:"  Grid.Row="4" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Beschrijving" IsEnabled="False" Grid.Row="4" Grid.Column="1" />
 
-			<Label Content="Locatie:"  Grid.Row="5" Grid.Column="0"/>
-			<Button Click="Button_View_Locatie" Content="View" Grid.Row="5" Grid.Column="1" Background="#009DE0" Foreground="white"/>
-		</Grid>
+        <!-- ===========================
+             HUIDIGE WAARDES (LEFT)
+        =========================== -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
 
-		<Grid Grid.Row="2" Grid.Column="1" Margin="5">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-			</Grid.RowDefinitions>
-			<Label Content="Id:" Grid.Row="0" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Nieuwe_Id" IsEnabled="False" Grid.Row="0" Grid.Column="1" Margin="5"/>
+            <!-- ID -->
+            <Label Content="Id:"/>
+            <TextBlock x:Name="TextBlock_Id" />
 
-			<Label Content="Titel:" Grid.Row="1" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Nieuwe_Titel" Grid.Row="1" Grid.Column="1" Margin="5"/>
+            <!-- Titel -->
+            <Label Content="Titel:"/>
+            <TextBlock x:Name="TextBlock_Titel"/>
 
-			<Label Content="Start Datum:" Grid.Row="2" Grid.Column="0"/>
-			<DatePicker x:Name="DatePicker_Nieuwe_Datum" Grid.Row="2" Grid.Column="1" Margin="5"/>
+            <!-- StartDatum -->
+            <Label Content="Start Datum:"/>
+            <TextBlock x:Name="TextBlock_Datum"/>
 
-			<Label Content="Status:" Grid.Row="3" Grid.Column="0"/>
-			<ComboBox x:Name="ComboBox_Nieuwe_Status" Grid.Row="3" Grid.Column="1" Margin="5">
-				<ComboBoxItem Content="Planning"/>
-				<ComboBoxItem Content="Uitgevoerd"/>
-				<ComboBoxItem Content="Afgerond"/>
-			</ComboBox>
+            <!-- Status -->
+            <Label Content="Status:"/>
+            <TextBlock x:Name="TextBlock_Status"/>
 
-			<Label Content="Beschrijving:"  Grid.Row="4" Grid.Column="0"/>
-			<TextBlock x:Name="TextBlock_Nieuwe_Beschrijving" Grid.Row="4" Grid.Column="1" Margin="5"/>
+            <!-- Beschrijving -->
+            <Label Content="Beschrijving:"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="120">
+                <TextBlock x:Name="TextBlock_Beschrijving"
+                           TextWrapping="Wrap"/>
+            </ScrollViewer>
 
-			<Label Content="Locatie:" Grid.Row="5" Grid.Column="0"/>
-			<Button Click="Button_Nieuwe_Locatie" Content="View" Grid.Row="5" Grid.Column="1" Background="#009DE0" Foreground="white" Margin="5" Padding="3"/>
-		</Grid>
+            <!-- LOCATIE -->
+            <Label Content="Locatie:" FontWeight="Bold" Margin="0,10,0,5"/>
 
-		<Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="auto"/>
-			</Grid.RowDefinitions>
+            <Label Content="Straat:"/>
+            <TextBlock x:Name="TextBlock_Locatie_Straat"/>
 
-			<Label Content="Huidige Partners"  Foreground="#009DE0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20"/>
-			<ListBox x:Name="ListBox_Partners" Grid.Row="1" Grid.ColumnSpan="3" Margin="10"/>
+            <Label Content="Huisnummer:"/>
+            <TextBlock x:Name="TextBlock_Locatie_Huisnummer"/>
 
-			<Button Click="Button_PartnerKoppelen" Content="Partners Koppelen" Grid.Row="2" Grid.Column="1" Margin="5" Background="#009DE0" Foreground="White"/>
-			<Button Click="Button_Opslaan" Content="Opslaan" Grid.Row="2" Grid.Column="2" Margin="5" Background="#009DE0" Foreground="White"/>
-		</Grid>
-	</Grid>
+            <Label Content="Postcode:"/>
+            <TextBlock x:Name="TextBlock_Locatie_Postcode"/>
+
+            <Label Content="Gemeente:"/>
+            <TextBlock x:Name="TextBlock_Locatie_Gemeente"/>
+
+            <Label Content="Wijk:"/>
+            <TextBlock x:Name="TextBlock_Locatie_Wijk"/>
+
+        </StackPanel>
+
+
+        <!-- ===========================
+             NIEUWE WAARDES (RIGHT)
+        =========================== -->
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
+
+            <!-- ID (readonly) -->
+            <Label Content="Id:"/>
+            <TextBox x:Name="TextBox_New_Id" IsReadOnly="True"/>
+
+            <!-- Titel -->
+            <Label Content="Titel:"/>
+            <TextBox x:Name="TextBox_New_Titel"/>
+
+            <!-- StartDatum -->
+            <Label Content="Start Datum:"/>
+            <DatePicker x:Name="DatePicker_New_Datum"/>
+
+            <!-- Status -->
+            <Label Content="Status:"/>
+            <ComboBox x:Name="ComboBox_New_Status">
+                <ComboBoxItem Content="Planning"/>
+                <ComboBoxItem Content="Uitvoering"/>
+                <ComboBoxItem Content="Afgerond"/>
+            </ComboBox>
+
+            <!-- Beschrijving (large text area) -->
+            <Label Content="Beschrijving:"/>
+            <TextBox x:Name="TextBox_New_Beschrijving"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     Height="120"/>
+
+            <!-- LOCATIE (split inputs) -->
+            <Label Content="Locatie:" FontWeight="Bold" Margin="0,10,0,5"/>
+
+            <Label Content="Straat:"/>
+            <TextBox x:Name="TextBox_New_Straat"/>
+
+            <Label Content="Huisnummer:"/>
+            <TextBox x:Name="TextBox_New_Huisnummer"/>
+
+            <Label Content="Postcode:"/>
+            <TextBox x:Name="TextBox_New_Postcode"/>
+
+            <Label Content="Gemeente:"/>
+            <TextBox x:Name="TextBox_New_Gemeente"/>
+
+            <Label Content="Wijk:"/>
+            <TextBox x:Name="TextBox_New_Wijk"/>
+
+        </StackPanel>
+
+
+        <!-- ===========================
+             PARTNERS SECTION
+             (BOTTOM, 2 COLUMNS)
+        =========================== -->
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- CURRENT PARTNERS -->
+            <StackPanel Grid.Column="0" Margin="10">
+                <Label Content="Huidige Partners"
+                       Foreground="#009DE0"
+                       FontSize="18"/>
+                <ListBox x:Name="ListBox_Partners_Current"
+                         Height="180"/>
+            </StackPanel>
+
+            <!-- ALL OTHER PARTNERS -->
+            <StackPanel Grid.Column="1" Margin="10">
+                <Label Content="Alle Overige Partners"
+                       Foreground="#009DE0"
+                       FontSize="18"/>
+                <ListBox x:Name="ListBox_Partners_All"
+                         Height="180"/>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Grid.ColumnSpan="2"
+                        Margin="5">
+
+                <Button Click="Button_PartnerKoppelen"
+                        Content="Partners Koppelen"
+                        Margin="5"
+                        Background="#009DE0"
+                        Foreground="White"/>
+
+                <Button Click="Button_Opslaan"
+                        Content="Opslaan"
+                        Margin="5"
+                        Background="#009DE0"
+                        Foreground="White"/>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+    </ScrollViewer>
 </Window>

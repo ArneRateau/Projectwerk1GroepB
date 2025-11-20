@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Managers
 {
-    public class PartnerManager
+    public class PartnerManager : IPartnerManager
     {
         private IPartnerRepository repo;
 
@@ -23,6 +23,11 @@ namespace StadOntwikkeling_BL.Managers
         public void MakeNewPartner(Partner partner)
         {
             repo.MakeNewPartner(partner);
+        }
+        public List<Partner> GetAllPartners()
+        {
+            //todo getall maken in repo
+            return repo.GetPartners();
         }
     }
 }

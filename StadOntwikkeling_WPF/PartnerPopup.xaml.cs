@@ -52,5 +52,10 @@ namespace StadOntwikkeling_WPF
             DialogResult = false;
             Close();
         }
+
+        private void TxtNaam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
