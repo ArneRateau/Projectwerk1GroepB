@@ -388,5 +388,10 @@ namespace StadOntwikkeling_DL.Repos
         {
             // Implementation needed based on requirements
         }
+
+        public int MaakProject()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

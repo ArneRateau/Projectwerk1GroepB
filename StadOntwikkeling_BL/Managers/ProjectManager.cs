@@ -31,5 +31,10 @@ namespace StadOntwikkeling_BL.Managers
             int newID = _projectRepo.MaakProject();
             return newID;
         }
+
+        void IProjectManager.MaakProject()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
