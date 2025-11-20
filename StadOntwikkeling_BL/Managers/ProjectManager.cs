@@ -32,9 +32,6 @@ namespace StadOntwikkeling_BL.Managers
             return newID;
         }
 
-        void IProjectManager.MaakProject()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }
