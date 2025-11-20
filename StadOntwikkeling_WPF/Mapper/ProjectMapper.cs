@@ -12,11 +12,13 @@ namespace StadOntwikkeling_WPF.Mapper
 	{
 		public Project MapToDomain(ProjectUI p)
 		{
-			return new Project(p.Id, p.Titel, p.StartDatum, p.Status, p.Beschrijving, LocatieMapper.MapToDomain(p.Locatie), p.Projecten, p.ProjectOnderdelen);
-		}
+			throw new NotImplementedException();
+            //return new Project(p.Id, p.Titel, p.StartDatum, p.Status, p.Beschrijving, LocatieMapper.MapToDomain(p.Locatie), p.Projecten, p.ProjectOnderdelen);
+        }
 		public Project MapFromDomain(Project p)
 		{
-			return new ProjectUI(p.Id, p.Titel, p.StartDatum, p.Status, p.Beschrijving, LocatieMapper.MapFromDomain(p.Locatie), ProjectPartner.Ma, p.ProjectOnderdelen);
-		}
+            throw new NotImplementedException();
+            //return new ProjectUI(p.Id, p.Titel, p.StartDatum, p.Status, p.Beschrijving, LocatieMapper.MapFromDomain(p.Locatie), ProjectPartner.Ma, p.ProjectOnderdelen);
+        }
 	}
 }

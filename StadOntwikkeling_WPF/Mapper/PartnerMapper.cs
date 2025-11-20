@@ -12,11 +12,12 @@ namespace StadOntwikkeling_WPF.Mapper
 	{
 		public static Partner MapToDomain(PartnerUI p)
 		{
-			return new Partner(p.Id, p.Naam, LocatieMapper.MapToDomain(p.Locatie), p.Email, )
-		}
+			throw new NotImplementedException();
+            //return new Partner(p.Id, p.Naam, LocatieMapper.MapToDomain(p.Locatie), p.Email);
+        }
 		public static PartnerUI MapFromDomain(Partner p)
 		{
-
-		}
+			throw new NotImplementedException();
+        }
 	}
 }

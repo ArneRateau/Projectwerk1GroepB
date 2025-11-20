@@ -13,8 +13,8 @@ namespace StadOntwikkeling_DL.Repos
 {
 	public class GebruikerRepository : IGebruikerRepository
 	{
-		//private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
-		private string _connectionString = "Data Source=localhost;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
+		private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
+		//private string _connectionString = "Data Source=localhost;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
 
 		public GebruikerRepository(string connectionstring)
 		{

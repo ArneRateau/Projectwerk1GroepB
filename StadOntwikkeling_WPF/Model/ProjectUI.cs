@@ -17,28 +17,28 @@ namespace StadOntwikkeling_WPF.Model
 		private Status _status;
 		private LocatieUI _locatie;
 
-		public ProjectUI(int id, string titel, string beschrijving, DateTime startDatum, Status status, LocatieUI locatie, List<ProjectPartner> projecten, List<ProjectOnderdeel> projectOnderdelen)
-		{
-			Id = id;
-			Titel = titel;
-			Beschrijving = beschrijving;
-			StartDatum = startDatum;
-			Status = status;
-			Locatie = locatie;
-			Projecten = projecten;
-			ProjectOnderdelen = projectOnderdelen;
-		}
+		//public ProjectUI(int id, string titel, string beschrijving, DateTime startDatum, Status status, LocatieUI locatie, List<ProjectPartner> projecten, List<ProjectOnderdeel> projectOnderdelen)
+		//{
+		//	Id = id;
+		//	Titel = titel;
+		//	Beschrijving = beschrijving;
+		//	StartDatum = startDatum;
+		//	Status = status;
+		//	Locatie = locatie;
+		//	Projecten = projecten;
+		//	ProjectOnderdelen = projectOnderdelen;
+		//}
 
-		public ProjectUI(string titel, string beschrijving, DateTime startDatum, Status status, LocatieUI locatie, List<ProjectPartner> projecten, List<ProjectOnderdeel> projectOnderdelen)
-		{
-			Titel = titel;
-			Beschrijving = beschrijving;
-			StartDatum = startDatum;
-			Status = status;
-			Locatie = locatie;
-			Projecten = projecten;
-			ProjectOnderdelen = projectOnderdelen;
-		}
+		//public ProjectUI(string titel, string beschrijving, DateTime startDatum, Status status, LocatieUI locatie, List<ProjectPartner> projecten, List<ProjectOnderdeel> projectOnderdelen)
+		//{
+		//	Titel = titel;
+		//	Beschrijving = beschrijving;
+		//	StartDatum = startDatum;
+		//	Status = status;
+		//	Locatie = locatie;
+		//	Projecten = projecten;
+		//	ProjectOnderdelen = projectOnderdelen;
+		//}
 
 		public int Id { get; set; }
 		public string Titel

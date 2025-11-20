@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="StadOntwikkeling_BL.Exceptions.BouwfirmaException" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\BouwfirmaException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.GroenRuimteProjectException" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\GroenRuimteProjectException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.InnovatiefWonenProjectException" Collapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\InnovatiefWonenProjectException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.LocatieException" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\LocatieException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.PartnerException" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\PartnerException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.ProjectException" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ProjectException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.ProjectOnderdeelException" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ProjectOnderdeelException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.ProjectPartnerException" Collapsed="true">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ProjectPartnerException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Exceptions.StadsontwikkelingProjectException" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\StadsontwikkelingProjectException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Managers.GebruikerManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Managers\GebruikerManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Managers.PartnerManager" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\PartnerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Managers.ProjectManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBAAIAAAABAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\ProjectManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Managers.ProjectPartnerManager" Collapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Managers\ProjectPartnerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.DTO_s.ProjectDTO" Collapsed="true">
+    <Position X="16" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAEAAAAAEAAAAAAAAAUACAAAAAAAAAgAAgAAAA=</HashCode>
+      <FileName>Models\DTO's\ProjectDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Bouwfirma" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAACAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAM=</HashCode>
+      <FileName>Models\Bouwfirma.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Faciliteit" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAABAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Faciliteit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Gebruiker" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABACAAAAAAAABAAAAACAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\Gebruiker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.GroenRuimteProject" Collapsed="true">
+    <Position X="2" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACQAQQAAAAAAAEECADAEAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\GroenRuimteProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.InnovatiefWonenProject" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAQIAAAAAAAIAAAAAAAAgBACAJAAAAAAA=</HashCode>
+      <FileName>Models\InnovatiefWonenProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Locatie" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAABAAAAAABAgAABAACAgAAAAgAgAQAACAA=</HashCode>
+      <FileName>Models\Locatie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Partner" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAABABAAAAkAAAAAAAAAAAAAAAAM=</HashCode>
+      <FileName>Models\Partner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Project" Collapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAAAEACAAQAAAAEBAAAQAAmAAAAAAACAAAAEQAAA=</HashCode>
+      <FileName>Models\Project.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.ProjectOnderdeel" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ProjectOnderdeel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.ProjectPartner" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAACAAAAAAAAACBACAAAAAAAAgAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\ProjectPartner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.StadsontwikkelingProject" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAEABAAAAAAAAAAgIAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\StadsontwikkelingProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.AppSession" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AppSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="StadOntwikkeling_BL.Interfaces.IGebruikerManager" Collapsed="true">
+    <Position X="9" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGebruikerManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="StadOntwikkeling_BL.Interfaces.IGebruikerRepository" Collapsed="true">
+    <Position X="10.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGebruikerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="StadOntwikkeling_BL.Interfaces.IPartnerRepository" Collapsed="true">
+    <Position X="12.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPartnerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectManager" Collapsed="true">
+    <Position X="14.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IProjectManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectPartnerRepository" Collapsed="true">
+    <Position X="16" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Interfaces\IProjectPartnerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="StadOntwikkeling_BL.Interfaces.IProjectRepository" Collapsed="true">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IProjectRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="StadOntwikkeling_BL.Enums.Status" Collapsed="true">
+    <Position X="9" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Enums\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="StadOntwikkeling_BL.Enums.Toegankelijkheid" Collapsed="true">
+    <Position X="10.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Enums\Toegankelijkheid.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="StadOntwikkeling_BL.Enums.VergunningStatus" Collapsed="true">
+    <Position X="12.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAgAA=</HashCode>
+      <FileName>Enums\VergunningStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
