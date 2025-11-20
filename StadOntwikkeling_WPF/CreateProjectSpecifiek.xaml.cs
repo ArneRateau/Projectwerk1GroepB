@@ -23,6 +23,11 @@ namespace StadOntwikkeling_WPF
     {
         private string[] _nrmlData = {};
         private IProjectManager _projectManager;
+
+        public CreateProjectSpecifiek(string[] doorgever)
+        {
+        }
+
         public CreateProjectSpecifiek(string[] doorgever,IProjectManager projectManager)
         {
             InitializeComponent();
