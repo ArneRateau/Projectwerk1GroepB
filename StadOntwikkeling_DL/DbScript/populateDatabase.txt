@@ -57,8 +57,8 @@ INSERT INTO dbo.Project (Titel, Startdatum, Beschrijving, Status, LocatieId) VAL
 
 -- Stadsontwikkeling
 INSERT INTO dbo.Stadsontwikkeling (ProjectId, VergunningStatus, ArchitecturieleWaarde, Toegankelijkheid, Bezienswaardigheid, Uitlegbord, Infowandeling) VALUES
-(1, 2, 1, 4, 1, 1, 1),   -- Oude Dokken
-(4, 1, 1, 5, 1, 1, 0);   -- Nederschelde
+(1, 2, 1, 2, 1, 1, 1),   -- Oude Dokken
+(4, 1, 1, 0, 1, 1, 0);   -- Nederschelde
 
 -- GroeneRuimte
 INSERT INTO dbo.GroeneRuimte (ProjectId, Oppervlakte, Biodiversiteit, AantalWandelpaden, InToeristischeWandelroute, Beoordeling) VALUES

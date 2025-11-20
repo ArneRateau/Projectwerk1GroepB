@@ -445,10 +445,49 @@ namespace StadOntwikkeling_DL.Repos
 			}
         }
 
-        public int MaakProjectStads(int vergunStatus, int archWaard, int Toegang, int bezienswaard, int uitlegb, int infoWand)
+        public int MaakProjectStads(int projectId,int vergunStatus, int archWaard, int Toegang, int bezienswaard, int uitlegb, int infoWand)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(_connectionString)) { 
+				conn.Open();
+				int stadID;
+					string sql = @"
+				INSERT INTO Stadsontwikkeling (ProjectId,VergunningStatus, ArchitecturieleWaarde, Toegankelijkheid, Bezienswaardigheid, Uitlegbord, Infowandeling)
+				VALUES (@ProjectId,@VergunningStatus, @ArchitecturieleWaarde, @Toegankelijkheid, @Bezienswaardigheid, @Uitlegbord, @Infowandeling)
+
+				SELECT CAST(SCOPE_IDENTITY() AS int);";
+				using (SqlCommand cmdo = new SqlCommand(sql, conn))
+				{
+					cmdo.Parameters.AddWithValue("@ProjectId", projectId);
+					cmdo.Parameters.AddWithValue("@VergunningStatus", vergunStatus);
+					cmdo.Parameters.AddWithValue("@ArchitecturieleWaarde",archWaard);
+					cmdo.Parameters.AddWithValue("@Toegankelijkheid", Toegang);
+					cmdo.Parameters.AddWithValue("@Bezienswaardigheid", bezienswaard);
+                    cmdo.Parameters.AddWithValue("@Uitlegbord", uitlegb);
+                    cmdo.Parameters.AddWithValue("@Infowandeling", infoWand);
+					cmdo.ExecuteScalar();
+				}
+				return 1;
         }
+        }
+		void AddBouwFirmaAanStads(int newID, int id)
+		{
+			using (SqlConnection conn = new SqlConnection(_connectionString))
+			{
+				conn.Open();
+				string sql = @"
+				INSERT INTO Stadsontwikkeling_Bouwfirma (ProjectId,BouwfirmaId)
+				VALUES (@ProjectId, @BouwfirmaId)
+
+				SELECT CAST(SCOPE_IDENTITY() AS int);";
+                using (SqlCommand cmdo = new SqlCommand(sql, conn))
+                {
+                    cmdo.Parameters.AddWithValue("@ProjectId", newID);
+                    cmdo.Parameters.AddWithValue("@BouwfirmaId", id);
+                    cmdo.ExecuteScalar();
+                }
+
+            }
+		}
 
         public int MaakProjectGroen(int oppervlak, double biodivers, int aantWandelpad, int toeriWandelr, double beoordeling)
         {
@@ -458,6 +497,11 @@ namespace StadOntwikkeling_DL.Repos
         public int MaakProjectInno(int aantWoone,string woonvormT, int rondl, int showwon,double archInnoScore, int samErf, int samToer)
         {
             throw new NotImplementedException();
+        }
+
+        void IProjectRepository.AddBouwFirmaAanStads(int newID, int id)
+        {
+            AddBouwFirmaAanStads(newID, id);
         }
     }
 }   

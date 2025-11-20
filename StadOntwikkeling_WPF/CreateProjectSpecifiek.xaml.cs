@@ -38,8 +38,8 @@ namespace StadOntwikkeling_WPF
         private void CreeerProject_Click(object sender, RoutedEventArgs e)
         {
             bool stadsType = false, groeneType = false, innovatieType = false;
-            bool bam = false, cord = false, alhe = false, demo = false, archWaa = false, bezienWaard = false, uitlegBord, infoWand = false;
-            string vergunningsStatus, openbareToegang;
+            bool bam = false, cord = false, alhe = false, demo = false, archWaa = false, bezienWaard = false, uitlegBord = false, infoWand = false;
+            string vergunningsStatus="", openbareToegang="";
             bool speelT = false, pickZone = false, infoBord = false, toeWand = false;
             string oppvlak,bioSco,aanWandel, nieuweFaciliteit, bezoekScore;
             bool modulW = false, cohouW = false, rondL = false, showW = false, samErf = false, samToer = false;
@@ -167,7 +167,8 @@ namespace StadOntwikkeling_WPF
             }
             else { 
                 string titel = _nrmlData[0], status = _nrmlData[1], datum = _nrmlData[2], wijk = _nrmlData[3], straat = _nrmlData[4], gemeente = _nrmlData[5], postcode = _nrmlData[6], huisnummer = _nrmlData[7], beschrijving = _nrmlData[8];
-                _projectManager.MaakProject(titel,status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving);
+                _projectManager.MaakProject(titel,status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving,
+                    bam,cord,alhe,demo,vergunningsStatus,archWaa,openbareToegang,bezienWaard,uitlegBord,infoWand,stadsType);
             }
 
         }

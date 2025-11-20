@@ -15,7 +15,8 @@ namespace StadOntwikkeling_BL.Interfaces
     {
         List<Project> GetProjects();
         List<ProjectDTO> GetProjectsLite();
-        public int MaakProject(string titel, string status, string datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving);
+        public int MaakProject(string titel, string status, string datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving,
+            bool bam, bool cord, bool alhe, bool demo, string vergunningsStatus,bool archWaa,string openbareToegang,bool bezienWaard,bool uitlegBord,bool infoWand,bool stadsType);
         
     }
 }
