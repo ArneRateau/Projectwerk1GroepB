@@ -20,9 +20,9 @@ namespace StadOntwikkeling_BL.Managers
         {
             return _repo.GetPartners();
         }
-        public void MakeNewPartner(Partner partner)
+        public int MaakPartner(string naam, string email)
         {
-            _repo.MakeNewPartner(partner);
+            return _repo.MaakPartner(naam, email);
         }
         public List<Partner> GetAllPartners()
         {
