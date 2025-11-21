@@ -14,7 +14,13 @@ namespace StadOntwikkeling_BL.Interfaces
         List<Partner> GetAllPartners();
 
         List<Partner> GetPartnersByProjectId(int projectId);
+
+        Partner GetPartnerByEmail(string email);
         public int MaakPartner(string naam, string email);
+
+        void KoppelPartnerAanProject(int projectId, int partnerId, string rol);
+        
+
 
 
     }

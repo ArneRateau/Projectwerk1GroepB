@@ -33,5 +33,15 @@ namespace StadOntwikkeling_BL.Managers
         {
             return _repo.GetPartnersByProjectId(projectId);
         }
+
+        public Partner GetPartnerByEmail(string email)
+        {
+            return _repo.GetPartnerByEmail(email);
+        }
+
+        public void KoppelPartnerAanProject(int projectId, int partnerId, string rol)
+        {
+            _repo.KoppelPartnerAanProject(projectId, partnerId, rol);
+        }
     }
 }

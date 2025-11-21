@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -174,6 +175,13 @@ namespace StadOntwikkeling_WPF
             LoadPartners();
         }
 
+        private string ExtractEmail(string item)
+        {
+            int start = item.IndexOf('(') + 1;
+            int end = item.IndexOf(')');
+            return item.Substring(start, end - start).Trim();
+        }
+
         private void ListBox_Partners_All_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListBox_Partners_All.SelectedItem == null)
@@ -182,21 +190,32 @@ namespace StadOntwikkeling_WPF
             // The ListBox items look like: "Naam (email)"
             string selected = ListBox_Partners_All.SelectedItem.ToString();
 
-            // Extract the partner's name (before first '(' )
-            //string partnerNaam = selected.Split('(')[0].Trim();
+            string email = ExtractEmail(selected);
 
-            // manier om juiste partner te vinden zodat role juist kan toegewezen worden
-            //Partner partner = _partnerManager.GetPartnerByName(partnerNaam);
+            Partner partner = _partnerManager.GetPartnerByEmail(email);
 
-            //if (partner == null)
-            //{
-            //    MessageBox.Show("Partner kon niet geladen worden.");
-            //    return;
-            //}
+            
+
+            if (partner == null)
+            {
+                MessageBox.Show("Partner kon niet geladen worden.");
+                return;
+            }
 
             // Open the partner window
             PartnerPopup partnerPopup = new PartnerPopup();//hier kaan partner meegegeven worden als parameter
-            partnerPopup.ShowDialog();
+            if (partnerPopup.ShowDialog() == true)
+            {
+                string rol = partnerPopup.PartnerRol;
+
+                // Save link to DB
+                _partnerManager.KoppelPartnerAanProject(p.Id, partner.Id, rol);
+
+                // Reload project & UI list
+                p = _projectManager.GetProjectById(p.Id);
+                LoadPartners();
+            }
+            
         }
 
     }

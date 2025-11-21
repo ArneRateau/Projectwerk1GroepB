@@ -50,6 +50,28 @@ namespace StadOntwikkeling_DL.Repos
             return partners;
         }
 
+        public Partner GetPartnerByEmail(string email)
+        {
+            using SqlConnection conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            string sql = @"SELECT PartnerId, Naam, Email FROM Partner WHERE Email = @Email";
+
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@Email", email);
+
+                using SqlDataReader reader = cmd.ExecuteReader();
+                if (!reader.Read()) return null;
+
+                return new Partner(
+                    reader.GetInt32(0),
+                    reader.GetString(1),
+                    reader.GetString(2)
+                );
+            }
+        }
+
 
         public List<Partner> GetPartners()
         {
@@ -134,6 +156,29 @@ namespace StadOntwikkeling_DL.Repos
                 }
             }
         }
+
+        public void KoppelPartnerAanProject(int projectId, int partnerId, string rol)
+        {
+            using SqlConnection conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            string sql = @"
+        INSERT INTO ProjectPartner (ProjectId, PartnerId, Rol)
+        VALUES (@ProjectId, @PartnerId, @Rol);";
+
+            using SqlCommand cmd = new SqlCommand(sql, conn)
+            {
+                Parameters =
+        {
+            new SqlParameter("@ProjectId", projectId),
+            new SqlParameter("@PartnerId", partnerId),
+            new SqlParameter("@Rol", rol)
+        }
+            };
+
+            cmd.ExecuteNonQuery();
+        }
+
 
 
         //nog niet klaar

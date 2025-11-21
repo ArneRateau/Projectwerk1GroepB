@@ -26,5 +26,7 @@ namespace StadOntwikkeling_BL.Interfaces
 
         Project GetProjectById(int id);
 
+       
+
     }
 }

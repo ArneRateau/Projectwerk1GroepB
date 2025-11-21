@@ -16,6 +16,9 @@ namespace StadOntwikkeling_BL.Interfaces
 
         int MaakPartner(string naam, string email);
 
+        Partner GetPartnerByEmail(string email);
 
+        void KoppelPartnerAanProject(int projectId, int partnerId, string rol);
+        
     }
 }
