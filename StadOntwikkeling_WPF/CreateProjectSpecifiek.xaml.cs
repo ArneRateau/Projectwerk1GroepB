@@ -41,9 +41,9 @@ namespace StadOntwikkeling_WPF
             bool bam = false, cord = false, alhe = false, demo = false, archWaa = false, bezienWaard = false, uitlegBord = false, infoWand = false;
             string vergunningsStatus="", openbareToegang="";
             bool speelT = false, pickZone = false, infoBord = false, toeWand = false;
-            string oppvlak,bioSco,aanWandel, nieuweFaciliteit, bezoekScore;
+            string oppvlak = "", bioSco = "", aanWandel = "", nieuweFaciliteit = "", bezoekScore = "";
             bool modulW = false, cohouW = false, rondL = false, showW = false, samErf = false, samToer = false;
-            string aanWoonheden, nieuweWoonVorm, innoScore;
+            string aanWoonheden = "", nieuweWoonVorm = "", innoScore = "";
             if (StadsOntwikkeling.IsChecked ?? true)
             {
                 //geen controles added YET voor textvelden
@@ -168,7 +168,10 @@ namespace StadOntwikkeling_WPF
             else { 
                 string titel = _nrmlData[0], status = _nrmlData[1], datum = _nrmlData[2], wijk = _nrmlData[3], straat = _nrmlData[4], gemeente = _nrmlData[5], postcode = _nrmlData[6], huisnummer = _nrmlData[7], beschrijving = _nrmlData[8];
                 _projectManager.MaakProject(titel,status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving,
-                    bam,cord,alhe,demo,vergunningsStatus,archWaa,openbareToegang,bezienWaard,uitlegBord,infoWand,stadsType);
+                    bam,cord,alhe,demo,vergunningsStatus,archWaa,openbareToegang,bezienWaard,uitlegBord,infoWand,stadsType,
+                    oppvlak, bioSco, aanWandel, speelT, pickZone, infoBord, nieuweFaciliteit, toeWand, bezoekScore, groeneType,
+                    aanWoonheden,modulW,cohouW,nieuweWoonVorm, rondL, showW, innoScore, samErf, samToer, innovatieType);
+                MessageBox.Show("Project succesvol aangemaakt!");
             }
 
         }

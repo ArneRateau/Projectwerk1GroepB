@@ -507,19 +507,84 @@ namespace StadOntwikkeling_DL.Repos
             }
 		}
 
-        public int MaakProjectGroen(int oppervlak, double biodivers, int aantWandelpad, int toeriWandelr, double beoordeling)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int MaakProjectInno(int aantWoone,string woonvormT, int rondl, int showwon,double archInnoScore, int samErf, int samToer)
-        {
-            throw new NotImplementedException();
-        }
-
         void IProjectRepository.AddBouwFirmaAanStads(int newID, int id)
         {
             AddBouwFirmaAanStads(newID, id);
+        }
+
+        public int maakProjectGroen(int projectId, int oppvlak, double bioSco, int aanWandel, int toeWand, double bezoekScore)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+
+            {
+                conn.Open();
+                string sql = @"
+				INSERT INTO GroeneRuimte (ProjectId, Oppervlakte, Biodiversiteit, AantalWandelpaden, InToeristischeWandelroute, Beoordeling)
+				VALUES (@ProjectId, @Oppervlakte, @Biodiversiteit, @AantalWandelpaden, @InToeristischeWandelroute, @Beoordeling)
+
+				SELECT CAST(SCOPE_IDENTITY() AS int);";
+                using (SqlCommand cmdo = new SqlCommand(sql, conn))
+                {
+                    cmdo.Parameters.AddWithValue("@ProjectId", projectId);
+                    cmdo.Parameters.AddWithValue("@Oppervlakte", oppvlak);
+                    cmdo.Parameters.AddWithValue("@Biodiversiteit", bioSco);
+                    cmdo.Parameters.AddWithValue("@AantalWandelpaden", aanWandel);
+                    cmdo.Parameters.AddWithValue("@InToeristischeWandelroute", toeWand);
+                    cmdo.Parameters.AddWithValue("@Beoordeling", bezoekScore);
+                    cmdo.ExecuteScalar();
+                }
+
+            }
+            return 1;
+        }
+
+        public int AddFaciliteit(int newID, string faciliteit)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = @"
+				INSERT INTO Faciliteit (ProjectId,Naam)
+				VALUES (@ProjectId, @Naam)
+
+				SELECT CAST(SCOPE_IDENTITY() AS int);";
+                using (SqlCommand cmdo = new SqlCommand(sql, conn))
+                {
+                    cmdo.Parameters.AddWithValue("@ProjectId", newID);
+                    cmdo.Parameters.AddWithValue("@Naam", faciliteit);
+                    cmdo.ExecuteScalar();
+                }
+
+            }
+			return newID;
+        }
+
+        public int MaakProjectInno(int newID, int aantalWooneenheden, string woonvormen, int rondL, int showwoning,double ArchInnoScore, int samenErf, int samenToer)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+
+            {
+                conn.Open();
+                string sql = @"
+				INSERT INTO InnovatiefWonen (ProjectId, AantalWooneenheden, WoonvormTypes, Rondleiding, Showwoning, ArchitectuurInnovatieScore, SamenwerkingErfgoed, SamenwerkingToerisme)
+				VALUES (@ProjectId, @AantalWooneenheden, @WoonvormTypes, @Rondleiding, @Showwoning,@ArchitectuurInnovatieScore, @SamenwerkingErfgoed, @SamenwerkingToerisme)
+
+				SELECT CAST(SCOPE_IDENTITY() AS int);";
+                using (SqlCommand cmdo = new SqlCommand(sql, conn))
+                {
+                    cmdo.Parameters.AddWithValue("@ProjectId", newID);
+                    cmdo.Parameters.AddWithValue("@AantalWooneenheden", aantalWooneenheden);
+                    cmdo.Parameters.AddWithValue("@WoonvormTypes", woonvormen);
+                    cmdo.Parameters.AddWithValue("@Rondleiding", rondL);
+                    cmdo.Parameters.AddWithValue("@Showwoning", showwoning);
+                    cmdo.Parameters.AddWithValue("@ArchitectuurInnovatieScore", ArchInnoScore);
+                    cmdo.Parameters.AddWithValue("@SamenwerkingErfgoed", samenErf);
+                    cmdo.Parameters.AddWithValue("@SamenwerkingToerisme", samenToer);
+                    cmdo.ExecuteScalar();
+                }
+
+            }
+            return 1;
         }
     }
 }   
