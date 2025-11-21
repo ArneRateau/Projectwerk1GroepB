@@ -26,27 +26,10 @@ namespace StadOntwikkeling_BL.Managers
         }
 
         // nog niet zeker over parameters
-        public int MaakProject(
-            string titel,
-            string status,
-            string datum,
-            string wijk,
-            string straat,
-            string gemeente,
-            string postcode,
-            string huisnummer,
-            string beschrijving,
-            bool bam,
-            bool cord,
-            bool alhe,
-            bool demo,
-            string vergunningsStatus,
-            bool archWaa,
-            string openbareToegang,
-            bool bezienWaard,
-            bool uitlegBord,
-            bool infoWand,
-            bool stadsType)
+        public int MaakProject(string titel, string status, string datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving, 
+            bool bam, bool cord, bool alhe, bool demo, string vergunningsStatus, bool archWaa, string openbareToegang, bool bezienWaard, bool uitlegBord, bool infoWand, bool stadsType,
+            string oppvlak, string bioSco,string aanWandel,bool speelT,bool pickZone,bool infoBord,string nieuweFaciliteit,bool toeWand,string bezoekScore,bool groeneType,
+            string aanWoonheden, bool modulW, bool cohouW, string nieuweWoonVorm, bool rondL, bool showW, string innoScore, bool samErf, bool samToer, bool innovatieType)
         {
             int postCode = int.Parse(postcode);
             DateTime tijd = DateTime.Parse(datum);
@@ -121,6 +104,83 @@ namespace StadOntwikkeling_BL.Managers
                 {
                     _projectRepo.AddBouwFirmaAanStads(newID, id);
                 }
+                
+            }
+            if (groeneType)
+            {
+                int opperVlak = int.Parse(oppvlak);
+                double bioScore = double.Parse(bioSco);
+                int aantWandel = int.Parse(aanWandel);
+                int toerWand = 0;
+                if (toeWand) { 
+                    toerWand++;
+                }
+                double Beoord = double.Parse(bezoekScore);
+                int groenId = _projectRepo.maakProjectGroen(newID, opperVlak, bioScore, aantWandel, toerWand, Beoord);
+                     //speelT, pickZone, infoBord, nieuweFaciliteit,
+
+                List<string> faciliteiten = new List<string>();
+                if (speelT)
+                {
+                    faciliteiten.Add("Speeltuin");
+                }
+                if (pickZone)
+                {
+                    faciliteiten.Add("PicknickZone");
+                }
+                if (infoBord)
+                {
+                    faciliteiten.Add("Informatiebord");
+                }
+                if (nieuweFaciliteit != "")
+                {
+                    faciliteiten.Add(nieuweFaciliteit);
+                }
+                foreach(string faciliteit in faciliteiten)
+                {
+                    int faciliteitId = _projectRepo.AddFaciliteit(newID, faciliteit);
+                }
+                
+            }
+            if (innovatieType)
+            {
+                int rondleid = 0,showwoning=0,samenErf=0,samenToer=0;
+                double ArchInnoScore = 0;
+                int aantalWooneenheden = int.Parse(aanWoonheden);
+                string woonvormen = "";
+                if (modulW)
+                {
+                    woonvormen+= "Modulaire Woning; ";
+                }
+                if (cohouW)
+                {
+                    woonvormen += "Cohousing; ";
+                }
+                if (!string.IsNullOrEmpty(nieuweWoonVorm))
+                {
+                    woonvormen += nieuweWoonVorm;
+                    woonvormen += "; ";
+                }
+                if (rondL)
+                {
+                    rondleid = 1; 
+                }
+                if (showW)
+                {
+                    showwoning = 1;
+                }
+                ArchInnoScore = double.Parse(innoScore);
+                if (samErf)
+                {
+                    samenErf = 1;
+                }
+                if (samToer)
+                {
+                    samenToer = 1;
+                }
+
+                //bool rondL, bool showW, string innoScore, bool samErf, bool samToer, bool innovatieType
+                int innoId = _projectRepo.MaakProjectInno(newID, aantalWooneenheden,woonvormen,rondleid,showwoning,ArchInnoScore,samenErf,samenToer);
             }
 
             return newID;

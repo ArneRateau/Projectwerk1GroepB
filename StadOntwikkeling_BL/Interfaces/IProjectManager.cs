@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -16,7 +17,9 @@ namespace StadOntwikkeling_BL.Interfaces
         List<Project> GetProjects();
         List<ProjectDTO> GetProjectsLite();
         public int MaakProject(string titel, string status, string datum, string wijk, string straat, string gemeente, string postcode, string huisnummer, string beschrijving,
-            bool bam, bool cord, bool alhe, bool demo, string vergunningsStatus,bool archWaa,string openbareToegang,bool bezienWaard,bool uitlegBord,bool infoWand,bool stadsType);
+            bool bam, bool cord, bool alhe, bool demo, string vergunningsStatus,bool archWaa,string openbareToegang,bool bezienWaard,bool uitlegBord,bool infoWand,bool stadsType,
+            string oppvlak,string bioSco,string aanWandel,bool speelT,bool pickZone,bool infoBord,string nieuweFaciliteit,bool toeWand,string bezoekScore,bool groeneType,
+            string aanWoonheden, bool modulW,bool cohouW,string nieuweWoonVorm,bool rondL,bool showW,string innoScore,bool samErf,bool samToer,bool innovatieType);
         
 		void updateProject(Project toUpdate);
         void MaakProject();

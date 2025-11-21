@@ -18,9 +18,8 @@ namespace StadOntwikkeling_BL.Interfaces
         int MaakProjectAlgemeen(string v1, int v2, DateTime now, string v3, string v4, string v5, int v6, string v7, string v8);
         int MaakProjectStads(int newID,int Vergun,int archWaarde,int Toegang,int Beziens,int UitlegBord,int InfoWandeling);
         void AddBouwFirmaAanStads(int newID, int id);
-		void updateProject(Project toUpdate);
-        public int MaakProject();
-
-        Project GetProjectById(int id);
+        int maakProjectGroen(int projectId,int oppvlak, double bioSco, int aanWandel, int toeWand, double bezoekScore);
+        int AddFaciliteit(int newID, string faciliteit);
+        int MaakProjectInno(int newID, int aantalWooneenheden, string woonvormen, int rondL, int showwoning,double ArchInnoScore, int samenErf, int samenToer);
     }
 }
