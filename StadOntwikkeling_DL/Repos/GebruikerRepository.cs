@@ -21,22 +21,25 @@ namespace StadOntwikkeling_DL.Repos
 			_connectionString = connectionstring;
 		}
 
-		public int MaakGebruiker(string email, bool isAdmin, bool isPartner)
+		public int MaakGebruiker(string naam,string email, bool isAdmin, bool isPartner)
 		{
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
                 string sql = @"
-            INSERT INTO Gebruiker (Email, IsAdmin, IsPartner)
-            VALUES (@Email, @IsAdmin, @IsPartner);
+            INSERT INTO Gebruiker (Naam, Email, IsAdmin, IsPartner)
+            VALUES (@Naam, @Email, @IsAdmin, @IsPartner);
 
             SELECT CAST(SCOPE_IDENTITY() AS int);";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
+                    cmd.Parameters.AddWithValue("@Naam", naam);
+
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@IsAdmin", isAdmin);
                     cmd.Parameters.AddWithValue("@IsPartner", isPartner);
+
 
                     int newId = (int)cmd.ExecuteScalar();
                     return newId;

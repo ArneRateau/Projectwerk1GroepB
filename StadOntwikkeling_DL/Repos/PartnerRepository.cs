@@ -113,10 +113,29 @@ namespace StadOntwikkeling_DL.Repos
             return partners;
         }
 
-        public int MakeNewPartner(Partner partner)
+        public int MaakPartner(string naam, string email)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string sql = @"
+            INSERT INTO Partner (Naam, Email)
+            VALUES (@Naam, @Email);
+
+            SELECT CAST(SCOPE_IDENTITY() AS int);";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Naam", naam);
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    int newId = (int)cmd.ExecuteScalar();
+                    return newId;
+                }
+            }
         }
+
 
         //nog niet klaar
         //public int /*void*/ MakeNewPartner(Partner partner/*, Locatie locatie*/)

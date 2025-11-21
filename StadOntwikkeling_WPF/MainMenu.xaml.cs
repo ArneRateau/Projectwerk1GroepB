@@ -71,7 +71,7 @@ namespace StadOntwikkeling_WPF
 
         private void AddGebruiker_Click(object? sender, RoutedEventArgs e)
         {
-            var window = new GebruikerToevoegen(_gebruikerManager);
+            var window = new GebruikerToevoegen(_gebruikerManager, _partnerManager);
             window.ShowDialog();
         }
 

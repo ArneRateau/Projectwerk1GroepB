@@ -64,7 +64,11 @@
                 <DataGridTextColumn Header="Type(s)" Binding="{Binding ProjectTypesDisplay}" Width="1.5*" />
 
             </DataGrid.Columns>
-
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="InfoProject" Click="ToonInfoProject_Click"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
 
     </Grid>

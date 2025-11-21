@@ -141,5 +141,10 @@ namespace StadOntwikkeling_BL.Managers
         {
             throw new NotImplementedException();
         }
+        
+        public List<ProjectPartner> GetProjectPartners(int projectId)
+        {
+            return _projectRepo.GetProjectPartners(projectId);
+        }
     }
 }

@@ -616,5 +616,75 @@ namespace StadOntwikkeling_DL.Repos
         {
             throw new NotImplementedException();
         }
+        public List<ProjectPartner> GetProjectPartners(int projectId)
+        {
+            string query = "SELECT pa.PartnerId,pa.Naam,pa.Email, pp.Rol," +
+            " pr.ProjectId, pr.Titel,pr.StartDatum,pr.Status,pr.Beschrijving," +
+            //" pl.Straat AS PartnerStraat,pl.Postcode AS PartnerPostcode,pl.Gemeente AS PartnerGemeente,pl.Wijk AS PartnerWijk,pl.HuisNummer AS PartnerHuisnummer," +
+            " prl.Straat AS ProjectStraat, prl.Straat AS ProjectStraat,prl.Straat AS ProjectStraat,prl.Postcode AS ProjectPostcode,prl.Gemeente AS ProjectGemeente,prl.Wijk AS ProjectWijk,prl.HuisNummer AS ProjectHuisnummer" +
+            " FROM Partner pa " +
+            " JOIN ProjectPartner pp ON pa.PartnerId = pp.PartnerId " +
+            " JOIN Project pr ON pp.ProjectId = pr.ProjectId " +
+            //" JOIN Locatie pl ON pa.LocatieId = pl.LocatieId" +
+            " JOIN Locatie prl ON pr.LocatieId = prl.LocatieId WHERE pp.ProjectId = @ProjectId";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                var partners = new List<ProjectPartner>();
+
+                connection.Open();
+                cmd.CommandText = query;
+                cmd.Parameters.AddWithValue("@ProjectId", projectId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Partner locatie
+                        /*                        var partnerLocatie = new Locatie(
+                                                    (string)reader["PartnerStraat"],
+                                                    (string)reader["PartnerPostcode"],
+                                                    (string)reader["PartnerGemeente"],
+                                                    (string)reader["PartnerWijk"],
+                                                    (string)reader["PartnerHuisnummer"]
+                                                );
+                        */
+                        // Partner object
+                        var partner = new Partner(
+                            (int)reader["PartnerId"],
+                            (string)reader["Naam"],
+                            (string)reader["Email"]
+                        );
+
+                        // Project locatie
+                        var projectLocatie = new Locatie(
+                            (string)reader["ProjectStraat"],
+                            (string)reader["ProjectPostcode"],
+                            (string)reader["ProjectGemeente"],
+                            (string)reader["ProjectWijk"],
+                            (string)reader["ProjectHuisnummer"]
+                        );
+
+                        // Project object
+                        var project = new Project(
+                            (int)reader["ProjectId"],
+                            (string)reader["Titel"],
+                            (DateTime)reader["StartDatum"],
+                            (Status)reader["Status"],
+                            (string)reader["Beschrijving"],
+                            projectLocatie,
+                            null,
+                            null    
+                        );
+
+                        // De koppeling
+                        partners.Add(new ProjectPartner(partner, project, (string)reader["Rol"]));
+                    }
+
+                    return partners;
+                }
+            }
+            
+        }
     }
 }
