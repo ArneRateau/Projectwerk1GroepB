@@ -20,18 +20,20 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IGebruikerManager _gebruikerManager;
-        private readonly IProjectManager _projectManager;
-        private readonly IPartnerManager _partnerManager;
-        private readonly ILocatieManager _locatieManager;
+        private readonly GebruikerManager _gebruikerManager;
+        private readonly ProjectManager _projectManager;
+        private readonly PartnerManager _partnerManager;
+        private readonly LocatieManager _locatieManager;
+        private readonly ProjectPartnerManager _projectPartnerManager;
 
-        public MainWindow(IGebruikerManager gebruikerManager, IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager)
+        public MainWindow(GebruikerManager gebruikerManager, ProjectManager projectManager, PartnerManager partnerManager, LocatieManager locatieManager, ProjectPartnerManager projectPartnerManager)
         {
             InitializeComponent();
             _gebruikerManager = gebruikerManager;
             _projectManager = projectManager;
             _partnerManager = partnerManager;
             _locatieManager = locatieManager;
+            _projectPartnerManager = projectPartnerManager;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -48,7 +50,7 @@ namespace StadOntwikkeling_WPF
             {
                 AppSession.huidigeGebruiker = g;
 
-                var mw = new MainMenu(_gebruikerManager, _projectManager, _partnerManager, _locatieManager);
+                var mw = new MainMenu(_gebruikerManager, _projectManager, _partnerManager, _locatieManager, _projectPartnerManager);
 
                 mw.ShowDialog();
             }

@@ -79,15 +79,16 @@ namespace StadOntwikkeling_DL.Repos
         }
 
         
-        private List<string> LoadPartnerNames(int projectId)
+        private List<string>  LoadPartnerNames(int projectId)
         {
-            List<string> partners = new List<string>();
+            List<string> partners = new();
 
-            string query = @"
-                SELECT pa.Naam
-                FROM Partner pa
-                JOIN ProjectPartner pp ON pa.PartnerId = pp.PartnerId
-                WHERE pp.ProjectId = @ProjectId";
+            string query = "SELECT pa.PartnerId, pa.Naam, pa.Email FROM Partner pa JOIN ProjectPartner pp ON pa.PartnerId=pp.PartnerId WHERE pp.ProjectId=@projectId";
+            //string query = @"
+            //    SELECT pa.Naam
+            //    FROM Partner pa
+            //    JOIN ProjectPartner pp ON pa.PartnerId = pp.PartnerId
+            //    WHERE pp.ProjectId = @ProjectId";
 
             using (SqlConnection con = new SqlConnection(_connectionString))
             using (SqlCommand cmd = new SqlCommand(query, con))
@@ -95,11 +96,11 @@ namespace StadOntwikkeling_DL.Repos
                 con.Open();
                 cmd.Parameters.AddWithValue("@ProjectId", projectId);
 
-                using (SqlDataReader r = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    while (r.Read())
-                        partners.Add((string)r["Naam"]);
-                }
+                    while (reader.Read())
+                        partners.Add(reader.GetString(reader.GetOrdinal("Naam")));
+				}
             }
             return partners;
         }

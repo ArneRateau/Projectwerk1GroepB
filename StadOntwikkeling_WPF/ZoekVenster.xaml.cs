@@ -13,162 +13,160 @@ using System.Windows.Controls;
 
 namespace StadOntwikkeling_WPF
 {
-    public partial class ZoekVenster : Window
-    {
-        private readonly IProjectManager _projectManager;
-        private readonly IPartnerManager _partnerManager;
-        private readonly ILocatieManager _locatieManager;
-        private List<ProjectDTO> _alleProjecten = new List<ProjectDTO>();
-
-        public ZoekVenster(IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager)
-        {
-            InitializeComponent();
-            _projectManager = projectManager;
-            _partnerManager = partnerManager;
-            _locatieManager = locatieManager;
-            LoadProjecten();
-            LoadFilters();
-            
-        }
-
-        private void LoadProjecten()
-        {
-            _alleProjecten = _projectManager.GetProjectsLite();
-            DgResultaten.ItemsSource = _alleProjecten;
-        }
-
-        
-
-        private ProjectDTO? GetSelectedProject()
-        {
-            return DgResultaten.SelectedItem as ProjectDTO;
-        }
-        private void OpenEditWindow(ProjectDTO project)
-        {
-            Project fullProject = _projectManager.GetProjectById(project.Id);
-
-            
-            
-            var win = new ProjectWindow(fullProject, (ProjectManager)_projectManager, (PartnerManager)_partnerManager, (LocatieManager)_locatieManager);
+	public partial class ZoekVenster : Window
+	{
+		private readonly ProjectManager _projectManager;
+		private readonly PartnerManager _partnerManager;
+		private readonly LocatieManager _locatieManager;
+		private readonly ProjectPartnerManager _projectPartnerManager;
+		private List<ProjectDTO> _alleProjecten = new();
+		public ZoekVenster(ProjectManager projectManager, PartnerManager partnerManager, LocatieManager locatieManager, ProjectPartnerManager projectPartnerManager)
+		{
+			InitializeComponent();
+			_projectManager = projectManager;
+			_partnerManager = partnerManager;
+			_locatieManager = locatieManager;
+			_projectPartnerManager = projectPartnerManager;
 
 
-            this.Close();
+			LoadProjecten();
+			LoadFilters();
+		}
 
-            win.ShowDialog();
+		private void LoadProjecten()
+		{
+			_alleProjecten = _projectManager.GetProjectsLite();
+			DgResultaten.ItemsSource = null;
+			DgResultaten.ItemsSource = _alleProjecten;
+		}
 
-            LoadProjecten();
-        }
+		private ProjectDTO? GetSelectedProject()
+		{
+			return DgResultaten.SelectedItem as ProjectDTO;
+		}
+		private void OpenEditWindow(ProjectDTO project)
+		{
+			Project fullProject = _projectManager.GetProjectById(project.Id);
+			
+			var win = new ProjectWindow(fullProject, _projectManager, _partnerManager, _locatieManager, _projectPartnerManager);
+			
+			win.ShowDialog();
 
-        private void DgResultaten_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var project = GetSelectedProject();
-            if (project == null) return;
+			LoadProjecten();
 
-            OpenEditWindow(project);
-        }
-        void LoadFilters()
-        {
-            // Wijken
-            var wijken = _alleProjecten
-                .Select(p => p.Wijk)
-                .Where(w => !string.IsNullOrWhiteSpace(w))
-                .Distinct()
-                .OrderBy(w => w)
-                .ToList();
+			this.Close();
+		}
 
-            foreach (var w in wijken)
-                CmbWijk.Items.Add(new ComboBoxItem { Content = w });
+		private void DgResultaten_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			var project = GetSelectedProject();
+			if (project == null) return;
 
-            // Partners
-            var partners = _alleProjecten
-                .SelectMany(p => p.PartnerNamen)
-                .Where(n => !string.IsNullOrWhiteSpace(n))
-                .Distinct()
-                .OrderBy(n => n)
-                .ToList();
+			OpenEditWindow(project);
+		}
+		void LoadFilters()
+		{
+			// Wijken
+			var wijken = _alleProjecten
+				.Select(p => p.Wijk)
+				.Where(w => !string.IsNullOrWhiteSpace(w))
+				.Distinct()
+				.OrderBy(w => w)
+				.ToList();
 
-            foreach (var p in partners)
-                CmbPartner.Items.Add(new ComboBoxItem { Content = p });
-        }
+			foreach (var w in wijken)
+				CmbWijk.Items.Add(new ComboBoxItem { Content = w });
+
+			// Partners
+			var partners = _alleProjecten
+				.SelectMany(p => p.PartnerNamen)
+				.Where(n => !string.IsNullOrWhiteSpace(n))
+				.Distinct()
+				.OrderBy(n => n)
+				.ToList();
+
+			foreach (var p in partners)
+				CmbPartner.Items.Add(new ComboBoxItem { Content = p });
+		}
 
 
 
-        private void BtnZoek_Click(object sender, RoutedEventArgs e)
-        {
-            var query = _alleProjecten.AsEnumerable();
+		private void BtnZoek_Click(object sender, RoutedEventArgs e)
+		{
+			var query = _alleProjecten.AsEnumerable();
 
-            // Filter: Wijk
-            if (CmbWijk.SelectedItem is ComboBoxItem wijkItem)
-            {
-                string wijk = wijkItem.Content.ToString();
-                if (wijk != "None")
-                {
-                    query = query.Where(p =>
-                        p.Wijk.Equals(wijk, StringComparison.OrdinalIgnoreCase)
-                    );
-                }
-            }
-
-
-            // Filter: Status
-            if (CmbStatus.SelectedItem is ComboBoxItem statusItem)
-            {
-                string status = statusItem.Content.ToString();
-                if (status != "None")
-                {
-                    query = query.Where(p => p.Status == status);
-                }
-            }
-
-            // Filter: Type project
-            if (CmbType.SelectedItem is ComboBoxItem typeItem)
-            {
-                string type = typeItem.Content.ToString();
-                if (type != "None")
-                {
-                    query = query.Where(p =>
-                        p.ProjectTypes.Any(t =>
-                            t.Equals(type, StringComparison.OrdinalIgnoreCase)
-                        )
-                    );
-                }
-            }
+			// Filter: Wijk
+			if (CmbWijk.SelectedItem is ComboBoxItem wijkItem)
+			{
+				string wijk = wijkItem.Content.ToString();
+				if (wijk != "None")
+				{
+					query = query.Where(p =>
+						p.Wijk.Equals(wijk, StringComparison.OrdinalIgnoreCase)
+					);
+				}
+			}
 
 
-            // Filter: Naam partner
-            if (CmbPartner.SelectedItem is ComboBoxItem partnerItem)
-            {
-                string partner = partnerItem.Content.ToString();
-                if (partner != "None")
-                {
-                    query = query.Where(p =>
-                        p.PartnerNamen.Any(pa =>
-                            pa.Equals(partner, StringComparison.OrdinalIgnoreCase)
-                        )
-                    );
-                }
-            }
+			// Filter: Status
+			if (CmbStatus.SelectedItem is ComboBoxItem statusItem)
+			{
+				string status = statusItem.Content.ToString();
+				if (status != "None")
+				{
+					query = query.Where(p => p.Status == status);
+				}
+			}
+
+			// Filter: Type project
+			if (CmbType.SelectedItem is ComboBoxItem typeItem)
+			{
+				string type = typeItem.Content.ToString();
+				if (type != "None")
+				{
+					query = query.Where(p =>
+						p.ProjectTypes.Any(t =>
+							t.Equals(type, StringComparison.OrdinalIgnoreCase)
+						)
+					);
+				}
+			}
 
 
-            // Filter: Startdatum >=
-            if (DpStart.SelectedDate is DateTime start)
-            {
-                query = query.Where(p => p.StartDatum >= start);
-            }
+			// Filter: Naam partner
+			if (CmbPartner.SelectedItem is ComboBoxItem partnerItem)
+			{
+				string partner = partnerItem.Content.ToString();
+				if (partner != "None")
+				{
+					query = query.Where(p =>
+						p.PartnerNamen.Any(pa =>
+							pa.Equals(partner, StringComparison.OrdinalIgnoreCase)
+						)
+					);
+				}
+			}
 
 
-            // Filter: Startdatum <= einde
-            if (DpEind.SelectedDate is DateTime einde)
-            {
-                query = query.Where(p => p.StartDatum <= einde);
-            }
+			// Filter: Startdatum >=
+			if (DpStart.SelectedDate is DateTime start)
+			{
+				query = query.Where(p => p.StartDatum >= start);
+			}
 
-            DgResultaten.ItemsSource = query.ToList();
-        }
 
-        private void CmbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+			// Filter: Startdatum <= einde
+			if (DpEind.SelectedDate is DateTime einde)
+			{
+				query = query.Where(p => p.StartDatum <= einde);
+			}
 
-        }
-    }
+			DgResultaten.ItemsSource = query.ToList();
+		}
+
+		private void CmbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
+	}
 }

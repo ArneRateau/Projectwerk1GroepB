@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Managers
 {
-    public class ProjectPartnerManager
+    public class ProjectPartnerManager : IProjectPartnerManager
     {
         private IProjectPartnerRepository _repo;
 

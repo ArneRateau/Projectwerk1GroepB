@@ -60,5 +60,9 @@ namespace StadOntwikkeling_BL.Models
 				_email = value;
 			}
 		}
+		public override string ToString()
+		{
+			return $" {Naam} {Email}";
+		}
 	}
 }

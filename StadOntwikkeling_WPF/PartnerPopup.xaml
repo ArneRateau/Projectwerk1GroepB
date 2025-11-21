@@ -1,7 +1,7 @@
 ﻿<Window x:Class="StadOntwikkeling_WPF.PartnerPopup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Partner toevoegen" Height="260" Width="380"
+        Title="Partner toevoegen" Height="300" Width="380"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         Background="White">
@@ -21,15 +21,24 @@
         <!-- Inhoud -->
         <StackPanel Margin="20,60,20,20">
 
-           
+			<!-- Partner Selecteren -->
+			<TextBlock Text="Partner:"
+                       FontWeight="Bold"
+                       Margin="0,15,0,5"/>
+			
+			<ComboBox x:Name="CmbPartners"
+          Height="26"
+          ItemsSource="{Binding AllePartners}"
+          DisplayMemberPath="Naam"
+          SelectedItem="{Binding GeselecteerdePartner, Mode=TwoWay}"/>
 
-            <!-- Rol -->
+			<!-- Rol -->
             <TextBlock Text="Rol in project:"
                        FontWeight="Bold"
                        Margin="0,15,0,5"/>
-            <TextBox x:Name="TxtRol" Height="26"/>
+			<TextBox x:Name="TxtRol" Height="26"/>
 
-            <!-- Knoppen rij -->
+			<!-- Knoppen rij -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,25,0,0">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StadOntwikkeling_WPF"
         mc:Ignorable="d"
-        Title="ProjectWindow" Height="800" Width="800">
+        Title="ProjectWindow" Height="1000" Width="800">
     
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 

@@ -26,7 +26,7 @@ namespace StadOntwikkeling_BL.Models.DTO_s
             StartDatum = startDate;
             ProjectTypes = projectTypes;
         }
-        public ProjectDTO(int id, string title, string status, string wijk, DateTime startDate, List<string> projectTypes, List<string> partnernamen)
+        public ProjectDTO(int id, string title, string status, string wijk, DateTime startDate, List<string> projectTypes, List<string> partnerNaams)
         {
             Id = id;
             Title = title;
@@ -34,7 +34,7 @@ namespace StadOntwikkeling_BL.Models.DTO_s
             Wijk = wijk;
             StartDatum = startDate;
             ProjectTypes = projectTypes;
-            PartnerNamen = partnernamen;
+            PartnerNamen = partnerNaams;
         }
 
         public int Id { get; set; }
