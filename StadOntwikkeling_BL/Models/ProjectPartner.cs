@@ -14,8 +14,8 @@ namespace StadOntwikkeling_BL.Models
 		private Partner _partner;
 		private Project _project;
 		private string _rol;
-
-		public ProjectPartner(Partner partner, Project project, string rol)
+        public string Naam { get; set; }
+        public ProjectPartner(Partner partner, Project project, string rol)
 		{
 			Partner = partner;
 			Project = project;
@@ -29,8 +29,16 @@ namespace StadOntwikkeling_BL.Models
 			Project = project;
 			Rol = rol;
 		}
+		public ProjectPartner(int id, Partner partner, Project project, string rol, string naam)
+		{
+			Id = id;
+			Partner = partner;
+			Project = project;
+			Rol = rol;
+			Naam = naam;
 
-		public int Id
+        }
+        public int Id
 		{
 			get { return _id; }
 			set
@@ -70,5 +78,6 @@ namespace StadOntwikkeling_BL.Models
 				_rol = value;
 			}
 		}
+
 	}
 }

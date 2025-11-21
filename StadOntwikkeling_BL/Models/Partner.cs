@@ -11,24 +11,19 @@ namespace StadOntwikkeling_BL.Models
 	{
 		private int _id;
 		private string _naam;
-		private Locatie _locatie;
 		private string _email;
 
-		public Partner(string naam, Locatie locatie, string email, List<ProjectPartner> projecten)
+		public Partner(string naam, string email)
 		{
 			Naam = naam;
-			Locatie = locatie;
 			Email = email;
-			Projecten = projecten;
 		}
 
-		public Partner(int id, string naam, Locatie locatie, string email, List<ProjectPartner> projecten)
+		public Partner(int id, string naam, string email)
 		{
 			Id = id;
 			Naam = naam;
-			Locatie = locatie;
 			Email = email;
-			Projecten = projecten;
 		}
 
 		public int Id
@@ -54,16 +49,7 @@ namespace StadOntwikkeling_BL.Models
 					_naam = value;
 			}
 		}
-		public Locatie Locatie
-		{
-			get { return _locatie; }
-			set
-			{
-				if (value == null)
-					throw new PartnerException("Locatie mag niet null zijn");
-				_locatie = value;
-			}
-		}
+		
 		public string Email
 		{
 			get { return _email; }
@@ -74,6 +60,5 @@ namespace StadOntwikkeling_BL.Models
 				_email = value;
 			}
 		}
-		public List<ProjectPartner> Projecten { get; set; } = new();
 	}
 }

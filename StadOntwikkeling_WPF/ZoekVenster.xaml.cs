@@ -1,10 +1,13 @@
-﻿using System.Linq;
-using System.Windows;
-using System.Collections.Generic;
-using StadOntwikkeling_BL.Models;
-using System.Windows.Controls;
+﻿using StadOntwikkeling_BL.Enums;
 using StadOntwikkeling_BL.Interfaces;
+using StadOntwikkeling_BL.Managers;
+using StadOntwikkeling_BL.Models;
 using StadOntwikkeling_BL.Models.DTO_s;
+using StadOntwikkeling_WPF.Model;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 
 
@@ -13,16 +16,19 @@ namespace StadOntwikkeling_WPF
     public partial class ZoekVenster : Window
     {
         private readonly IProjectManager _projectManager;
+        private readonly IPartnerManager _partnerManager;
+        private readonly ILocatieManager _locatieManager;
         private List<ProjectDTO> _alleProjecten = new List<ProjectDTO>();
 
-        public ZoekVenster(IProjectManager projectManager)
+        public ZoekVenster(IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager)
         {
             InitializeComponent();
             _projectManager = projectManager;
-
+            _partnerManager = partnerManager;
+            _locatieManager = locatieManager;
             LoadProjecten();
             LoadFilters();
-
+            
         }
 
         private void LoadProjecten()
@@ -31,6 +37,35 @@ namespace StadOntwikkeling_WPF
             DgResultaten.ItemsSource = _alleProjecten;
         }
 
+        
+
+        private ProjectDTO? GetSelectedProject()
+        {
+            return DgResultaten.SelectedItem as ProjectDTO;
+        }
+        private void OpenEditWindow(ProjectDTO project)
+        {
+            Project fullProject = _projectManager.GetProjectById(project.Id);
+
+            
+            
+            var win = new ProjectWindow(fullProject, (ProjectManager)_projectManager, (PartnerManager)_partnerManager, (LocatieManager)_locatieManager);
+
+
+            this.Close();
+
+            win.ShowDialog();
+
+            LoadProjecten();
+        }
+
+        private void DgResultaten_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var project = GetSelectedProject();
+            if (project == null) return;
+
+            OpenEditWindow(project);
+        }
         void LoadFilters()
         {
             // Wijken

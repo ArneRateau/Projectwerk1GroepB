@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Interfaces
 {
-    public interface IPartnerRepository
+    public interface IPartnerManager
     {
         List<Partner> GetPartners();
-
         List<Partner> GetAllPartners();
 
         List<Partner> GetPartnersByProjectId(int projectId);
-        public int MaakPartner(string naam, string email);
+
+        int MaakPartner(string naam, string email);
 
 
     }

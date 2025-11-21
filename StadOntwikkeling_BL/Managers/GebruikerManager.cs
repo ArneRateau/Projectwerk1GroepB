@@ -17,10 +17,10 @@ namespace StadOntwikkeling_BL.Managers
             _gebruikerRepo = gebruikerRepo;
         }
 
-        public int MaakGebruiker(string email, bool isAdmin, bool isPartner)
+        public int MaakGebruiker(string naam, string email, bool isAdmin, bool isPartner)
         { 
 
-            int newId = _gebruikerRepo.MaakGebruiker(email, isAdmin, isPartner);
+            int newId = _gebruikerRepo.MaakGebruiker(naam, email, isAdmin, isPartner);
             return newId;
         }
 

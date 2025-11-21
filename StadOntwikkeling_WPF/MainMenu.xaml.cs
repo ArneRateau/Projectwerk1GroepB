@@ -13,17 +13,22 @@ namespace StadOntwikkeling_WPF
     {
         private readonly IGebruikerManager _gebruikerManager;
         private readonly IProjectManager _projectManager;
+        private readonly IPartnerManager _partnerManager;
+        private readonly ILocatieManager _locatieManager;
 
-        public MainMenu(IGebruikerManager gebruikerManager, IProjectManager projectManager)
+        public MainMenu(IGebruikerManager gebruikerManager, IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager)
         {
             InitializeComponent();
             _gebruikerManager = gebruikerManager;
             _projectManager = projectManager;
+            _partnerManager = partnerManager;
+            _locatieManager = locatieManager;
+
+
 
             ApplyPermissions();
 
             addGebruiker.Click += AddGebruiker_Click;
-
         }
 
         private void ApplyPermissions()
@@ -65,13 +70,13 @@ namespace StadOntwikkeling_WPF
 
         private void AddGebruiker_Click(object? sender, RoutedEventArgs e)
         {
-            var window = new GebruikerToevoegen(_gebruikerManager);
+            var window = new GebruikerToevoegen(_gebruikerManager, _partnerManager);
             window.ShowDialog();
         }
 
         private void BekijkProjecten_Click(object sender, RoutedEventArgs e)
 		{
-            var window = new ZoekVenster(_projectManager);
+            var window = new ZoekVenster(_projectManager, _partnerManager, _locatieManager);
             window.ShowDialog();
         }
 

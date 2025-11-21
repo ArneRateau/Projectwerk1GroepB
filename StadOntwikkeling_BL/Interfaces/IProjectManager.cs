@@ -21,5 +21,10 @@ namespace StadOntwikkeling_BL.Interfaces
             string oppvlak,string bioSco,string aanWandel,bool speelT,bool pickZone,bool infoBord,string nieuweFaciliteit,bool toeWand,string bezoekScore,bool groeneType,
             string aanWoonheden, bool modulW,bool cohouW,string nieuweWoonVorm,bool rondL,bool showW,string innoScore,bool samErf,bool samToer,bool innovatieType);
         
+		void updateProject(Project toUpdate);
+        void MaakProject();
+
+        Project GetProjectById(int id);
+
     }
 }

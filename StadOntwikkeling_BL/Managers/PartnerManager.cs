@@ -8,21 +8,30 @@ using System.Threading.Tasks;
 
 namespace StadOntwikkeling_BL.Managers
 {
-    public class PartnerManager
+    public class PartnerManager : IPartnerManager
     {
-        private IPartnerRepository repo;
+        private IPartnerRepository _repo;
 
         public PartnerManager(IPartnerRepository repo)
         {
-            this.repo = repo;
+            _repo = repo;
         }
         public List<Partner> GetPartners()
         {
-            return repo.GetPartners();
+            return _repo.GetPartners();
         }
-        public void MakeNewPartner(Partner partner)
+        public int MaakPartner(string naam, string email)
         {
-            repo.MakeNewPartner(partner);
+            return _repo.MaakPartner(naam, email);
+        }
+        public List<Partner> GetAllPartners()
+        {
+            return _repo.GetAllPartners();
+        }
+        
+        public List<Partner> GetPartnersByProjectId(int projectId)
+        {
+            return _repo.GetPartnersByProjectId(projectId);
         }
     }
 }
