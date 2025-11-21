@@ -12,7 +12,7 @@ namespace StadOntwikkeling_DL.Repos
 {
     public class LocatieRepository : ILocatieRepository
     {
-        private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog = GentProjecten; Integrated Security = True; Encrypt=True;Trust Server Certificate=True";
+        private string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
 
         public LocatieRepository(string connectionString)
         {

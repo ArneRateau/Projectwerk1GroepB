@@ -11,8 +11,8 @@ namespace StadOntwikkeling_DL.Repos
 {
     public class ProjectRepository : IProjectRepository
     {
-        //private readonly string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
-        private readonly string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog=GentProjecten;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        private readonly string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
+        //private readonly string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog=GentProjecten;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
 
         public ProjectRepository(string connectionString)
         {
@@ -601,7 +601,7 @@ namespace StadOntwikkeling_DL.Repos
             }
         }
 
-        
+
         public int maakProjectGroen(int projectId, int oppvlak, double bioSco, int aanWandel, int toeWand, double bezoekScore)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -623,9 +623,21 @@ namespace StadOntwikkeling_DL.Repos
                     cmdo.Parameters.AddWithValue("@Beoordeling", bezoekScore);
                     cmdo.ExecuteScalar();
                 }
+                string updateType = @"
+                    UPDATE Project_ProjectType
+                    SET GroeneRuimteId = @Id
+                    WHERE ProjectId = @Pid";
 
+                using (SqlCommand cmd = new SqlCommand(updateType, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", projectId);
+                    cmd.Parameters.AddWithValue("@Pid", projectId);
+                    cmd.ExecuteNonQuery();
+
+
+                }
+                return 1;
             }
-            return 1;
         }
 
         public int AddFaciliteit(int newID, string faciliteit)
@@ -671,6 +683,18 @@ namespace StadOntwikkeling_DL.Repos
                     cmdo.Parameters.AddWithValue("@SamenwerkingErfgoed", samenErf);
                     cmdo.Parameters.AddWithValue("@SamenwerkingToerisme", samenToer);
                     cmdo.ExecuteScalar();
+                }
+
+                string updateType = @"
+                    UPDATE Project_ProjectType
+                    SET InnovatiefWonenId = @Id
+                    WHERE ProjectId = @Pid";
+
+                using (SqlCommand cmd = new SqlCommand(updateType, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", newID);
+                    cmd.Parameters.AddWithValue("@Pid", newID);
+                    cmd.ExecuteNonQuery();
                 }
 
             }
