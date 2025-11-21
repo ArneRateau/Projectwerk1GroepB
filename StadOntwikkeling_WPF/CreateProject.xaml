@@ -11,26 +11,26 @@
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,150" >Voer algemene projectgegevens in.</TextBlock>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,75,850,0 ">Titel:</TextBlock>
         <TextBox x:Name="Titel" VerticalAlignment="Top" HorizontalAlignment="Center" Width="350" Margin="0,75,375,0" FontSize="20" Foreground="#009DE0"></TextBox>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="175,75,0,0 ">Status:</TextBlock>
-        <ComboBox Name="Status" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" FontSize="20" Margin="475,75,0,0" Foreground="#009DE0">
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="185,75,0,0 ">Status:</TextBlock>
+        <ComboBox Name="Status" VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" FontSize="20" Margin="490,75,0,0" Foreground="#009DE0" SelectedIndex="0">
             <ComboBoxItem>Planning</ComboBoxItem>
             <ComboBoxItem>Uitvoering</ComboBoxItem>
             <ComboBoxItem>Afgerond</ComboBoxItem>
         </ComboBox>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="140,175,0,150" >Startdatum:</TextBlock>
-        <DatePicker x:Name="Datum" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="475,150,0,0"/>
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="536,124,0,0" >Startdatum:</TextBlock>
+        <DatePicker x:Name="Datum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="662,125,0,0" Width="151"/>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,125,850,0 ">Wijk:</TextBlock>
         <TextBox x:Name="Wijk" VerticalAlignment="Top" HorizontalAlignment="Center" Width="350" Margin="0,125,375,0" FontSize="20" Foreground="#009DE0"></TextBox>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,175,850,0 ">Straat:</TextBlock>
         <TextBox x:Name="Straat" VerticalAlignment="Top" HorizontalAlignment="Center" Width="350" Margin="0,175,375,0" FontSize="20" Foreground="#009DE0"></TextBox>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,225,850,0 ">Gemeente:</TextBlock>
         <TextBox x:Name="Gemeente" VerticalAlignment="Top" HorizontalAlignment="Center" Width="350" Margin="0,225,375,0" FontSize="20" Foreground="#009DE0"></TextBox>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,275,835,0 ">Postcode:</TextBlock>
-        <TextBox x:Name="Postcode" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Margin="0,275,625,0" FontSize="20" Foreground="#009DE0"></TextBox>
-        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,275,375,0 ">Huisnummer:</TextBlock>
-        <TextBox x:Name="Huisnummer" VerticalAlignment="Top" HorizontalAlignment="Center" Width="50" Margin="0,275,175,0" FontSize="20" Foreground="#009DE0"></TextBox>
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="545,225,0,0">Postcode:</TextBlock>
+        <TextBox x:Name="Postcode" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Margin="662,223,0,0" FontSize="20" Foreground="#009DE0"></TextBox>
+        <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="528,176,0,0">Huisnummer:</TextBlock>
+        <TextBox x:Name="Huisnummer" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Margin="662,174,0,0" FontSize="20" Foreground="#009DE0"></TextBox>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,325,825,0 ">Beschrijving:</TextBlock>
-        <TextBox x:Name="Beschrijving" VerticalAlignment="Top" HorizontalAlignment="Center" Width="650" Height="350" Margin="0,325,25,0" FontSize="12" Foreground="#009DE0"></TextBox>
+        <TextBox x:Name="Beschrijving" VerticalAlignment="Top" HorizontalAlignment="Center" Width="650" Height="350" Margin="0,300,10,0" FontSize="12" Foreground="#009DE0"></TextBox>
         <Button x:Name="CreeerProject" Content="Creeer" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="425,685,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="CreeerProject_Click"/>
 
     </Grid>

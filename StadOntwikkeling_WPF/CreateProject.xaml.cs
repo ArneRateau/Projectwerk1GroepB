@@ -97,5 +97,6 @@ namespace StadOntwikkeling_WPF
             CreateProjectSpecifiek cps = new CreateProjectSpecifiek(doorgever, _projectManager);
             cps.ShowDialog();
         }
+
     }
 }
