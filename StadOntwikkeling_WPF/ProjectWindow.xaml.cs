@@ -183,7 +183,7 @@ namespace StadOntwikkeling_WPF
             string selected = ListBox_Partners_All.SelectedItem.ToString();
 
             // Extract the partner's name (before first '(' )
-            string partnerNaam = selected.Split('(')[0].Trim();
+            //string partnerNaam = selected.Split('(')[0].Trim();
 
             // manier om juiste partner te vinden zodat role juist kan toegewezen worden
             //Partner partner = _partnerManager.GetPartnerByName(partnerNaam);
@@ -195,7 +195,7 @@ namespace StadOntwikkeling_WPF
             //}
 
             // Open the partner window
-            PartnerPopup partnerPopup = new PartnerPopup();//hier kan partner meegegeven worden als parameter
+            PartnerPopup partnerPopup = new PartnerPopup();//hier kaan partner meegegeven worden als parameter
             partnerPopup.ShowDialog();
         }
 

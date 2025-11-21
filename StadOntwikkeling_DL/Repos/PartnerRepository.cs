@@ -51,7 +51,6 @@ namespace StadOntwikkeling_DL.Repos
         }
 
 
-        //nog niet klaar
         public List<Partner> GetPartners()
         {
             List<Partner> partners = new List<Partner>();

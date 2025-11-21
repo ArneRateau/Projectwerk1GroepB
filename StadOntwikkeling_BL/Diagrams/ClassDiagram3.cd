@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="StadOntwikkeling_BL.Models.Project" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAAAEACAAQAAAAEBAAAQAAmAAAAAAACAAAAEQAAA=</HashCode>
+      <FileName>Models\Project.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Locatie" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ProjectOnderdelen" />
+      <Property Name="Projecten" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.ProjectOnderdeel" Collapsed="true">
+    <Position X="6.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ProjectOnderdeel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.GroenRuimteProject" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <Members>
+      <Property Name="Faciliteiten" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACQAQQAAAAAAAEECADAEAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\GroenRuimteProject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Faciliteiten" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.ProjectPartner" Collapsed="true">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAACAAAAAAAAACBADAAAAAAAAgAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\ProjectPartner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Locatie" Collapsed="true">
+    <Position X="4.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAABAAAAAABAgAABAACAgAAAAgAgAQAACAA=</HashCode>
+      <FileName>Models\Locatie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.InnovatiefWonenProject" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAQIAAAAAAAIAAAAAAAAgBACAJAAAAAAA=</HashCode>
+      <FileName>Models\InnovatiefWonenProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.StadsontwikkelingProject" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAEABAAAAAAAAAAgIAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\StadsontwikkelingProject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Bouwfirmas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Bouwfirma" Collapsed="true">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAACAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAM=</HashCode>
+      <FileName>Models\Bouwfirma.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StadOntwikkeling_BL.Models.Partner" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAM=</HashCode>
+      <FileName>Models\Partner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

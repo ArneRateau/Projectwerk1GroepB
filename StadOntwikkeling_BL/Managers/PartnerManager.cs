@@ -28,7 +28,7 @@ namespace StadOntwikkeling_BL.Managers
         {
             return _repo.GetAllPartners();
         }
-
+        
         public List<Partner> GetPartnersByProjectId(int projectId)
         {
             return _repo.GetPartnersByProjectId(projectId);
