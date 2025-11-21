@@ -12,9 +12,11 @@ namespace StadOntwikkeling_BL.Interfaces
     {
         List<Project> GetProjects();
 
+        Project GetProjectById(int id);
+
         List<ProjectDTO> GetProjectsLite();
-        void CombineProjectOnderdeel();
-		void UpdateProject(Project toUpdate);
+        
+		void updateProject(Project toUpdate);
         int MaakProjectAlgemeen(string v1, int v2, DateTime now, string v3, string v4, string v5, int v6, string v7, string v8);
         int MaakProjectStads(int newID,int Vergun,int archWaarde,int Toegang,int Beziens,int UitlegBord,int InfoWandeling);
         void AddBouwFirmaAanStads(int newID, int id);

@@ -18,7 +18,7 @@ namespace StadOntwikkeling_DL.Repos
 
 		public GebruikerRepository(string connectionstring)
 		{
-			//_connectionString = connectionstring;
+			_connectionString = connectionstring;
 		}
 
 		public int MaakGebruiker(string naam,string email, bool isAdmin, bool isPartner)

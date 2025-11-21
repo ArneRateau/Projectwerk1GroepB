@@ -601,11 +601,7 @@ namespace StadOntwikkeling_DL.Repos
             }
         }
 
-        void IProjectRepository.AddBouwFirmaAanStads(int newID, int id)
-        {
-            AddBouwFirmaAanStads(newID, id);
-        }
-
+        
         public int maakProjectGroen(int projectId, int oppvlak, double bioSco, int aanWandel, int toeWand, double bezoekScore)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
