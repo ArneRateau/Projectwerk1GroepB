@@ -94,8 +94,31 @@ namespace StadOntwikkeling_WPF
                 return;
             }
             string[] doorgever = {titel, status,datum,wijk,straat,gemeente,postcode,huisnummer,beschrijving};
-            CreateProjectSpecifiek cps = new CreateProjectSpecifiek(doorgever, _projectManager);
-            cps.ShowDialog();
+
+            if (TypeStads.IsChecked == true)
+            {
+                CreateProject_StadsOntwikkeling win = new CreateProject_StadsOntwikkeling(doorgever, _projectManager);
+                win.ShowDialog();
+            }
+            else if (TypeGroen.IsChecked == true)
+            {
+                CreateProject_GroeneRuimte win = new CreateProject_GroeneRuimte(doorgever, _projectManager);
+                win.ShowDialog();
+            }
+            else if (TypeWonen.IsChecked == true)
+            {
+                CreateProject_InnovatiefWonen win = new CreateProject_InnovatiefWonen(doorgever, _projectManager);
+                win.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Selecteer een projecttype.");
+                return;
+            }
+
+            this.Close();
+
+           
         }
 
     }

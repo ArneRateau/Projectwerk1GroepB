@@ -30,7 +30,33 @@
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="528,176,0,0">Huisnummer:</TextBlock>
         <TextBox x:Name="Huisnummer" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Margin="662,174,0,0" FontSize="20" Foreground="#009DE0"></TextBox>
         <TextBlock Foreground="#009DE0" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,325,825,0 ">Beschrijving:</TextBlock>
+        
+        
         <TextBox x:Name="Beschrijving" VerticalAlignment="Top" HorizontalAlignment="Center" Width="650" Height="350" Margin="0,300,10,0" FontSize="12" Foreground="#009DE0"></TextBox>
+
+        <TextBlock Text="Projecttype:" 
+   Foreground="#009DE0" 
+   FontSize="20"
+   Margin="60,650,0,0"
+   VerticalAlignment="Top"
+   HorizontalAlignment="Left"/>
+
+        <StackPanel Orientation="Vertical" Margin="60,685,0,0"
+    HorizontalAlignment="Left" VerticalAlignment="Top">
+            <RadioButton x:Name="TypeStads"
+         Content="Stadsontwikkeling"
+         FontSize="18" 
+         GroupName="ProjectType" />
+            <RadioButton x:Name="TypeGroen"
+         Content="Groene Ruimte"
+         FontSize="18" 
+         GroupName="ProjectType" />
+            <RadioButton x:Name="TypeWonen"
+         Content="Innovatief Wonen"
+         FontSize="18" 
+         GroupName="ProjectType" />
+        </StackPanel>
+
         <Button x:Name="CreeerProject" Content="Creeer" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="200" Margin="425,685,0,0" Background="#009DE0" Foreground="White" BorderBrush="#009DE0" FontSize="20" Click="CreeerProject_Click"/>
 
     </Grid>

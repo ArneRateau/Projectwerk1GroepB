@@ -1,0 +1,47 @@
+﻿<Window x:Class="StadOntwikkeling_WPF.CreateProject_StadsOntwikkeling"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Stadsontwikkelingsproject" Height="450" Width="600">
+
+    <Grid Margin="20">
+
+        <TextBlock Text="Stadsontwikkelingsproject"
+                   FontSize="20" Foreground="#009DE0"
+                   HorizontalAlignment="Center"/>
+
+        <StackPanel Margin="0,60,0,0">
+
+            <TextBlock Text="Betrokken bouwfirma's" Foreground="#009DE0"/>
+            <CheckBox x:Name="BAM" Content="BAM Interbuild"/>
+            <CheckBox x:Name="Cordeel" Content="Cordeel"/>
+            <CheckBox x:Name="Alheembouw" Content="Alheembouw"/>
+            <CheckBox x:Name="Democo" Content="Democo"/>
+
+            <TextBlock Text="Vergunning" Margin="0,10,0,0" Foreground="#009DE0"/>
+            <ComboBox x:Name="VergStatus" SelectedIndex="0" Width="200">
+                <ComboBoxItem>in aanvraag</ComboBoxItem>
+                <ComboBoxItem>Goedgekeurd</ComboBoxItem>
+                <ComboBoxItem>Geweigerd</ComboBoxItem>
+            </ComboBox>
+
+            <CheckBox x:Name="ArchWaarde" Content="Architecturale waarde" Margin="0,10,0,0"/>
+            <CheckBox x:Name="BezienWa" Content="Bezienwaardig voor toeristen"/>
+            <CheckBox x:Name="Uitlegbord" Content="Uitlegbord"/>
+            <CheckBox x:Name="Infowandeling" Content="Infowandeling"/>
+
+            <TextBlock Text="Openbaar toegankelijkheid" Margin="0,10,0,0" Foreground="#009DE0"/>
+            <ComboBox x:Name="OpenToegang" SelectedIndex="0" Width="200">
+                <ComboBoxItem>volledig openbaar</ComboBoxItem>
+                <ComboBoxItem>Gedeeltelijk</ComboBoxItem>
+                <ComboBoxItem>Gesloten</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <Button Content="Creeer"
+                Width="200" Height="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Click="Create_Click"/>
+
+    </Grid>
+</Window>

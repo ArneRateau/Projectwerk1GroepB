@@ -1,15 +1,15 @@
-﻿using StadOntwikkeling_BL.Enums;
+﻿using StadOntwikkeling_BL;
+using StadOntwikkeling_BL.Enums;
 using StadOntwikkeling_BL.Interfaces;
 using StadOntwikkeling_BL.Managers;
 using StadOntwikkeling_BL.Models;
 using StadOntwikkeling_BL.Models.DTO_s;
 using StadOntwikkeling_WPF.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
-
 
 namespace StadOntwikkeling_WPF
 {
@@ -28,7 +28,25 @@ namespace StadOntwikkeling_WPF
             _locatieManager = locatieManager;
             LoadProjecten();
             LoadFilters();
-            
+
+            ApplyAccessRights();
+        }
+        //methode zodat partners niet meer projecten kunnen openen en aanpassen 
+        private void ApplyAccessRights()
+        {
+            var gebruiker = AppSession.huidigeGebruiker;
+            bool isPartner = gebruiker?.IsPartner == true;
+
+            DgResultaten.IsEnabled = !isPartner;
+            DgResultaten.Opacity = isPartner ? 0.6 : 1.0;
+            if (isPartner)
+            {
+                DgResultaten.ToolTip = "Partners kunnen geen projecten openen vanuit deze lijst.";
+            }
+            else
+            {
+                DgResultaten.ToolTip = null;
+            }
         }
 
         private void LoadProjecten()
@@ -36,8 +54,6 @@ namespace StadOntwikkeling_WPF
             _alleProjecten = _projectManager.GetProjectsLite();
             DgResultaten.ItemsSource = _alleProjecten;
         }
-
-        
 
         private ProjectDTO? GetSelectedProject()
         {
@@ -47,10 +63,7 @@ namespace StadOntwikkeling_WPF
         {
             Project fullProject = _projectManager.GetProjectById(project.Id);
 
-            
-            
             var win = new ProjectWindow(fullProject, (ProjectManager)_projectManager, (PartnerManager)_partnerManager, (LocatieManager)_locatieManager);
-
 
             this.Close();
 
@@ -61,6 +74,10 @@ namespace StadOntwikkeling_WPF
 
         private void DgResultaten_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // Guard: partners are not allowed to open/edit projects
+            if (AppSession.huidigeGebruiker?.IsPartner == true)
+                return;
+
             var project = GetSelectedProject();
             if (project == null) return;
 
@@ -90,8 +107,6 @@ namespace StadOntwikkeling_WPF
             foreach (var p in partners)
                 CmbPartner.Items.Add(new ComboBoxItem { Content = p });
         }
-
-
 
         private void BtnZoek_Click(object sender, RoutedEventArgs e)
         {

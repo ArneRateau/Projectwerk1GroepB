@@ -1,0 +1,40 @@
+﻿<Window x:Class="StadOntwikkeling_WPF.CreateProject_InnovatiefWonen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Innovatief Wonen" Height="450" Width="600">
+
+    <Grid Margin="20">
+
+        <TextBlock Text="Innovatief Wonen Project"
+                   FontSize="20"
+                   Foreground="#009DE0"
+                   HorizontalAlignment="Center"/>
+
+        <StackPanel Margin="0,60,0,0">
+
+            <TextBlock Text="Aantal wooneenheden" Foreground="#009DE0"/>
+            <TextBox x:Name="AantalWoon" Width="120"/>
+
+            <TextBlock Text="Type woonvormen" Margin="0,10,0,0" Foreground="#009DE0"/>
+            <CheckBox x:Name="Modulair" Content="Modulaire woningen"/>
+            <CheckBox x:Name="Cohousing" Content="Co-Housing"/>
+            <TextBox x:Name="ExtraWoonvorm" Width="200"/>
+
+            <CheckBox x:Name="Rondleiding" Content="Rondleiding mogelijk" Margin="0,10,0,0"/>
+            <CheckBox x:Name="Showwoning" Content="Showwoning beschikbaar"/>
+
+            <TextBlock Text="Innovatiescore" Margin="0,10,0,0" Foreground="#009DE0"/>
+            <TextBox x:Name="InnovScore" Width="50"/>
+
+            <CheckBox x:Name="SamenErfgoed" Content="Samenwerking erfgoed"/>
+            <CheckBox x:Name="SamenToerisme" Content="Samenwerking Toerisme Gent"/>
+        </StackPanel>
+
+        <Button Content="Creeer"
+                Width="200" Height="40"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Click="Create_Click"/>
+
+    </Grid>
+</Window>
