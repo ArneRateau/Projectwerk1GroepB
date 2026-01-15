@@ -47,8 +47,14 @@ namespace StadOntwikkeling_WPF
                 return;
             }
 
-            string datum = Datum.Text;
-            if (string.IsNullOrWhiteSpace(datum))
+			if (!DateTime.TryParse(Datum.Text, out DateTime parsedDatum))
+			{
+				MessageBox.Show("Ongeldige datum.");
+				return;
+			}
+			string datum = parsedDatum.ToString("yyyy-MM-dd");
+
+			if (string.IsNullOrWhiteSpace(datum))
             {
                 MessageBox.Show("Geschatte datum moet ingegeven zijn.");
                 return;

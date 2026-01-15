@@ -23,5 +23,6 @@ namespace StadOntwikkeling_BL.Interfaces
 
         Project GetProjectById(int id);
         List<ProjectPartner> GetProjectPartners(int projectId);
+        void VerwijderProject(int projectId);
     }
 }

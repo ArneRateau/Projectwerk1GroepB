@@ -618,7 +618,7 @@ namespace StadOntwikkeling_DL.Repos
         }
         public List<ProjectPartner> GetProjectPartners(int projectId)
         {
-            string query = "SELECT pa.PartnerId,pa.Naam,pa.Email, pp.Rol," +
+            string query = "SELECT pa.PartnerId,pa.Naam,pa.Email, pp.ProjectPartnerId, pp.Rol," +
             " pr.ProjectId, pr.Titel,pr.StartDatum,pr.Status,pr.Beschrijving," +
             //" pl.Straat AS PartnerStraat,pl.Postcode AS PartnerPostcode,pl.Gemeente AS PartnerGemeente,pl.Wijk AS PartnerWijk,pl.HuisNummer AS PartnerHuisnummer," +
             " prl.Straat AS ProjectStraat, prl.Straat AS ProjectStraat,prl.Straat AS ProjectStraat,prl.Postcode AS ProjectPostcode,prl.Gemeente AS ProjectGemeente,prl.Wijk AS ProjectWijk,prl.HuisNummer AS ProjectHuisnummer" +
@@ -649,6 +649,7 @@ namespace StadOntwikkeling_DL.Repos
                                                     (string)reader["PartnerHuisnummer"]
                                                 );
                         */
+                        int projectPartnerId = (int)reader["ProjectPartnerId"];
                         // Partner object
                         var partner = new Partner(
                             (int)reader["PartnerId"],
@@ -676,15 +677,138 @@ namespace StadOntwikkeling_DL.Repos
                             null,
                             null    
                         );
-
+                        partner = partner;
                         // De koppeling
-                        partners.Add(new ProjectPartner(partner, project, (string)reader["Rol"]));
+                        partners.Add(new ProjectPartner(projectPartnerId, partner, project, (string)reader["Rol"]));
                     }
+                    partners = partners;
 
                     return partners;
                 }
             }
             
         }
-    }
+
+		public void VerwijderProject(int projectId)
+		{
+			using SqlConnection conn = new SqlConnection(_connectionString);
+			conn.Open();
+
+			using SqlTransaction tx = conn.BeginTransaction();
+
+			try
+			{
+				// GebruikerProject verwijderen
+				string deleteUserProjects = @"DELETE FROM GebruikerProject WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteUserProjects, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 1) Alle projecttypes verwijderen
+				string deleteTypes = @"DELETE FROM Project_ProjectType WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteTypes, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 2) Partners koppelingen verwijderen
+				string deletePartners = @"DELETE FROM ProjectPartner WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deletePartners, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 3) Faciliteiten (Groene Ruimte)
+				string deleteFaciliteiten = @"DELETE FROM Faciliteit WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteFaciliteiten, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 4) Bouwfirma koppelingen (Stadsontwikkeling)
+				string deleteStadsontwikkelingBouwfirma = @"
+            DELETE FROM Stadsontwikkeling_Bouwfirma 
+            WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteStadsontwikkelingBouwfirma, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 5) Stadsontwikkeling / Groen / InnovatiefWonen
+				string deleteStadsontwikkeling = @"DELETE FROM Stadsontwikkeling WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteStadsontwikkeling, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				string deleteGroen = @"DELETE FROM GroeneRuimte WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteGroen, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				string deleteInnovatief = @"DELETE FROM InnovatiefWonen WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteInnovatief, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 6) Locatie ophalen (we checken later of die weg mag)
+				int locatieId = -1;
+				string getLocatie = @"SELECT LocatieId FROM Project WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(getLocatie, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					var result = cmd.ExecuteScalar();
+					if (result != null)
+						locatieId = Convert.ToInt32(result);
+				}
+
+				// 7) Project verwijderen
+				string deleteProject = @"DELETE FROM Project WHERE ProjectId = @ProjectId";
+				using (SqlCommand cmd = new SqlCommand(deleteProject, conn, tx))
+				{
+					cmd.Parameters.AddWithValue("@ProjectId", projectId);
+					cmd.ExecuteNonQuery();
+				}
+
+				// 8) Locatie verwijderen *alleen als niemand anders die gebruikt*
+				if (locatieId != -1)
+				{
+					string check = @"SELECT COUNT(*) FROM Project WHERE LocatieId = @LocId";
+					using (SqlCommand cmd = new SqlCommand(check, conn, tx))
+					{
+						cmd.Parameters.AddWithValue("@LocId", locatieId);
+						int count = (int)cmd.ExecuteScalar();
+
+						if (count == 0)
+						{
+							string deleteLoc = @"DELETE FROM Locatie WHERE LocatieId = @LocId";
+							using (SqlCommand cmd2 = new SqlCommand(deleteLoc, conn, tx))
+							{
+								cmd2.Parameters.AddWithValue("@LocId", locatieId);
+								cmd2.ExecuteNonQuery();
+							}
+						}
+					}
+				}
+
+				tx.Commit();
+			}
+			catch (Exception ex)
+			{
+				tx.Rollback();
+				throw new Exception("Project verwijderen mislukt.", ex);
+			}
+		}
+	}
 }

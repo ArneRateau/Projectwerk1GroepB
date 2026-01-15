@@ -14,7 +14,7 @@ namespace StadOntwikkeling_BL.Models
 		private Partner _partner;
 		private Project _project;
 		private string _rol;
-        public string Naam { get; set; }
+        //public string Naam { get; set; }
         public ProjectPartner(Partner partner, Project project, string rol)
 		{
 			Partner = partner;
@@ -29,15 +29,15 @@ namespace StadOntwikkeling_BL.Models
 			Project = project;
 			Rol = rol;
 		}
-		public ProjectPartner(int id, Partner partner, Project project, string rol, string naam)
-		{
-			Id = id;
-			Partner = partner;
-			Project = project;
-			Rol = rol;
-			Naam = naam;
+		//public ProjectPartner(int id, Partner partner, Project project, string rol)
+		//{
+		//	Id = id;
+		//	Partner = partner;
+		//	Project = project;
+		//	Rol = rol;
+		//	//Naam = naam;
 
-        }
+  //      }
         public int Id
 		{
 			get { return _id; }
@@ -77,7 +77,6 @@ namespace StadOntwikkeling_BL.Models
 					throw new ProjectException("Rol mag niet leeg of null zijn");
 				_rol = value;
 			}
-		}
-
+		}	
 	}
 }

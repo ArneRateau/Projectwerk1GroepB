@@ -62,10 +62,16 @@ namespace StadOntwikkeling_DL.Repos
 					{
 						if (reader.Read())
 						{
+							string name;
 							int id = reader.GetInt32(0);
 							string userEmail = reader.GetString(1);
 							bool isAdmin = reader.GetBoolean(2);
 							bool isPartner = reader.GetBoolean(3);
+							try
+							{name = reader.GetString(4);}
+								catch (Exception)
+							{ name = null; }
+							
 							Gebruiker nieuwGebruiker = new(id, userEmail, isAdmin, isPartner);
 							return nieuwGebruiker;
 						}

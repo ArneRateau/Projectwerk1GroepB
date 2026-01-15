@@ -95,5 +95,10 @@ namespace StadOntwikkeling_BL.Models
 				_huisnummer = value;
 			}
 		}
+
+		public override string ToString()
+		{
+			return $"{Straat} {Huisnummer}, {Gemeente}({Postcode})";
+		}
 	}
 }

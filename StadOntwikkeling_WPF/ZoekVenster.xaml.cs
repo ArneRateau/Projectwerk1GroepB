@@ -174,5 +174,31 @@ namespace StadOntwikkeling_WPF
             InfoProjectWindow info = new InfoProjectWindow(_projectManager, res.Id);
             info.ShowDialog();
         }
-    }
+
+		private void VerwijderProject_Click(object sender, RoutedEventArgs e)
+		{
+			var project = (ProjectDTO)DgResultaten.SelectedItem;
+
+			if (project == null)
+			{
+				MessageBox.Show("Selecteer eerst een project.");
+				return;
+			}
+
+			var bevestiging = MessageBox.Show(
+				$"Weet u zeker dat u het project '{project.Title}' wilt verwijderen?",
+				"Bevestiging",
+				MessageBoxButton.YesNo,
+				MessageBoxImage.Warning);
+
+			if (bevestiging == MessageBoxResult.Yes)
+			{
+				// VOORBEELD — verwijder logica
+				_projectManager.VerwijderProject(project.Id);
+
+				// UI verversen
+				BtnZoek_Click(null, null);
+			}
+		}
+	}
 }

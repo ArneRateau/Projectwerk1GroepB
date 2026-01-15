@@ -47,29 +47,28 @@
                     Click="BtnZoek_Click"/>
         </StackPanel>
 
-        <DataGrid x:Name="DgResultaten"
-                  Grid.Row="1"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  MouseDoubleClick="DgResultaten_MouseDoubleClick">
+		<DataGrid x:Name="DgResultaten"
+          Grid.Row="1"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          MouseDoubleClick="DgResultaten_MouseDoubleClick">
 
-            
+			<DataGrid.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="InfoProject" Click="ToonInfoProject_Click" />
+					<Separator />
+					<MenuItem Header="Verwijderen" Click="VerwijderProject_Click" />
+				</ContextMenu>
+			</DataGrid.ContextMenu>
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="2*" />
-                <DataGridTextColumn Header="Wijk" Binding="{Binding Wijk}" Width="1.5*" />
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" />
-                <DataGridTextColumn Header="StartDatum"  Binding="{Binding StartDatum, StringFormat=\{0:dd/MM/yyyy\}}" Width="1.2*" />
-                <DataGridTextColumn Header="Partners" Binding="{Binding PartnerNamenDisplay}" Width="2*" />
-                <DataGridTextColumn Header="Type(s)" Binding="{Binding ProjectTypesDisplay}" Width="1.5*" />
-
-            </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="InfoProject" Click="ToonInfoProject_Click"></MenuItem>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-        </DataGrid>
-
-    </Grid>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="2*" />
+				<DataGridTextColumn Header="Wijk" Binding="{Binding Wijk}" Width="1.5*" />
+				<DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" />
+				<DataGridTextColumn Header="StartDatum" Binding="{Binding StartDatum, StringFormat=\{0:dd/MM/yyyy\}}" Width="1.2*" />
+				<DataGridTextColumn Header="Partners" Binding="{Binding PartnerNamenDisplay}" Width="2*" />
+				<DataGridTextColumn Header="Type(s)" Binding="{Binding ProjectTypesDisplay}" Width="1.5*" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </Window>

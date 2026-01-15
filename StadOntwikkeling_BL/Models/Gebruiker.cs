@@ -42,7 +42,7 @@ namespace StadOntwikkeling_BL.Models
         public int Id
         {
             get { return _id; }
-            set
+            private set
             {
                 if (value <= 0)
                     throw new PartnerException("Id mag niet nul of negatief zijn");

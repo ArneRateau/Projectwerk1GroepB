@@ -53,11 +53,11 @@ namespace StadOntwikkeling_BL.Managers
 
             int Status;
             if (status == "Planning")
-                Status = 0;
-            else if (status == "Uitvoering")
                 Status = 1;
-            else
+            else if (status == "Uitvoering")
                 Status = 2;
+            else
+                Status = 3;
 
             int newID = _projectRepo.MaakProjectAlgemeen(
                 titel,
@@ -145,6 +145,10 @@ namespace StadOntwikkeling_BL.Managers
         public List<ProjectPartner> GetProjectPartners(int projectId)
         {
             return _projectRepo.GetProjectPartners(projectId);
+        }
+        public void VerwijderProject(int projectId)
+        {
+            _projectRepo.VerwijderProject(projectId);
         }
     }
 }

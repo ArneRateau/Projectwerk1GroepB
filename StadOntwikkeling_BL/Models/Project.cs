@@ -92,5 +92,10 @@ namespace StadOntwikkeling_BL.Models
 		}
 		public List<ProjectPartner> Projecten { get; set; } = new();
 		public List<ProjectOnderdeel> ProjectOnderdelen { get; set; } = new();
+
+		public override string ToString()
+		{
+			return $"{Titel}";
+		}
 	}
 }
