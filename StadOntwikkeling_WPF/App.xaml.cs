@@ -3,6 +3,7 @@ using StadOntwikkeling_DL.Repos;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace StadOntwikkeling_WPF
 {
@@ -15,8 +16,8 @@ namespace StadOntwikkeling_WPF
         private ProjectManager _projectManager;
         private PartnerManager _partnerManager;
         private LocatieManager _locatieManager;
-        private string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
-
+        //private string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
+        private string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog=GentProjecten;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

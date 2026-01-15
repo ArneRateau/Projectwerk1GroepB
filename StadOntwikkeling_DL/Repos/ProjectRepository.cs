@@ -11,8 +11,8 @@ namespace StadOntwikkeling_DL.Repos
 {
     public class ProjectRepository : IProjectRepository
     {
-        private readonly string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
-        //private readonly string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog=GentProjecten;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        //private readonly string _connectionString = "Data Source=LAPTOP-TD9V3TI9;Initial Catalog=GentProjecten;Integrated Security=True;Trust Server Certificate=True";
+        private readonly string _connectionString = "Data Source=MRROBOT\\SQLEXPRESS;Initial Catalog=GentProjecten;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
 
         public ProjectRepository(string connectionString)
         {

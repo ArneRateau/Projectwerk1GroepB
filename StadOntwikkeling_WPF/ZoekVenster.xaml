@@ -10,42 +10,70 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-       
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
 
-            <ComboBox x:Name="CmbPartner" Width="150" Margin="0,0,10,0"
-          ToolTip="Partnernaam">
-                <ComboBoxItem Content="None" IsSelected="True"/>
-            </ComboBox>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8" VerticalAlignment="Top" >
 
+            <!-- Partner -->
+            <StackPanel Width="150" Margin="0,0,10,0">
+                <TextBlock Text="Partner" Margin="0,0,0,3"/>
+                <ComboBox x:Name="CmbPartner">
+                    <ComboBoxItem Content="None" IsSelected="True"/>
+                </ComboBox>
+            </StackPanel>
 
-            <ComboBox x:Name="CmbWijk" Width="150" Margin="0,0,10,0"
-          ToolTip="Wijk">
-                <ComboBoxItem Content="None" IsSelected="True"/>
-            </ComboBox>
+            <!-- Wijk -->
+            <StackPanel Width="150" Margin="0,0,10,0">
+                <TextBlock Text="Wijk" Margin="0,0,0,3"/>
+                <ComboBox x:Name="CmbWijk">
+                    <ComboBoxItem Content="None" IsSelected="True"/>
+                </ComboBox>
+            </StackPanel>
 
+            <!-- Type -->
+            <StackPanel Width="160" Margin="0,0,10,0">
+                <TextBlock Text="Projecttype" Margin="0,0,0,3"/>
+                <ComboBox x:Name="CmbType">
+                    <ComboBoxItem Content="None" IsSelected="True"/>
+                    <ComboBoxItem Content="Stadsontwikkeling"/>
+                    <ComboBoxItem Content="Groene Ruimte"/>
+                    <ComboBoxItem Content="Innovatief Wonen"/>
+                </ComboBox>
+            </StackPanel>
 
-            <ComboBox x:Name="CmbType" Width="160" Margin="0,0,10,0">
-                <ComboBoxItem Content="None" IsSelected="True"/>
-                <ComboBoxItem Content="Stadsontwikkeling"/>
-                <ComboBoxItem Content="Groene Ruimte"/>
-                <ComboBoxItem Content="Innovatief Wonen"/>
-            </ComboBox>
+            <!-- Status -->
+            <StackPanel Width="150" Margin="0,0,10,0">
+                <TextBlock Text="Status" Margin="0,0,0,3"/>
+                <ComboBox x:Name="CmbStatus" SelectionChanged="CmbStatus_SelectionChanged">
+                    <ComboBoxItem Content="None" IsSelected="True"/>
+                    <ComboBoxItem Content="Planning"/>
+                    <ComboBoxItem Content="Uitvoering"/>
+                    <ComboBoxItem Content="Afgerond"/>
+                </ComboBox>
+            </StackPanel>
 
-            <ComboBox x:Name="CmbStatus" Width="150" Margin="0,0,10,0" SelectionChanged="CmbStatus_SelectionChanged">
-                <ComboBoxItem Content="None" IsSelected="True"/>
-                <ComboBoxItem Content="Planning"/>
-                <ComboBoxItem Content="Uitvoering"/>
-                <ComboBoxItem Content="Afgerond"/>
-            </ComboBox>
+            <!-- Startdatum -->
+            <StackPanel Width="140" Margin="0,0,10,0">
+                <TextBlock Text="Startdatum vanaf" Margin="0,0,0,3"/>
+                <DatePicker x:Name="DpStart"/>
+            </StackPanel>
 
-            <DatePicker x:Name="DpStart" Width="140" Margin="0,0,10,0"/>
-            <DatePicker x:Name="DpEind" Width="140" Margin="0,0,10,0"/>
+            <!-- Einddatum -->
+            <StackPanel Width="140" Margin="0,0,10,0">
+                <TextBlock Text="Startdatum tot" Margin="0,0,0,3"/>
+                <DatePicker x:Name="DpEind"/>
+            </StackPanel>
 
-            <Button Content="Zoek" Width="90" Height="35"
-                    Background="#007ACC" Foreground="White"
-                    Click="BtnZoek_Click"/>
+            <!-- Button -->
+            <StackPanel Width="90">
+                <TextBlock Text="" Height="3"/>
+                <!-- spacing -->
+                <Button Content="Zoek" Height="35"
+                Background="#007ACC" Foreground="White"
+                Click="BtnZoek_Click"/>
+            </StackPanel>
+
         </StackPanel>
+
 
         <DataGrid x:Name="DgResultaten"
                   Grid.Row="1"
