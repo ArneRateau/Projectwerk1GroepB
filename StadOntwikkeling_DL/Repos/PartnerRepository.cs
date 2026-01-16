@@ -85,10 +85,10 @@ namespace StadOntwikkeling_DL.Repos
             List<Partner> partners = new List<Partner>();
 
             string sql = @"
-        SELECT pa.PartnerId, pa.Naam, pa.Email
-        FROM Partner pa
-        JOIN ProjectPartner pp ON pa.PartnerId = pp.ProjectPartnerId
-        WHERE pp.ProjectId = @projectId;
+SELECT DISTINCT pa.PartnerId, pa.Naam, pa.Email
+FROM Partner pa
+JOIN ProjectPartner pp ON pa.PartnerId=pp.PartnerId
+WHERE pp.ProjectId = 8 ORDER BY pa.PartnerId asc;
     ";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))

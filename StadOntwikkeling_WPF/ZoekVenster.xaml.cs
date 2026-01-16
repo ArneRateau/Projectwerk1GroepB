@@ -15,12 +15,12 @@ namespace StadOntwikkeling_WPF
 {
 	public partial class ZoekVenster : Window
 	{
-		private readonly ProjectManager _projectManager;
-		private readonly PartnerManager _partnerManager;
-		private readonly LocatieManager _locatieManager;
-		private readonly ProjectPartnerManager _projectPartnerManager;
+		private IProjectManager _projectManager;
+		private IPartnerManager _partnerManager;
+		private ILocatieManager _locatieManager;
+		private IProjectPartnerManager _projectPartnerManager;
 		private List<ProjectDTO> _alleProjecten = new();
-		public ZoekVenster(ProjectManager projectManager, PartnerManager partnerManager, LocatieManager locatieManager, ProjectPartnerManager projectPartnerManager)
+		public ZoekVenster(IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager, IProjectPartnerManager projectPartnerManager)
 		{
 			InitializeComponent();
 			_projectManager = projectManager;
@@ -171,7 +171,7 @@ namespace StadOntwikkeling_WPF
         private void ToonInfoProject_Click(object sender, RoutedEventArgs e)
         {
             ProjectDTO res = (ProjectDTO)DgResultaten.SelectedItem;
-            InfoProjectWindow info = new InfoProjectWindow(_projectManager, res.Id);
+            InfoProjectWindow info = new InfoProjectWindow(_projectManager, _partnerManager, _locatieManager, _projectPartnerManager, res.Id);
             info.ShowDialog();
         }
 

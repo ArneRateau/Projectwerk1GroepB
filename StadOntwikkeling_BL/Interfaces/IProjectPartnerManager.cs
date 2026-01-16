@@ -11,5 +11,6 @@ namespace StadOntwikkeling_BL.Interfaces
 	{
 		bool HeeftPartnerRolVoorProject(Project pr, Partner pa, string rol);
 		void KoppelPartnerAanProject(Project pr, Partner pa, string rol);
+		void VerwijderPartnerVanProject(int projectId, int partnerId);
 	}
 }

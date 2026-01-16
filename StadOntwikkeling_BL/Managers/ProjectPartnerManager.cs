@@ -24,5 +24,10 @@ namespace StadOntwikkeling_BL.Managers
         {
             _repo.KoppelPartnerAanProject(pr, pa, rol);
         }
-    }
+        public void VerwijderPartnerVanProject(int projectId, int partnerId)
+        {
+            _repo.VerwijderPartnerVanProject(projectId, partnerId);
+        }
+
+	}
 }

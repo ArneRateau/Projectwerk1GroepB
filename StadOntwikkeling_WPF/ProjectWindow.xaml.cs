@@ -28,16 +28,16 @@ namespace StadOntwikkeling_WPF
 	public partial class ProjectWindow : Window
 	{
 		//public List<Partner> Partners { get; private set; } = new();
-		private readonly ProjectManager _projectManager;
-		private readonly PartnerManager _partnerManager;
-		private readonly LocatieManager _locatieManager;
-		private readonly ProjectPartnerManager _projectPartnerManager;
+		private readonly IProjectManager _projectManager;
+		private readonly IPartnerManager _partnerManager;
+		private readonly ILocatieManager _locatieManager;
+		private readonly IProjectPartnerManager _projectPartnerManager;
 		private Project p;
 		private ObservableCollection<Partner> _currentPartners = new();
 		private ObservableCollection<Partner> _beschikbaarPartners = new();
 		private ObservableCollection<ProjectPartner> _projectPartner = new();
 
-		public ProjectWindow(Project project, ProjectManager projectManager, PartnerManager partnerManager, LocatieManager locatieManager, ProjectPartnerManager projectPartnerManager)
+		public ProjectWindow(Project project, IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager, IProjectPartnerManager projectPartnerManager)
 		{
 			InitializeComponent();
 			p = project;
@@ -165,6 +165,22 @@ namespace StadOntwikkeling_WPF
 
 				//Partners = _currentPartners.ToList();
 
+				// 1. Haal huidige partners from DB
+				var dbPartners = _partnerManager.GetPartnersByProjectId(p.Id).ToList();
+
+				// 2. Vergelijk met wat nu in UI staat
+				var uiPartners = _currentPartners.ToList();
+
+				// => Partners die verwijderd moeten worden
+				var removedPartners = dbPartners
+					.Where(db => uiPartners.All(ui => ui.Id != db.Id))
+					.ToList();
+
+				foreach (var partner in removedPartners)
+				{
+					_projectPartnerManager.VerwijderPartnerVanProject(p.Id, partner.Id);
+				}
+
 				MessageBox.Show("Project opgeslagen.");
 				this.Close();
 			}
@@ -219,5 +235,25 @@ namespace StadOntwikkeling_WPF
 			partnerPopup.ShowDialog();
 		}
 
+		private void RemoveSelected_Partners_Button(object sender, RoutedEventArgs e)
+		{
+			if (ListBox_Partners_Current.SelectedItem is not Partner partner)
+				return;
+
+			_beschikbaarPartners.Add(partner);
+			_currentPartners.Remove(partner);
+		}
+
+		private void RemoveAll_Partners_Button(object sender, RoutedEventArgs e)
+		{
+
+			var geselecteerdePartners = ListBox_Partners_Current.SelectedItems.Cast<Partner>().ToList();
+
+			foreach (var partner in geselecteerdePartners)
+			{
+				_beschikbaarPartners.Add(partner);
+				_currentPartners.Remove(partner);
+			}
+		}
 	}
 }

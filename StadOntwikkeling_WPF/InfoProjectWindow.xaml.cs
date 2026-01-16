@@ -23,14 +23,23 @@ namespace StadOntwikkeling_WPF
     /// </summary>
     public partial class InfoProjectWindow : Window
     {
-        private IProjectManager _projectManager;
-        private List<ProjectPartner> _projectPartnerList;
-        public InfoProjectWindow(IProjectManager projectManager, int projectId)
+		private readonly IProjectManager _projectManager;
+		private readonly IPartnerManager _partnerManager;
+		private readonly ILocatieManager _locatieManager;
+		private readonly IProjectPartnerManager _projectPartnerManager;
+        private Project _project;
+
+		private List<ProjectPartner> _projectPartnerList;
+        public InfoProjectWindow(IProjectManager projectManager, IPartnerManager partnerManager, ILocatieManager locatieManager, IProjectPartnerManager projectPartnerManager, int projectId)
         {
             InitializeComponent();
             _projectManager = projectManager;
-            Project project = _projectManager.GetProjectById(projectId);
-            DataGridInfoProjecten.ItemsSource = new List<Project> { project };
+            _partnerManager = partnerManager;
+            _locatieManager = locatieManager;
+            _projectPartnerManager = projectPartnerManager;
+
+            _project = _projectManager.GetProjectById(projectId);
+            DataGridInfoProjecten.ItemsSource = new List<Project> { _project };
 
             var projectPartnerList = _projectManager.GetProjectPartners(projectId);
             DataGridPartners.ItemsSource = projectPartnerList;
@@ -92,8 +101,8 @@ namespace StadOntwikkeling_WPF
         }
         private void ToonProjectWindow_Click(object sender, RoutedEventArgs e)
         {
-            /*ProjectWindow projectWindow = new ProjectWindow(project, _projectManager);
-            info.ShowDialog();*/
+            ProjectWindow projectWindow = new ProjectWindow(_project, _projectManager, _partnerManager, _locatieManager, _projectPartnerManager);
+            projectWindow.ShowDialog();
         }
     }
 }

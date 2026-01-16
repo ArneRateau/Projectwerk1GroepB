@@ -74,5 +74,19 @@ namespace StadOntwikkeling_DL.Repos
             }
             return partners;
         }
-    }
+		public void VerwijderPartnerVanProject(int projectId, int partnerId)
+		{
+			string query = "DELETE FROM ProjectPartner WHERE ProjectId = @ProjectId AND PartnerId = @PartnerId";
+
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			using (SqlCommand cmd = connection.CreateCommand())
+			{
+				connection.Open();
+				cmd.CommandText = query;
+				cmd.Parameters.AddWithValue("@ProjectId", projectId);
+				cmd.Parameters.AddWithValue("@PartnerId", partnerId);
+				cmd.ExecuteNonQuery();
+			}
+		}
+	}
 }
